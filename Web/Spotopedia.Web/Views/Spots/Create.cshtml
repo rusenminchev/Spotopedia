@@ -1,0 +1,94 @@
+﻿@using Spotopedia.Data.Models.Enumerations
+@model Spotopedia.Web.ViewModels.Spots.CreateSpotInputModel
+
+@{
+ 
+}
+
+<h1>Add New Spot</h1>
+
+<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data"> 
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+  <p></p>
+    <div>
+        <span asp-validation-for="Type" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="Type" class="input-group-text">
+                    <i class="fas fa-chevron-up"></i>
+                </label>
+            </div>
+            <select asp-for="Type" class="form-control">
+                <option selected disabled>Choose the type of the spot</option>
+                @foreach (int spotType in Enum.GetValues(typeof(SpotType)))
+                {
+                    <option value="@spotType">@Enum.GetName(typeof(SpotType), spotType)</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div>
+        <span asp-validation-for="KickOutLevel" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="KickOutLevel" class="input-group-text">
+                    <i class="fas fa-chevron-up"></i>
+                </label>
+            </div>
+            <select asp-for="KickOutLevel" class="form-control">
+                <option selected disabled>Possibility to be kicked out from the spot</option>
+                @foreach (int spotType in Enum.GetValues(typeof(KickOutLevel)))
+                {
+                    <option value="@spotType">@Enum.GetName(typeof(KickOutLevel), spotType)</option>
+                }
+            </select>
+        </div>
+    </div>
+    <p></p>
+    @*<div>
+        <label asp-for="Address.AddressName"></label>
+        <input asp-for="Address.AddressName" class="form-control" />
+        <span asp-validation-for="Address.AddressName" class="text-danger"></span>
+    </div>*@
+  <div>    
+    <p></p>
+ <fieldset class="gllpLatlonPicker">
+    <label asp-for="Address.AddressName"></label>
+    <input asp-for="Address.AddressName" type="text" class="gllpSearchField" >
+    <input type="button" class="gllpSearchButton" value="search">
+	<div class="gllpMap">Google Maps</div>
+	<input asp-for="Address.Latitude"   type="hidden" class="gllpLatitude" value="20"/>
+	<input asp-for="Address.Longitude"  type="hidden" class="gllpLongitude" value="20"/>
+	<input type="hidden" class="gllpZoom" value="3"/>
+  </fieldset>
+</div>
+    <p></p>
+<div class="row justify-content-sm-between">
+        @for (int i = 0; i < 3; i++)
+        {
+            <div class="image mb-2" id="@("preview-picture" + i)">
+                <label for="@("image" + i)" class="image-upload"></label>
+                <input type="file" asp-for="Images" id="@("image" + i)" class="image-upload" />
+            </div>
+        }
+    </div>
+<div>
+    <p></p>
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+   
+}
