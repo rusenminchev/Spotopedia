@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class GetAllSpotsListViewModel
+    public class AllSpotsListViewModel
     {
         public IEnumerable<SpotInListViewModel> Spots { get; set; }
 

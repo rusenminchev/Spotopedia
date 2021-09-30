@@ -18,6 +18,6 @@
 
         public Address Address { get; set; }
 
-        public virtual ICollection<SpotImage> SpotImages { get; set; }
+        public ICollection<SpotImage> SpotImages { get; set; }
     }
 }

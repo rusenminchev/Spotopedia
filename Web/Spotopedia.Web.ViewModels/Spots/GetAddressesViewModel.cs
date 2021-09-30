@@ -15,5 +15,9 @@ namespace Spotopedia.Web.ViewModels.Spots
         public string Longitude { get; set; }
 
         public int SpotId { get; set; }
+
+        public string SpotTitle { get; set; }
+
+        public ICollection<SpotImage> SpotSpotImages { get; set; }
     }
 }

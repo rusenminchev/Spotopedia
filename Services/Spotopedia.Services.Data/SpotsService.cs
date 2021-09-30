@@ -74,12 +74,7 @@ namespace Spotopedia.Services.Data
             await this.spotsRepository.SaveChangesAsync();
         }
 
-        public int GetCount()
-        {
-            return this.spotsRepository.AllAsNoTracking().Count();
-        }
-
-        public IEnumerable<T> GetAll<T>(int pageNumber, int itemsPerPage = 4)
+        public IEnumerable<T> GetAll<T>(int pageNumber, int itemsPerPage)
         {
             return this.spotsRepository.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
@@ -87,6 +82,11 @@ namespace Spotopedia.Services.Data
                 .Take(itemsPerPage)
                 .To<T>()
                 .ToList();
+        }
+
+        public int GetCount()
+        {
+            return this.spotsRepository.All().Count();
         }
 
         public IEnumerable<T> GetAllAddresses<T>()

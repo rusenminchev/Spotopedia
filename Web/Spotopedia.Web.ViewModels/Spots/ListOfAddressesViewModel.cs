@@ -7,6 +7,6 @@ namespace Spotopedia.Web.ViewModels.Spots
 {
     public class ListOfAddressesViewModel
     {
-       public IEnumerable<GetAddressesViewModel> Addresses { get; set; }
+        public IEnumerable<GetAddressesViewModel> Addresses { get; set; }
     }
 }
