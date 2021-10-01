@@ -13,8 +13,6 @@
 
         IEnumerable<T> GetAll<T>(int pageNumber, int itemsPerPage);
 
-        IEnumerable<T> GetAllAddresses<T>();
-
         T GetById<T>(int id);
     }
 }

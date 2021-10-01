@@ -17,11 +17,13 @@ namespace Spotopedia.Web.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ISpotsService spotsService;
+        private readonly IAddressesService addressesService;
 
-        public SpotsController(UserManager<ApplicationUser> userManager, ISpotsService spotsService)
+        public SpotsController(UserManager<ApplicationUser> userManager, ISpotsService spotsService, IAddressesService addressesService)
         {
             this.userManager = userManager;
             this.spotsService = spotsService;
+            this.addressesService = addressesService;
         }
 
         public IActionResult Create()
@@ -77,29 +79,7 @@ namespace Spotopedia.Web.Controllers
 
         public JsonResult GetAddress()
         {
-            //get the data from the Branch table
-            //test data
-            //List<GetAddressesViewModel> addresses = new List<GetAddressesViewModel>();
-            //{
-            //    new BranchModel(){ BranchName="Branch one", BranchGeoLocationLat=51.5m, BranchGeoLocationLong = -0.09m},
-            //    new BranchModel(){ BranchName="Branch two", BranchGeoLocationLat=51.495m, BranchGeoLocationLong = -0.083m},
-            //    new BranchModel(){ BranchName="Branch three", BranchGeoLocationLat=51.49m, BranchGeoLocationLong = -0.1m},
-            //};
-
-            var allAdresses = this.spotsService.GetAllAddresses<GetAddressesViewModel>().ToList();
-
-            //foreach (var address in allAdresses)
-            //{
-            //    var newAddress = new GetAddressesViewModel()
-            //    {
-            //        AddressName = address.AddressName,
-            //        Latitude = address.Latitude,
-            //        Longitude = address.Longitude,
-            //    };
-
-            //    addresses.Add()
-            //}
-
+            var allAdresses = this.addressesService.GetAllAddresses<GetAddressesViewModel>().ToList();
             return this.Json(allAdresses);
         }
     }

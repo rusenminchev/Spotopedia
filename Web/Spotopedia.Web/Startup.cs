@@ -76,6 +76,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ISpotsService, SpotsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IAddressesService, AddressesService>();
 
         }
 

@@ -89,13 +89,6 @@ namespace Spotopedia.Services.Data
             return this.spotsRepository.All().Count();
         }
 
-        public IEnumerable<T> GetAllAddresses<T>()
-        {
-            return this.spotAddressRepository.All()
-                 .To<T>()
-                 .ToList();
-        }
-
         public T GetById<T>(int id)
         {
             var spot = this.spotsRepository.AllAsNoTracking()

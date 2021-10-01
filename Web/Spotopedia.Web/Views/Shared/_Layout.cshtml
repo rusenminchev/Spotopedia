@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     <link href="~/css/jquery-gmaps-latlon-picker.css" rel="stylesheet" asp-append-version="true"/>
-    <link href="~/css/styles.css" rel="stylesheet" />
-    <link href="~/css/leaflet.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" asp-append-version="true"/>
+    <link href="~/css/leaflet.css" rel="stylesheet" asp-append-version="true"/>
+    <link href="~/lib/leaflet-geosearch/style.css" rel="stylesheet" asp-append-version="true"/>
 </head>
 <body>
     <header>
@@ -62,8 +63,9 @@
     <script src="~/js/jquery-2.1.1.min.js"></script>
     <script src="~/js/jquery-gmaps-latlon-picker.js"></script>
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAPx2JcdwZpcpUTRCssV2DEURihT8mRsBU&sensor=false" asp-append-version="true"></script>   
-    <script src="~/js/index.js"></script>
-    <script src="~/js/leaflet.js"></script>
+    <script src="~/js/index.js" asp-append-version="true"></script>
+    <script src="~/js/leaflet.js" asp-append-version="true"></script>
+    <script src="~/lib/leaflet-geosearch/bundle.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
