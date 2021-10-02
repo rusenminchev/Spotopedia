@@ -1,17 +1,14 @@
-﻿namespace Spotopedia.Web.ViewModels.Spots
+﻿using Microsoft.AspNetCore.Http;
+using Spotopedia.Data.Models.Enumerations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace Spotopedia.Web.ViewModels.Spots
 {
-    using Microsoft.AspNetCore.Http;
-    using Spotopedia.Data.Models;
-    using Spotopedia.Data.Models.Enumerations;
-    using Spotopedia.Services.Mapping;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public class EditSpotInputModel : IMapFrom<Spot>
+    public abstract class BaseSpotInputModel
     {
-
-        public int Id { get; set; }
-
         [MinLength(5)]
         [MaxLength(50)]
         [Required(ErrorMessage = "Please enter a spot title.")]
@@ -30,12 +27,9 @@
 
         public int AddressId { get; set; }
 
-        public CreateSpotAddressInputModel Address { get; set; } = new CreateSpotAddressInputModel();
+        public CreateSpotAddressInputModel Address { get; set; }
 
-        public IEnumerable<string> ImagesUrls { get; set; }
-
+        [Required(ErrorMessage = "Please upload photos of the spot.")]
         public IEnumerable<IFormFile> Images { get; set; }
-            = new HashSet<IFormFile>();
-
     }
 }

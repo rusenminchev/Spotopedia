@@ -14,5 +14,9 @@
         IEnumerable<T> GetAll<T>(int pageNumber, int itemsPerPage);
 
         T GetById<T>(int id);
+
+        bool IsThisUserAddedThisSpot(string userId, int spotId);
+
+        Task EditAsync(int id, EditSpotInputModel input);
     }
 }

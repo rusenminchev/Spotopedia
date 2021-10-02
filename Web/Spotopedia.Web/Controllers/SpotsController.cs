@@ -47,6 +47,32 @@ namespace Spotopedia.Web.Controllers
             return this.Redirect("/");
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (!this.spotsService.IsThisUserAddedThisSpot(user.Id, id))
+            {
+                this.RedirectToAction($"/Spots/ById?id={id}");
+            }
+
+            var inputModel = this.spotsService.GetById<EditSpotInputModel>(id);
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditSpotInputModel input, CreateSpotAddressInputModel addressInput)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.View(input);
+            }
+
+            await this.spotsService.EditAsync(id, input);
+            return this.RedirectToAction(nameof(this.ById), new { id });
+        }
+
         public IActionResult SpotMap()
         {
             return this.View();

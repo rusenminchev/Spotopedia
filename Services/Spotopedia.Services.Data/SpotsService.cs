@@ -97,5 +97,50 @@ namespace Spotopedia.Services.Data
                                 .FirstOrDefault();
             return spot;
         }
+
+        public async Task EditAsync(int id, EditSpotInputModel input)
+        {
+            var spot = this.spotsRepository.All().FirstOrDefault(x => x.Id == id);
+            var address = this.spotAddressRepository.All().FirstOrDefault(x => x.SpotId == id);
+
+            spot.Title = input.Title;
+            spot.Description = input.Description;
+            spot.Type = input.Type;
+            spot.KickOutLevel = input.KickOutLevel;
+
+            address.AddressName = input.Address.AddressName;
+            address.Latitude = input.Address.Latitude;
+            address.Longitude = input.Address.Longitude;
+
+            var imageUrls = new List<string>();
+            foreach (var image in input.Images)
+            {
+                await using var memoryStream = new MemoryStream();
+                await image.CopyToAsync(memoryStream);
+                var destinationData = memoryStream.ToArray();
+
+                try
+                {
+                    var imageUrl = await this.cloudinaryService.UploadPictureAsync(destinationData, image.FileName, "SpotsImages", 900, 600);
+                    imageUrls.Add(imageUrl);
+                }
+                catch
+                {
+                }
+            }
+
+            foreach (var imageUrl in imageUrls.Where(x => x != null))
+            {
+                spot.SpotImages.Add(new SpotImage() { ImageUrl = imageUrl });
+            }
+
+            this.spotsRepository.Update(spot);
+            await this.spotsRepository.SaveChangesAsync();
+        }
+
+        public bool IsThisUserAddedThisSpot(string userId, int spotId)
+        {
+            return this.spotsRepository.All().Any(x => x.Id == spotId && x.AddedByUserId == userId);
+        }
     }
 }

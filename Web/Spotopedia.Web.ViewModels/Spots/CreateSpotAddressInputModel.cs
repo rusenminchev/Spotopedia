@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Spotopedia.Data.Models;
+using Spotopedia.Services.Mapping;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Spotopedia.Web.ViewModels.Spots
 {
-    public class CreateSpotAddressInputModel
+    public class CreateSpotAddressInputModel : IMapFrom<Address>
     {
         [MinLength(10)]
         [MaxLength(100)]
