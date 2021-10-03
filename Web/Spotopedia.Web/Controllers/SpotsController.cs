@@ -26,6 +26,7 @@ namespace Spotopedia.Web.Controllers
             this.addressesService = addressesService;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new CreateSpotInputModel();
@@ -33,6 +34,7 @@ namespace Spotopedia.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateSpotInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -47,13 +49,14 @@ namespace Spotopedia.Web.Controllers
             return this.Redirect("/");
         }
 
-        public async Task<IActionResult> Edit(int id)
+        [Authorize]
+        public IActionResult Edit(int id)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (!this.spotsService.IsThisUserAddedThisSpot(user.Id, id))
+            if (!this.spotsService.IsThisUserAddedThisSpot(userId, id))
             {
-                this.RedirectToAction($"/Spots/ById?id={id}");
+               return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
             var inputModel = this.spotsService.GetById<EditSpotInputModel>(id);
@@ -62,11 +65,19 @@ namespace Spotopedia.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditSpotInputModel input, CreateSpotAddressInputModel addressInput)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditSpotInputModel input)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             if (!this.ModelState.IsValid)
             {
-                this.View(input);
+                return this.View(input);
+            }
+
+            if (!this.spotsService.IsThisUserAddedThisSpot(userId, id))
+            {
+                return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
             await this.spotsService.EditAsync(id, input);

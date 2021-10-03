@@ -54,25 +54,16 @@
     <p></p>
     <div>    
  <fieldset class="gllpLatlonPicker">
-    <label asp-for="Address.AddressName"></label>
-    <input asp-for="Address.AddressName" type="text" class="gllpSearchField" >
+     <label>Location</label>
+    <input type="text" class="gllpSearchField" >
     <input type="button" class="gllpSearchButton" value="search">
 	<div class="gllpMap">Google Maps</div>
-	<input asp-for="Address.Latitude"   type="hidden" class="gllpLatitude" value="20"/>
-	<input asp-for="Address.Longitude"  type="hidden" class="gllpLongitude" value="20"/>
-	<input type="hidden" class="gllpZoom" value="3"/>
+    <input asp-for="Address.AddressName" type="hidden" class="gllpLocationName" value="@Model.Address.AddressName"/>
+	<input asp-for="Address.Latitude"   type="hidden" class="gllpLatitude" value="@Model.Address.Latitude"/>
+	<input asp-for="Address.Longitude"  type="hidden" class="gllpLongitude" value="@Model.Address.Longitude"/>
+	<input type="hidden" class="gllpZoom" value="15"/>
   </fieldset>
 </div>
-    <p></p>
-  <div class="row justify-content-sm-between">
-        @for (int i = 0; i < 3; i++)
-        {
-            <div class="image mb-2" id="@("preview-picture" + i)">
-                <label for="@("image" + i)" class="image-upload"></label>
-                <input type="file" asp-for="Images" id="@("image" + i)" class="image-upload" />
-            </div>
-        }
-    </div>
     <hr />
     <input type="hidden" asp-for="Id" />
 </form>
@@ -103,3 +94,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    var subCategoryIndex = 1;
+    function AddSubCategory() {
+        $(".row").
+            append("<div class='image mb-2' id='preview-picture" + subCategoryIndex + "' >" +
+                "<label for='image" + subCategoryIndex + "' class='image-upload'></label>" +
+                "<input type='file' id='image" + subCategoryIndex + "' class='image-upload' name='Images'/>" +
+                "</div>");
+        subCategoryIndex++;
+    }
+</script>
+
+<script>
+    $(document).on('change', ".image-upload", function () {
+        let id = $(this).parent().attr('id');
+        console.log(id);
+        console.log(1);
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return;
+        if (/^image/.test(files[0].type)) {
+            var ReaderObj = new FileReader();
+            ReaderObj.readAsDataURL(files[0]);
+            ReaderObj.onloadend = function () {
+                $("#" + id).css("background-image", "url(" + this.result + ")");
+            }
+        } else {
+            alert("Upload an image");
+        }
+    });
+</script>

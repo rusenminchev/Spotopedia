@@ -35,12 +35,11 @@
         "dist/jquery.validate.unobtrusive.js",
         "dist/jquery.validate.unobtrusive.min.js"
       ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "leaflet-geosearch@2.7.0",
+      "destination": "wwwroot/lib/leaflet-geosearch/"
     }
-  ,
-{
-  "provider": "cdnjs",
-  "library": "leaflet-geosearch@2.7.0",
-  "destination": "wwwroot/lib/leaflet-geosearch/"
-}
-]
+  ]
 }

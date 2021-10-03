@@ -1,11 +1,13 @@
 ﻿namespace Spotopedia.Web.ViewModels.Spots
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Http;
     using Spotopedia.Data.Models;
     using Spotopedia.Data.Models.Enumerations;
     using Spotopedia.Services.Mapping;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
 
     public class EditSpotInputModel : IMapFrom<Spot>
     {
@@ -30,12 +32,9 @@
 
         public int AddressId { get; set; }
 
-        public CreateSpotAddressInputModel Address { get; set; } = new CreateSpotAddressInputModel();
-
-        public IEnumerable<string> ImagesUrls { get; set; }
+        public CreateSpotAddressInputModel Address { get; set; }
 
         public IEnumerable<IFormFile> Images { get; set; }
             = new HashSet<IFormFile>();
-
     }
 }

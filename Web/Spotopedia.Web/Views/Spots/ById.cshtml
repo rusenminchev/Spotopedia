@@ -1,18 +1,30 @@
 ﻿@using Spotopedia.Common
 @model Spotopedia.Web.ViewModels.Spots.SingleSpotViewModel
 
-<div class="d-flex justify-content-center">
-  <div class="card-header">
+<div>
     <img class="card-img" src="@Model.SpotImages.First().ImageUrl" alt="dog">
-  </div>
-  <div class="card-body">
     <span class="badge badge-success">@Model.Type</span>
+<span>
+    @if (User.Identity.IsAuthenticated)
+{
+                     <span class="single-meta">
+                        <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+                    </span>
+}
+</span>
     <h4 class="card-title mt-2">@Model.Title</h4>
     <p class="card-text">@Model.Description</p>
-  </div>
-  <div class="card-footer">
+ 
+
+ <div>
     <a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-primary">Directions</a>
-  </div>
-  <li class="single-meta">
-                        <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-                    </li>
+     </div>
+<div>
+ <fieldset class="gllpLatlonPicker">
+	<div class="gllpMap">Google Maps</div>
+	<input type="hidden" class="gllpLatitude" value="@Model.Address.Latitude"/>
+	<input type="hidden" class="gllpLongitude" value="@Model.Address.Longitude"/>
+	<input type="hidden" class="gllpZoom" value="11"/>
+  </fieldset>
+</div>
+   </div>

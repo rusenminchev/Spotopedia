@@ -65,10 +65,11 @@
   <div>    
     <p></p>
  <fieldset class="gllpLatlonPicker">
-    <label asp-for="Address.AddressName"></label>
-    <input asp-for="Address.AddressName" type="text" class="gllpSearchField" >
+    <label>Location</label>
+    <input type="text" class="gllpSearchField" >
     <input type="button" class="gllpSearchButton" value="search">
 	<div class="gllpMap">Google Maps</div>
+    <input asp-for="Address.AddressName" type="hidden" class="gllpLocationName" value=""/>
 	<input asp-for="Address.Latitude"   type="hidden" class="gllpLatitude" value="20"/>
 	<input asp-for="Address.Longitude"  type="hidden" class="gllpLongitude" value="20"/>
 	<input type="hidden" class="gllpZoom" value="3"/>
