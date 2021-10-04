@@ -5,6 +5,7 @@
     <img class="card-img" src="@Model.SpotImages.First().ImageUrl" alt="dog">
     <span class="badge badge-success">@Model.Type</span>
 <span>
+
     @if (User.Identity.IsAuthenticated)
 {
                      <span class="single-meta">
@@ -15,6 +16,20 @@
     <h4 class="card-title mt-2">@Model.Title</h4>
     <p class="card-text">@Model.Description</p>
  
+<div class="text-muted small ml-3">
+                            <form id="votesForm" method="post"></form>
+                            <div>
+                                <a href="#" onclick="sendVote(@Model.Id, true)">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </a>
+                            </div>
+                            <div id="likesCount">@Model.LikesCount</div>
+                            <div id="dislikesCount">@Model.DislikesCount</div>
+                            <div>
+                                <a href="#" onclick="sendVote(@Model.Id, false)">
+                                    <i class="fa fa-thumbs-down"></i>
+                                </a>
+                            </div>
 
  <div>
     <a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-primary">Directions</a>
@@ -28,3 +43,24 @@
   </fieldset>
 </div>
    </div>
+
+@section Scripts {
+<script>
+        function sendVote(spotId, isLiked) {
+            var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+            var json = { spotId: spotId, isLiked: isLiked };
+            $.ajax({
+                url: "/api/spotVotes",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function (data) {
+                   $("#likesCount").html(data.likesCount);
+                   $("#dislikesCount").html(data.dislikesCount);
+                }
+            });
+        }
+    </script>
+}

@@ -11,7 +11,6 @@
         public Spot()
         {
             this.SpotImages = new HashSet<SpotImage>();
-            this.SpotComments = new HashSet<SpotComment>();
             this.SpotVotes = new HashSet<SpotVote>();
             this.Posts = new HashSet<SpotPost>();
             this.ChallengeEntries = new HashSet<ChallengeEntrySpot>();
@@ -39,8 +38,6 @@
         public virtual ApplicationUser AddedByUser { get; set; }
 
         public virtual ICollection<SpotImage> SpotImages { get; set; }
-
-        public virtual ICollection<SpotComment> SpotComments { get; set; }
 
         public virtual ICollection<SpotVote> SpotVotes { get; set; }
 

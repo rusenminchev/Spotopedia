@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Data;
-using Spotopedia.Web.ViewModels.Spots;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using GeoJSON;
-
-namespace Spotopedia.Web.Controllers
+﻿namespace Spotopedia.Web.Controllers
 {
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Data;
+    using Spotopedia.Web.ViewModels.Spots;
+
     public class SpotsController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;

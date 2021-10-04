@@ -32,11 +32,7 @@
 
         public DbSet<SpotImage> SpotImages { get; set; }
 
-        public DbSet<SpotVote> SpotsVotes { get; set; }
-
-        public DbSet<SpotComment> SpotComments { get; set; }
-
-        public DbSet<SpotCommentVote> SpotCommentVotes { get; set; }
+        public DbSet<SpotVote> SpotVotes { get; set; }
 
         public DbSet<SpotPost> SpotPosts { get; set; }
 

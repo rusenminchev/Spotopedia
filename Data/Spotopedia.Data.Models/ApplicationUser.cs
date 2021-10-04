@@ -19,8 +19,6 @@ namespace Spotopedia.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Spots = new HashSet<Spot>();
             this.SpotVotes = new HashSet<SpotVote>();
-            this.SpotComments = new HashSet<SpotComment>();
-            this.SpotCommentVotes = new HashSet<SpotCommentVote>();
             this.Posts = new HashSet<Post>();
             this.PostVotes = new HashSet<PostVote>();
             this.PostComments = new HashSet<PostComment>();
@@ -90,10 +88,6 @@ namespace Spotopedia.Data.Models
         public virtual ICollection<Spot> Spots { get; set; }
 
         public virtual ICollection<SpotVote> SpotVotes { get; set; }
-
-        public virtual ICollection<SpotComment> SpotComments { get; set; }
-
-        public virtual ICollection<SpotCommentVote> SpotCommentVotes { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
 

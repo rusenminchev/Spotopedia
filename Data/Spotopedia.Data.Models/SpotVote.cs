@@ -5,9 +5,8 @@
     using Spotopedia.Data.Common.Models;
     using Spotopedia.Data.Models.Enumerations;
 
-    public class SpotVote : BaseDeletableModel<int>
+    public class SpotVote : BaseModel<int>
     {
-        [Required]
         public int SpotId { get; set; }
 
         public virtual Spot Spot { get; set; }
@@ -17,7 +16,6 @@
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
-        [Required]
         public VoteType Value { get; set; }
     }
 }

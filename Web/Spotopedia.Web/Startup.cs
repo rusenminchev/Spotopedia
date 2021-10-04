@@ -62,6 +62,10 @@
                 }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
 
             services.AddSingleton(cloudinaryUtility);
             services.AddSingleton(this.configuration);
@@ -77,7 +81,7 @@
             services.AddTransient<ISpotsService, SpotsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IAddressesService, AddressesService>();
-
+            services.AddTransient<ISpotVotesService, SpotVotesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
