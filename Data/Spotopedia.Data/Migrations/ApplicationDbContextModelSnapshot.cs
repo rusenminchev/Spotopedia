@@ -483,11 +483,16 @@ namespace Spotopedia.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("SpotId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AddedByUserId");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("SpotId");
 
                     b.ToTable("Posts");
                 });
@@ -776,42 +781,6 @@ namespace Spotopedia.Data.Migrations
                     b.ToTable("SpotImages");
                 });
 
-            modelBuilder.Entity("Spotopedia.Data.Models.SpotPost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SpotId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("SpotId");
-
-                    b.ToTable("SpotPosts");
-                });
-
             modelBuilder.Entity("Spotopedia.Data.Models.SpotVote", b =>
                 {
                     b.Property<int>("Id")
@@ -971,7 +940,15 @@ namespace Spotopedia.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Spotopedia.Data.Models.Spot", "Spot")
+                        .WithMany("Posts")
+                        .HasForeignKey("SpotId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("AddedByUser");
+
+                    b.Navigation("Spot");
                 });
 
             modelBuilder.Entity("Spotopedia.Data.Models.PostComment", b =>
@@ -1078,25 +1055,6 @@ namespace Spotopedia.Data.Migrations
                     b.Navigation("Spot");
                 });
 
-            modelBuilder.Entity("Spotopedia.Data.Models.SpotPost", b =>
-                {
-                    b.HasOne("Spotopedia.Data.Models.Post", "Post")
-                        .WithMany("Spots")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Spotopedia.Data.Models.Spot", "Spot")
-                        .WithMany("Posts")
-                        .HasForeignKey("SpotId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("Spot");
-                });
-
             modelBuilder.Entity("Spotopedia.Data.Models.SpotVote", b =>
                 {
                     b.HasOne("Spotopedia.Data.Models.ApplicationUser", "AddedByUser")
@@ -1158,8 +1116,6 @@ namespace Spotopedia.Data.Migrations
                     b.Navigation("PostImages");
 
                     b.Navigation("PostVotes");
-
-                    b.Navigation("Spots");
                 });
 
             modelBuilder.Entity("Spotopedia.Data.Models.PostComment", b =>

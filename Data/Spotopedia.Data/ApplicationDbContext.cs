@@ -34,8 +34,6 @@
 
         public DbSet<SpotVote> SpotVotes { get; set; }
 
-        public DbSet<SpotPost> SpotPosts { get; set; }
-
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<PostImage> PostImages { get; set; }

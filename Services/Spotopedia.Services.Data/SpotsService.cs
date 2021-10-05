@@ -142,5 +142,16 @@ namespace Spotopedia.Services.Data
         {
             return this.spotsRepository.All().Any(x => x.Id == spotId && x.AddedByUserId == userId);
         }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllSpotsAsKeyValuePairs()
+        {
+            return this.spotsRepository.AllAsNoTracking().Select(x => new
+            {
+                x.Id,
+                x.Title,
+            }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Title));
+        }
+
+        
     }
 }

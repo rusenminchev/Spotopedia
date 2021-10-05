@@ -54,8 +54,6 @@ namespace Spotopedia.Services.Data
             }
 
             await this.spotVotesRepository.SaveChangesAsync();
-        }
-
-        
+        } 
     }
 }

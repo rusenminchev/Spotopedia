@@ -103,8 +103,8 @@
 
         public IActionResult ById(int id)
         {
-            var spot = this.spotsService.GetById<SingleSpotViewModel>(id);
-            return this.View(spot);
+            var spotViewModel = this.spotsService.GetById<SingleSpotViewModel>(id);
+            return this.View(spotViewModel);
         }
 
         public IActionResult Map()

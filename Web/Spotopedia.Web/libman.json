@@ -40,6 +40,11 @@
       "provider": "cdnjs",
       "library": "leaflet-geosearch@2.7.0",
       "destination": "wwwroot/lib/leaflet-geosearch/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "tinymce@5.9.2",
+      "destination": "wwwroot/lib/tinymce/"
     }
   ]
 }

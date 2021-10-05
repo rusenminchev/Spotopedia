@@ -27,7 +27,7 @@ namespace Spotopedia.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<SpotVoteResponseModel>> Post(SpotVoteInputModel input)
+        public async Task<ActionResult<VoteResponseModel>> Post(VoteInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
 
@@ -36,7 +36,7 @@ namespace Spotopedia.Web.Controllers
             var likesCount = this.spotVotesService.GetLikes(input.SpotId);
             var dislikesCount = this.spotVotesService.GetDislikes(input.SpotId);
 
-            var responseModel = new SpotVoteResponseModel
+            var responseModel = new VoteResponseModel
             {
                 LikesCount = likesCount,
                 DislikesCount = dislikesCount,

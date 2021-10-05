@@ -1,6 +1,6 @@
 ﻿namespace Spotopedia.Web.ViewModels.SpotVotes
 {
-    public class SpotVoteResponseModel
+    public class VoteResponseModel
     {
         public int LikesCount { get; set; }
 

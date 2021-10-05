@@ -18,5 +18,7 @@
         bool IsThisUserAddedThisSpot(string userId, int spotId);
 
         Task EditAsync(int id, EditSpotInputModel input);
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllSpotsAsKeyValuePairs();
     }
 }
