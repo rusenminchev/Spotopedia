@@ -4,7 +4,24 @@
 
  }
 
+<style>
+    #btn-back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+    }
+</style>
+
 <div class="container-fluid mt-100">
+<div>
+<a asp-controller="Posts" asp-action="Create" class="btn btn-primary float-right" ><i class="fa fa-plus"></i> Create post</a>
+<div class="clearfix"></div>
+
+<br>
+
+</div>
+
     @foreach (var post in Model.Posts)
     {
     <div class="row">
@@ -20,16 +37,35 @@
                     </div>
                 </div>
                 <div class="card-body">
+                <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a></h5>
+                <p class="card-text">@post.Content</p>
+                </div>
+                <div class="card-body">
                            @if (post.PostImages.Count > 0)
                 {
                             <img src="@post.PostImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
                 }
-            <div class="card-body">
-                <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a></h5>
-                <p class="card-text">@post.Caption</p>
+                <hr>
+                <div>
+    <form asp-controller="Comments" asp-action="Create" method="post" id="AddCommentForm" >
+        <input type="hidden" name="PostId" value="@post.Id" />
+    <div>
+         <label for="Content"></label>
+        <textarea name="Content" id="Content" class="form-control" placeholder="Write a comment..."></textarea> 
+    </div>
+    <div>
+        <br>
+        <input type="submit" class="btn btn-primary float-right" value="Add Comment" />
+        <div class="clearfix"></div>
+    </div>
+    </form>
                 </div>
+                <hr>
+                @if (post.PostComments.Count > 0)
+{
                 <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
-                    <div class="text-muted small ml-3 row">
+                                @*Voting 
+                            <div class="text-muted small ml-3 row">
                             <form id="votesForm" method="post"></form>
                             <div>
                                 <a href="#" onclick="sendVote(@post.Id, true)">
@@ -42,34 +78,111 @@
                                 <a href="#" onclick="sendVote(@post.Id, false)">
                                     <i class="fa fa-thumbs-down"></i>
                                 </a>
+                            </div>*@
+                     @*<div class="text-muted small ml-3"> <button type="button" class="btn btn-ppr" onclick="showAddCommentForm(@post.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>*@
+         
+                     @foreach (var comment in post.PostComments)
+{
+            <div class="container-fluid mt-100">
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center">
+                                    <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <div class="media-body ml-3">
+                                        @comment.AddedByUserUserName
+                                        <div class="text-muted small">
+                                            <time datetime="@comment.CreatedOn.ToString("O")"></time>
+                                        </div>
+                                    </div>
+                                    <div class="text-muted small ml-3">
+                                        @*@if (this.User.Identity.IsAuthenticated)*@
+                                            @*<div class="px-4 pt-3"> <button type="button" class="btn btn-secondary" onclick="showAddCommentForm(@comment.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>*@
+                                    </div>
+                                </div>
                             </div>
-                    <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Reply</button> </div>
-                </div
+                            <div class="card-body">
+                                <p class="card-text">@comment.Content</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+}
+                </div>
+}
             </div>
         </div>
     </div>
 </div>
-</div>
+     <hr>
+        <br>
+@*</div>*@
     }
+<!-- Back to top button -->
+<button
+        type="button"
+        class="btn btn-secondary btn-floating btn-lg"
+        id="btn-back-to-top"
+        >
+  <i class="fas fa-arrow-up"></i>
+</button>
+</div>
 
 @section Scripts{ 
+<script>
+    function showAddCommentForm() {
+        $("#AddCommentForm").show();
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#AddCommentForm").offset().top - $(window).height() / 2
+        }, 1000);
+    }
+
+    function sendVote(postId, isLiked) {
+        var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+        var json = { postId: postId, isLiked: isLiked };
+        $.ajax({
+            url: "/api/postVotes",
+            type: "POST",
+            data: JSON.stringify(json),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (data) {
+                $("#likesCount").html(data.likesCount);
+                $("#dislikesCount").html(data.dislikesCount);
+            }
+        });
+    }
+    </script>
 
 <script>
-        function sendVote(postId, isLiked) {
-            var token = $("#votesForm input[name=__RequestVerificationToken]").val();
-            var json = { postId: postId, isLiked: isLiked };
-            $.ajax({
-                url: "/api/postVotes",
-                type: "POST",
-                data: JSON.stringify(json),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                headers: { 'X-CSRF-TOKEN': token },
-                success: function (data) {
-                   $("#likesCount").html(data.likesCount);
-                   $("#dislikesCount").html(data.dislikesCount);
-                }
-            });
+    //Get the button
+    let mybutton = document.getElementById("btn-back-to-top");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (
+            document.body.scrollTop > 20 ||
+            document.documentElement.scrollTop > 20
+        ) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
         }
-    </script>
+    }
+    // When the user clicks on the button, scroll to the top of the document
+    mybutton.addEventListener("click", backToTop);
+
+    function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
 }

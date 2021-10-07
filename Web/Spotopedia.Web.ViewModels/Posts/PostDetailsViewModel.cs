@@ -2,6 +2,7 @@
 using Spotopedia.Data.Models;
 using Spotopedia.Data.Models.Enumerations;
 using Spotopedia.Services.Mapping;
+using Spotopedia.Web.ViewModels.Comments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Spotopedia.Web.ViewModels.Posts
     {
         public int Id { get; set; }
 
-        public string Caption { get; set; }
+        public string Content { get; set; }
 
         public virtual ICollection<PostImage> PostImages { get; set; } = new HashSet<PostImage>();
 
@@ -21,15 +22,13 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public DateTime CreatedOn { get; set; }
 
-        public ICollection<PostComment> PostComments { get; set; }
+        public ICollection<PostCommentViewModel> PostComments { get; set; }
 
         public ICollection<PostVote> PostVotes { get; set; }
 
         public int LikesCount { get; set; }
 
         public int DislikesCount { get; set; }
-
-        public virtual ICollection<SpotImage> SpotImages { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

@@ -17,6 +17,10 @@
 
         public virtual Post Post { get; set; }
 
+        public int? ParentId { get; set; }
+
+        public virtual PostComment Parent { get; set; }
+
         [Required]
         public string AddedByUserId { get; set; }
 

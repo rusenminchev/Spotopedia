@@ -29,7 +29,7 @@
                 AllowedFormats = new[] { "jpg", "png", "jfif", "exif", "gif", "bmp", "ppm", "pgm", "pbm", "pnm", "heif", "bat" },
                 Format = "jpg",
                 Overwrite = true,
-                Transformation = new Transformation().Width(width).Height(height).Crop("scale"),
+                Transformation = new Transformation().Background("auto").Width(width).Height(height).Crop("pad"),
             };
 
             uploadResult = this.cloudinaryUtility.Upload(uploadParams);

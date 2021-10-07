@@ -44,7 +44,7 @@ namespace Spotopedia.Services.Data
 
             var post = new Post
             {
-                Caption = input.Caption,
+                Content = input.Content,
                 AddedByUserId = userId,
             };
 
@@ -74,6 +74,7 @@ namespace Spotopedia.Services.Data
         public IEnumerable<T> GetAll<T>()
         {
             return this.postsRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
                 .To<T>()
                 .ToList();
         }

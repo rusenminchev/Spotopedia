@@ -8,9 +8,9 @@ namespace Spotopedia.Web.ViewModels.Posts
 {
     public class CreatePostInputModel : IMapFrom<Post>
     {
-        [MaxLength(500, ErrorMessage = "Max caption lenght reached")]
-        [Required(ErrorMessage = "Please enter caption.")]
-        public string Caption { get; set; }
+        [MaxLength(500)]
+        [Required(ErrorMessage = "Please insert text.")]
+        public string Content { get; set; }
 
         public IEnumerable<IFormFile> PostImages { get; set; }
             = new HashSet<IFormFile>();

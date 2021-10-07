@@ -17,7 +17,7 @@
 
         [Required]
         [MaxLength(500)]
-        public string Caption { get; set; }
+        public string Content { get; set; }
 
         public virtual ICollection<PostImage> PostImages { get; set; }
 
