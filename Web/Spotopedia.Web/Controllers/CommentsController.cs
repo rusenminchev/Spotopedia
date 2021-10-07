@@ -28,7 +28,7 @@ namespace Spotopedia.Web.Controllers
 
             await this.commentsService.CreateAsync(input.PostId, userId, input.Content);
 
-            return this.RedirectToAction("All", "Posts", new { id = input.PostId });
+            return this.RedirectToAction("All", "Posts");
         }
     }
 }

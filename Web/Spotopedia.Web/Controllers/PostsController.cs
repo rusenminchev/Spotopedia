@@ -35,7 +35,7 @@ namespace Spotopedia.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateAsync(CreatePostInputModel input)
+        public async Task<IActionResult> Create(CreatePostInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -47,7 +47,7 @@ namespace Spotopedia.Web.Controllers
 
             await this.postsService.CreateAsync(input, userId);
 
-            return this.RedirectToAction();
+            return this.RedirectToAction("All", "Posts");
         }
 
         public IActionResult Details(int id)
