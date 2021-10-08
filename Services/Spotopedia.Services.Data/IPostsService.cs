@@ -1,4 +1,5 @@
-﻿using Spotopedia.Web.ViewModels.Posts;
+﻿using Spotopedia.Data.Models;
+using Spotopedia.Web.ViewModels.Posts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,5 +14,11 @@ namespace Spotopedia.Services.Data
         T GetPostDetails<T>(int id);
 
         IEnumerable<T> GetAll<T>();
+
+        public bool IsThisPostAddedByThisUser(int postId, string userId);
+
+        Task EditAsync(int id, EditPostInputModel input);
+
+        Task DeleteAsync(int id);
     }
 }

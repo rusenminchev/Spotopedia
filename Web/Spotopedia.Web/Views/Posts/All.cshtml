@@ -161,7 +161,7 @@
 </div>
     <div>
         <br>
-        <input type="submit" class="btn btn-outline-primary float-right" value="Create Comment" />
+        <input type="submit" class="btn btn-outline-primary float-right" value="Publish" />
         <div class="clearfix"></div>
     </div>
     </form>
@@ -179,6 +179,17 @@
                 <div class="card-header">
                     <div class="media flex-wrap w-100 align-items-center"> <img src="https://i.imgur.com/iNmBizf.jpg" class="d-block ui-w-40 rounded-circle" alt="">
                         <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">@post.AddedByUserUserName</a>
+                        
+                        <div class="row float-right d-flex justify-content-end">
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == post.AddedByUserUserName)
+                        {
+                            <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-warning float-right">Edit</a>
+                            <a asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="btn btn-danger float-right">Delete</a>
+                         
+                        }
+                        </div>
+                        <div class="clearfix"></div>
+                        
                             <div class="text-muted small">@post.CreatedOn</div>
                         </div>
                         <div class="text-muted small ml-3">
@@ -204,6 +215,7 @@
     </div>
     <div>
         <br>
+
         <input type="submit" class="btn btn-primary float-right" value="Add Comment" />
         <div class="clearfix"></div>
     </div>

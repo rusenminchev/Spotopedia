@@ -2,6 +2,7 @@
 using Spotopedia.Services.Mapping;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Spotopedia.Web.ViewModels.Posts

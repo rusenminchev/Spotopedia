@@ -151,7 +151,5 @@ namespace Spotopedia.Services.Data
                 x.Title,
             }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Title));
         }
-
-        
     }
 }

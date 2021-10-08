@@ -24,6 +24,11 @@ namespace Spotopedia.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreatePostCommentInputModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("All", "Posts");
+            }
+
             var userId = this.userManager.GetUserId(this.User);
 
             await this.commentsService.CreateAsync(input.PostId, userId, input.Content);

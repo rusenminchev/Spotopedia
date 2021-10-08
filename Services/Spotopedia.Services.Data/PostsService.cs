@@ -78,5 +78,31 @@ namespace Spotopedia.Services.Data
                 .To<T>()
                 .ToList();
         }
+
+        public bool IsThisPostAddedByThisUser(int postId, string userId)
+        {
+            return this.postsRepository.All()
+                .Any(x => x.Id == postId && x.AddedByUserId == userId);
+        }
+
+        public async Task EditAsync(int id, EditPostInputModel input)
+        {
+            var post = this.postsRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            post.Content = input.Content;
+
+            this.postsRepository.Update(post);
+            await this.postsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var post = this.postsRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.postsRepository.Delete(post);
+            await this.postsRepository.SaveChangesAsync();
+        }
     }
 }

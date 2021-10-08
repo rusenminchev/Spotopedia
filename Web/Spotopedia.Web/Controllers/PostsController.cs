@@ -61,10 +61,52 @@ namespace Spotopedia.Web.Controllers
         {
             var viewModel = new AllPostsViewModel
             {
-               Posts = this.postsService.GetAll<PostDetailsViewModel>(),
+                Posts = this.postsService.GetAll<PostDetailsViewModel>(),
             };
 
             return this.View(viewModel);
+        }
+
+
+        public IActionResult Edit(int id)
+        {
+            //var userId = this.userManager.GetUserId(this.User);
+
+            //if (!this.postsService.IsThisPostAddedByThisUser(postId, userId))
+            //{
+            //    return this.RedirectToAction(nameof(this.All));
+            //}
+
+            var inputModel = this.postsService.GetPostDetails<EditPostInputModel>(id);
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int Id, EditPostInputModel input)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            //if (!this.ModelState.IsValid)
+            //{
+            //    return this.View(input);
+            //}
+
+            //if (!this.postsService.IsThisPostAddedByThisUser(postId, userId))
+            //{
+            //    return this.RedirectToAction(nameof(this.All));
+            //}
+
+            await this.postsService.EditAsync(Id, input);
+
+            return this.RedirectToAction(nameof(this.Details), new { Id });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.postsService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

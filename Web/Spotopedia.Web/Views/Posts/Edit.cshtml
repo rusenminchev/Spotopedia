@@ -1,0 +1,19 @@
+﻿@model Spotopedia.Web.ViewModels.Posts.EditPostInputModel
+
+@{ 
+    ViewData["Title"] = "Edit post";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+ <form method="post" id="editForm">
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+     <div>
+   <input type="hidden" asp-for="Id" />
+</form>
+
+<button type="submit" class="btn btn-outline-success float-right">Save changes</button>
