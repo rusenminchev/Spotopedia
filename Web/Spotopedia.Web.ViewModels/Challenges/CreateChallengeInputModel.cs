@@ -1,19 +1,15 @@
-﻿namespace Spotopedia.Data.Models
+﻿namespace Spotopedia.Web.ViewModels.Challenges
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text;
 
-    using Spotopedia.Data.Common.Models;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
 
-    public class Challenge : BaseDeletableModel<string>
+    public class CreateChallengeInputModel
     {
-        public Challenge()
-        {
-            this.Id = Guid.NewGuid().ToString();
-            this.ChallengeEntries = new HashSet<ChallengeEntry>();
-        }
-
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -26,12 +22,10 @@
         public DateTime EndDate { get; set; }
 
         [Required]
-        public bool IsItActive { get; set; }
+        public bool IsItActive => DateTime.UtcNow < this.EndDate;
 
         [Required]
         public string AddedByUserId { get; set; }
-
-        public virtual ApplicationUser AddedByUser { get; set; }
 
         public virtual ICollection<ChallengeEntry> ChallengeEntries { get; set; }
     }

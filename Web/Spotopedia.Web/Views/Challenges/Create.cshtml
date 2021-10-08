@@ -1,0 +1,41 @@
+﻿@model Spotopedia.Web.ViewModels.Challenges.CreateChallengeInputModel
+
+@{ 
+    ViewData["Title"] = "Create new challenge";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data"> 
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+        <div>
+        <label asp-for="EndDate"></label>
+        <input asp-for="EndDate" class="form-control" id="date_info" type="date" asp-format="{0:yyyy-MM-dd}" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <hr>
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+@section Scripts{ 
+<script>
+$(document).ready(function () {
+    var time = new Date();
+    var day = ("0" + time.getDate()).slice(-2);
+    var month = ("0" + (time.getMonth() + 1)).slice(-2);
+    var today = time.getFullYear() + "-" + (month) + "-" + (day);
+    $('#date_info').val(today);
+})
+</script>
+}

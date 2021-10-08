@@ -23,6 +23,7 @@ namespace Spotopedia.Data.Models
             this.PostVotes = new HashSet<PostVote>();
             this.PostComments = new HashSet<PostComment>();
             this.PostCommentVotes = new HashSet<PostCommentVote>();
+            this.Challenges = new HashSet<Challenge>();
             this.ChallengeEntries = new HashSet<ChallengeEntry>();
         }
 
@@ -96,6 +97,8 @@ namespace Spotopedia.Data.Models
         public virtual ICollection<PostComment> PostComments { get; set; }
 
         public virtual ICollection<PostCommentVote> PostCommentVotes { get; set; }
+
+        public virtual ICollection<Challenge> Challenges { get; set; }
 
         public virtual ICollection<ChallengeEntry> ChallengeEntries { get; set; }
     }
