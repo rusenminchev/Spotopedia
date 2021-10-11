@@ -9,8 +9,6 @@
     {
         public ChallengeEntry()
         {
-            this.ChallengeEntryImages = new HashSet<ChallengeEntryImage>();
-            this.Spots = new HashSet<ChallengeEntrySpot>();
         }
 
         [Required]
@@ -27,8 +25,6 @@
 
         public Challenge Challenge { get; set; }
 
-        public virtual ICollection<ChallengeEntryImage> ChallengeEntryImages { get; set; }
-
-        public virtual ICollection<ChallengeEntrySpot> Spots { get; set; }
+        public ChallengeEntryImage ChallengeEntryImage { get; set; }
     }
 }

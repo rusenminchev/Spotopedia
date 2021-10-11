@@ -47,8 +47,9 @@ namespace Spotopedia.Services.Data
 
         public IEnumerable<T> GetAll<T>()
         {
-            return this.challengesRepository.
-                AllAsNoTracking()
+            return this.challengesRepository
+                .AllAsNoTracking()
+                .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToList();
         }

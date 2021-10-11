@@ -26,6 +26,7 @@ namespace Spotopedia.Web.Controllers
             this.userManager = userManager;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var inputModel = new CreatePostInputModel();
@@ -67,15 +68,15 @@ namespace Spotopedia.Web.Controllers
             return this.View(viewModel);
         }
 
-
+        [Authorize]
         public IActionResult Edit(int id)
         {
-            //var userId = this.userManager.GetUserId(this.User);
+            var userId = this.userManager.GetUserId(this.User);
 
-            //if (!this.postsService.IsThisPostAddedByThisUser(postId, userId))
-            //{
-            //    return this.RedirectToAction(nameof(this.All));
-            //}
+            if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
+            {
+                return this.RedirectToAction(nameof(this.All));
+            }
 
             var inputModel = this.postsService.GetPostDetails<EditPostInputModel>(id);
             return this.View(inputModel);
@@ -87,15 +88,15 @@ namespace Spotopedia.Web.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            //if (!this.ModelState.IsValid)
-            //{
-            //    return this.View(input);
-            //}
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
 
-            //if (!this.postsService.IsThisPostAddedByThisUser(postId, userId))
-            //{
-            //    return this.RedirectToAction(nameof(this.All));
-            //}
+            if (!this.postsService.IsThisPostAddedByThisUser(Id, userId))
+            {
+                return this.RedirectToAction(nameof(this.All));
+            }
 
             await this.postsService.EditAsync(Id, input);
 

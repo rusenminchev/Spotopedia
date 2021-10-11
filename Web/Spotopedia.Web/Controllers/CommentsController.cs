@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Spotopedia.Data.Models;
 using Spotopedia.Services.Data;
@@ -22,6 +23,7 @@ namespace Spotopedia.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreatePostCommentInputModel input)
         {
             if (!this.ModelState.IsValid)
