@@ -45,7 +45,7 @@ namespace Spotopedia.Web.Controllers
 
             await this.challengeEntriesService.CreateAsync(input, id, userId);
 
-            return this.RedirectToAction("All", "Challenges");
+            return this.RedirectToAction("Details", "Challenges", new { id });
         }
     }
 }

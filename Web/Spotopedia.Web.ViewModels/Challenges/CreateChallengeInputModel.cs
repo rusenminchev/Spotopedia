@@ -3,10 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
+    using Microsoft.AspNetCore.Http;
     using Spotopedia.Data.Models;
-    using Spotopedia.Services.Mapping;
 
     public class CreateChallengeInputModel
     {
@@ -15,7 +13,6 @@
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(500)]
         public string Description { get; set; }
 
         [Required]
@@ -26,6 +23,9 @@
 
         [Required]
         public string AddedByUserId { get; set; }
+
+        [Required]
+        public IFormFile ChallengeImage { get; set; }
 
         public virtual ICollection<ChallengeEntry> ChallengeEntries { get; set; }
     }

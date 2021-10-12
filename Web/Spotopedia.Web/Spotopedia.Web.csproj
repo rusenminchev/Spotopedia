@@ -19,6 +19,7 @@
     <PackageReference Include="GeoJSON.Net.Contrib.EntityFramework" Version="0.1.7" />
     <PackageReference Include="GeoJSON.Net.Contrib.MsSqlSpatial" Version="0.3.6" />
     <PackageReference Include="GeoJSON.Net.Contrib.Wkb" Version="0.1.8" />
+    <PackageReference Include="HtmlSanitizer" Version="6.0.441" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.6" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />

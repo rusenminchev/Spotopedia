@@ -1,9 +1,12 @@
-﻿using Spotopedia.Data.Models;
+﻿using Ganss.XSS;
+using Spotopedia.Data.Models;
 using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.ChallengeEntries;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Spotopedia.Web.ViewModels.Challenges
 {
@@ -15,9 +18,24 @@ namespace Spotopedia.Web.ViewModels.Challenges
 
         public string Description { get; set; }
 
+        public string ShortDescription
+        {
+            get
+            {
+                var description = WebUtility.HtmlDecode(Regex.Replace(this.Description, @"<[^>]+>", string.Empty));
+                return description.Length > 200
+                    ? description.Substring(0, 200) + " ..."
+                    : description;
+            }
+        }
+
+        public string SanitizedDescription => new HtmlSanitizer().Sanitize(this.Description);
+
         public DateTime EndDate { get; set; }
 
         public bool IsItActive => DateTime.UtcNow < this.EndDate;
+
+        public ChallengeImage Image { get; set; }
 
         public IEnumerable<ChallengeEntryViewDetailsModel> ChallengeEntries { get; set; }
     }

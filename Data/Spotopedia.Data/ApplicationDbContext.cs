@@ -46,6 +46,8 @@
 
         public DbSet<Challenge> Challenges { get; set; }
 
+        public DbSet<ChallengeImage> ChallengeImages { get; set; }
+
         public DbSet<ChallengeEntry> ChallengeEntries { get; set; }
 
         public DbSet<ChallengeEntryImage> ChallengeEntryImages { get; set; }

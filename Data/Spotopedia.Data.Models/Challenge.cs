@@ -19,7 +19,6 @@
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(500)]
         public string Description { get; set; }
 
         [Required]
@@ -34,5 +33,7 @@
         public virtual ApplicationUser AddedByUser { get; set; }
 
         public virtual ICollection<ChallengeEntry> ChallengeEntries { get; set; }
+
+        public ChallengeImage Image { get; set; }
     }
 }
