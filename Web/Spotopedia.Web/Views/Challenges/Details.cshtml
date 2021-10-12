@@ -59,7 +59,8 @@
 
                   @if(this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.Identity.Name == challengeEntry.AddedByUserUserName)
                 {
-                   <a asp-controller="ChallengeEntries" asp-action="Delete" asp-route-id="@challengeEntry.Id" class="btn btn-danger float-right">Delete</a>
+                   <hr>
+                   <a asp-controller="ChallengeEntries" asp-action="Delete" asp-route-id="@challengeEntry.Id" class="btn btn-outline-danger float-right">Delete</a>
                 }        
 
                 </div>

@@ -1,7 +1,17 @@
 ﻿@using Spotopedia.Common 
 @model Spotopedia.Web.ViewModels.Challenges.AllChallengesViewModel
 
-@if(this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+<style>
+    .wrapper {
+        display: flex;
+    }
+
+        .wrapper > div:first-child {
+            margin-right: 10px;
+        } 
+</style>
+
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
 {
 <div class="text-muted small ml-3"> <a type="button"  asp-controller="Challenges" asp-action="Create"  class="btn btn-outline-primary float-right"><i class="fa fa-plus"></i>&nbsp; Create New Challenge</a> </div>
 <div class="clearfix"></div>
@@ -14,23 +24,26 @@
   <img src="@challenge.Image.ImageUrl" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"><a asp-action="Details" asp-route-id="@challenge.Id">@challenge.Name</a></h5>
-    @if(challenge.IsItActive)
-                {
+    @if (challenge.IsItActive)
+  {
                      <span class="badge badge-pill badge-success">Active</span>
-                }
-           else
-                {
+  }
+  else
+  {
                     <span class="badge badge-pill badge-danger">Expired</span>
-                }
+  }
     
     <p class="card-text">@challenge.ShortDescription</p>
-     @if(this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                {
-                   <a asp-controller="Challenges" asp-action="Edit" asp-route-id="@challenge.Id" class="btn btn-warning float-right">Edit</a>
-                   <a asp-controller="Challenges" asp-action="Delete" asp-route-id="@challenge.Id" class="btn btn-danger float-right">Delete</a>
-                }
-
     <p class="card-text"><small class="text-muted">Challenge ends: @challenge.EndDate</small></p>
+
+     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+                 <hr>
+                <div class="wrapper float-right">
+                   <div><a asp-controller="Challenges" asp-action="Edit" asp-route-id="@challenge.Id" class="btn btn-outline-warning float-right">Edit</a></div>
+                   <div><a asp-controller="Challenges" asp-action="Delete" asp-route-id="@challenge.Id" class="btn btn-outline-danger float-right">Delete</a></div>
+                </div>
+}
   </div>
 </div>
 }
