@@ -103,6 +103,7 @@ namespace Spotopedia.Web.Controllers
             return this.RedirectToAction(nameof(this.Details), new { id });
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             await this.postsService.DeleteAsync(id);

@@ -9,6 +9,8 @@ namespace Spotopedia.Web.ViewModels.ChallengeEntries
 {
     public class ChallengeEntryViewDetailsModel : IMapFrom<ChallengeEntry>
     {
+        public int Id { get; set; }
+
         public string Caption { get; set; }
 
         public string AddedByUserUserName { get; set; }

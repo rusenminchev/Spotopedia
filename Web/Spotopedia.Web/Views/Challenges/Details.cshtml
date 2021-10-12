@@ -1,4 +1,5 @@
-﻿@model Spotopedia.Web.ViewModels.Challenges.ChallengeDetailsViewModel
+﻿@using Spotopedia.Common
+@model Spotopedia.Web.ViewModels.Challenges.ChallengeDetailsViewModel
 
 <div class="container">
   <div class="row">
@@ -55,10 +56,15 @@
                 <div class="card-body">
                     <p class="card-text">@challengeEntry.Caption</p>
                     <img src="@challengeEntry.ChallengeEntryImageImageUrl" class="card-img-top" alt="...">
+
+                  @if(this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.Identity.Name == challengeEntry.AddedByUserUserName)
+                {
+                   <a asp-controller="ChallengeEntries" asp-action="Delete" asp-route-id="@challengeEntry.Id" class="btn btn-danger float-right">Delete</a>
+                }        
+
                 </div>
-                <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
-                    <div class="px-4 pt-3"> <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>
-                </div>
+                @*<div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
+                    <div class="px-4 pt-3"> <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>*@
             </div>
         </div>
     </div>

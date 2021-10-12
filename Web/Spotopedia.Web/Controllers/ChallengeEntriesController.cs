@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Spotopedia.Common;
 using Spotopedia.Data.Models;
 using Spotopedia.Services.Data;
 using Spotopedia.Web.ViewModels.ChallengeEntries;
@@ -46,6 +47,14 @@ namespace Spotopedia.Web.Controllers
             await this.challengeEntriesService.CreateAsync(input, id, userId);
 
             return this.RedirectToAction("Details", "Challenges", new { id });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.challengeEntriesService.DeleteAsync(id);
+
+            return this.RedirectToAction("All", "Challenges");
         }
     }
 }

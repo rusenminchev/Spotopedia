@@ -58,5 +58,20 @@ namespace Spotopedia.Services.Data
             this.challengesRepository.Update(challenge);
             await this.challengesRepository.SaveChangesAsync();
         }
+
+        public bool IsThisChallengeEntryAddedByThisUser(int challengeEntryId, string userId)
+        {
+            return this.challengeEntriesRepository.All()
+                .Any(x => x.Id == challengeEntryId && x.AddedByUserId == userId);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var challengeEntry = this.challengeEntriesRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.challengeEntriesRepository.Delete(challengeEntry);
+            await this.challengeEntriesRepository.SaveChangesAsync();
+        }
     }
 }

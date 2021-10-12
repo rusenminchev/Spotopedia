@@ -1,13 +1,15 @@
-﻿using Spotopedia.Web.ViewModels.ChallengeEntries;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Threading.Tasks;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Web.ViewModels.ChallengeEntries;
+
     public interface IChallengeEntriesService
     {
         Task CreateAsync(CreateChallengeEntryInputModel input, string challengeId, string userId);
+
+        Task DeleteAsync(int id);
+
+        bool IsThisChallengeEntryAddedByThisUser(int challengeEntryId, string userId);
     }
 }
