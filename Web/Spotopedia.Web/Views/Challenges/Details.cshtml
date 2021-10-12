@@ -18,10 +18,23 @@
        <!-- .card-body.tab-content  -->
        <div class="card-body tab-content">
          <div class="tab-pane fade show active" id="tab1">
-           <h4 class="card-title">@Model.Name</h4>
+         <br>
+                       @if(Model.IsItActive)
+                {
+                     <h4 class="card-title">@Model.Name <span class="badge badge-pill badge-success float-right">Active</span></h4>
+                     <a asp-controller="ChallengeEntries" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-warning float-right">Join the challenge</a>
+                     <div class="clearfix"></div>
+                }
+           else
+                {
+                    <h4 class="card-title">@Model.Name  <span class="badge badge-pill badge-danger float-right">Expired</span></h4>
+                    <button class="btn btn-warning float-right">Join the challenge</button>
+                    <div class="clearfix"></div>
+                }
+         <br>
+
            <img src="@Model.Image.ImageUrl" class="card-img-top" alt="...">
-           <p class="card-text">@Html.Raw(Model.SanitizedDescription)</p>
-           <a asp-controller="ChallengeEntries" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-warning">Join the challenge</a>
+           <p class="card-text">@Html.Raw(Model.SanitizedDescription)</p>        
          </div>
          <div class="tab-pane fade" id="tab2">
            <h4 class="card-title"></h4>

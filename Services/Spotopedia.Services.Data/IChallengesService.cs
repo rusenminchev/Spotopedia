@@ -13,5 +13,7 @@ namespace Spotopedia.Services.Data
         T GetChallengeDetails<T>(string id);
 
         IEnumerable<T> GetAll<T>();
+
+        Task EditAsync(string id, EditChallengeInputModel input);
     }
 }

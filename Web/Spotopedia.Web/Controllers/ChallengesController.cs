@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Spotopedia.Common;
 using Spotopedia.Data.Models;
 using Spotopedia.Services.Data;
 using Spotopedia.Web.ViewModels.Challenges;
@@ -21,6 +23,7 @@ namespace Spotopedia.Web.Controllers
             this.userManager = userManager;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var input = new CreateChallengeInputModel();
@@ -28,6 +31,7 @@ namespace Spotopedia.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateChallengeInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -53,6 +57,27 @@ namespace Spotopedia.Web.Controllers
             };
 
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.challengesService.GetChallengeDetails<EditChallengeInputModel>(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Edit(string id, EditChallengeInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(this.Details));
+            }
+            await this.challengesService.EditAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

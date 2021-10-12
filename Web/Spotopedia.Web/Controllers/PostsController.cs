@@ -84,7 +84,7 @@ namespace Spotopedia.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int Id, EditPostInputModel input)
+        public async Task<IActionResult> Edit(int id, EditPostInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
 
@@ -93,14 +93,14 @@ namespace Spotopedia.Web.Controllers
                 return this.View(input);
             }
 
-            if (!this.postsService.IsThisPostAddedByThisUser(Id, userId))
+            if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
             {
                 return this.RedirectToAction(nameof(this.All));
             }
 
-            await this.postsService.EditAsync(Id, input);
+            await this.postsService.EditAsync(id, input);
 
-            return this.RedirectToAction(nameof(this.Details), new { Id });
+            return this.RedirectToAction(nameof(this.Details), new { id });
         }
 
         public async Task<IActionResult> Delete(int id)

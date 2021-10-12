@@ -1,16 +1,34 @@
-﻿@model Spotopedia.Web.ViewModels.Challenges.AllChallengesViewModel
+﻿@using Spotopedia.Common 
+@model Spotopedia.Web.ViewModels.Challenges.AllChallengesViewModel
 
-
+@if(this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
 <div class="text-muted small ml-3"> <a type="button"  asp-controller="Challenges" asp-action="Create"  class="btn btn-outline-primary float-right"><i class="fa fa-plus"></i>&nbsp; Create New Challenge</a> </div>
 <div class="clearfix"></div>
 <br>
+}
+
 @foreach (var challenge in Model.Challenges)
 {
 <div class="card mb-3">
   <img src="@challenge.Image.ImageUrl" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"><a asp-action="Details" asp-route-id="@challenge.Id">@challenge.Name</a></h5>
+    @if(challenge.IsItActive)
+                {
+                     <span class="badge badge-pill badge-success">Active</span>
+                }
+           else
+                {
+                    <span class="badge badge-pill badge-danger">Expired</span>
+                }
+    
     <p class="card-text">@challenge.ShortDescription</p>
+     @if(this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                   <a asp-controller="Challenges" asp-action="Edit" asp-route-id="@challenge.Id" class="btn btn-warning float-right">Edit</a>
+                }
+
     <p class="card-text"><small class="text-muted">Challenge ends: @challenge.EndDate</small></p>
   </div>
 </div>

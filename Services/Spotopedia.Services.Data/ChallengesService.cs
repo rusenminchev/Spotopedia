@@ -69,5 +69,18 @@ namespace Spotopedia.Services.Data
                 .To<T>()
                 .ToList();
         }
+
+        public async Task EditAsync(string id, EditChallengeInputModel input)
+        {
+            var challenge = this.challengesRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            challenge.Name = input.Name;
+            challenge.Description = input.Description;
+            challenge.EndDate = input.EndDate;
+
+            this.challengesRepository.Update(challenge);
+            await this.challengesRepository.SaveChangesAsync();
+        }
     }
 }
