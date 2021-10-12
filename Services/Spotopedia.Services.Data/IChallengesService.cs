@@ -15,5 +15,7 @@ namespace Spotopedia.Services.Data
         IEnumerable<T> GetAll<T>();
 
         Task EditAsync(string id, EditChallengeInputModel input);
+
+        Task DeleteAsync(string id);
     }
 }

@@ -59,7 +59,7 @@ namespace Spotopedia.Web.Controllers
             return this.View(viewModel);
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Edit(string id)
         {
             var viewModel = this.challengesService.GetChallengeDetails<EditChallengeInputModel>(id);
@@ -76,6 +76,14 @@ namespace Spotopedia.Web.Controllers
                 return this.RedirectToAction(nameof(this.Details));
             }
             await this.challengesService.EditAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.challengesService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));
         }

@@ -27,6 +27,7 @@
      @if(this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
                    <a asp-controller="Challenges" asp-action="Edit" asp-route-id="@challenge.Id" class="btn btn-warning float-right">Edit</a>
+                   <a asp-controller="Challenges" asp-action="Delete" asp-route-id="@challenge.Id" class="btn btn-danger float-right">Delete</a>
                 }
 
     <p class="card-text"><small class="text-muted">Challenge ends: @challenge.EndDate</small></p>
