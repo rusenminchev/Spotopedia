@@ -4,6 +4,37 @@
 
  }
 
+@if (this.TempData.ContainsKey("Add"))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+         @this.TempData["Add"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (this.TempData.ContainsKey("Edit"))
+{
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+         @this.TempData["Edit"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (this.TempData.ContainsKey("Delete"))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+         @this.TempData["Delete"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
 <style>
     #btn-back-to-top {
         position: fixed;
@@ -135,7 +166,12 @@
 
         .wrapper > div:first-child {
             margin-right: 10px;
-        } 
+        }
+
+    ul.nav li.dropdown:hover ul.dropdown-menu {
+        display: block;
+    }
+ 
 </style>
 
 <div class="container-fluid mt-100">
@@ -189,10 +225,24 @@
                         <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">@post.AddedByUserUserName</a>  
                             <div class="text-muted small">@post.CreatedOn</div>
                         @if (User.Identity.IsAuthenticated && User.Identity.Name == post.AddedByUserUserName)
-        {
+        {                   
+                            <!-- Single button -->
+
+                            
                             <div class="wrapper float-right">
-                            <div><a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-outline-warning float-right">Edit</a></div>
-                            <div><a asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="btn btn-outline-danger float-right">Delete</a></div>
+                            <div class="container">
+                                  <div class="dropdown float-right">
+                                    <button class="btn btn-light dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">Edit</a></li>
+                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">Delete</a></li>
+                                  </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            @*<div><a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-outline-warning float-right">Edit</a></div>
+                            <div><a asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="btn btn-outline-danger float-right">Delete</a></div>*@
                             </div>
                             <div class="clearfix"></div>
         }
@@ -394,4 +444,13 @@ $('.image-upload-wrap').bind('dragover', function () {
 });
 
 </script>
+
+<script>
+          $('.dropdown').hover(function () {
+              $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+          }, function () {
+              $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+          });
+</script>
+
 }

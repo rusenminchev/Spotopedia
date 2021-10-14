@@ -1,4 +1,14 @@
-﻿<meta charset="utf-8" />
+﻿@if (this.TempData.ContainsKey("AddNewSpot"))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+         @this.TempData["AddNewSpot"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<meta charset="utf-8" />
   <title>Showing an ArcGIS basemap</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 

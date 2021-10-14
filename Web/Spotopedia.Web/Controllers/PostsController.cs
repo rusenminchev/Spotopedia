@@ -48,6 +48,7 @@ namespace Spotopedia.Web.Controllers
 
             await this.postsService.CreateAsync(input, userId);
 
+            this.TempData["Add"] = "Your post was successfully added.";
             return this.RedirectToAction("All", "Posts");
         }
 
@@ -100,7 +101,8 @@ namespace Spotopedia.Web.Controllers
 
             await this.postsService.EditAsync(id, input);
 
-            return this.RedirectToAction(nameof(this.Details), new { id });
+            this.TempData["Edit"] = "Your post was successfully edited!";
+            return this.RedirectToAction(nameof(this.All));
         }
 
         [Authorize]
@@ -108,6 +110,7 @@ namespace Spotopedia.Web.Controllers
         {
             await this.postsService.DeleteAsync(id);
 
+            this.TempData["Delete"] = "Your post was successfully deleted!";
             return this.RedirectToAction(nameof(this.All));
         }
     }

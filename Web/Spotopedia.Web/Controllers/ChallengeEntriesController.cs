@@ -46,6 +46,8 @@ namespace Spotopedia.Web.Controllers
 
             await this.challengeEntriesService.CreateAsync(input, id, userId);
 
+            this.TempData["AddNewEntry"] = $"Your entry for was successfully added!";
+
             return this.RedirectToAction("Details", "Challenges", new { id });
         }
 
@@ -53,6 +55,8 @@ namespace Spotopedia.Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await this.challengeEntriesService.DeleteAsync(id);
+
+            this.TempData["DeleteNewEntry"] = $"Your entry was successfully deleted!";
 
             return this.RedirectToAction("All", "Challenges");
         }

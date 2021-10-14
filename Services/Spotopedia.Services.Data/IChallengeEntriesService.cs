@@ -11,5 +11,7 @@
         Task DeleteAsync(int id);
 
         bool IsThisChallengeEntryAddedByThisUser(int challengeEntryId, string userId);
+
+        T GetChallengeEntryDetails<T>(int id);
     }
 }

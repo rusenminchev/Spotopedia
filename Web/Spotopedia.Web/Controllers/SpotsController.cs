@@ -44,7 +44,9 @@
 
             await this.spotsService.CreateAsync(input, user.Id);
 
-            return this.Redirect("/");
+            this.TempData["AddNewSpot"] = $"New spot was successfully added!";
+
+            return this.Redirect(nameof(this.Map));
         }
 
         [Authorize]
@@ -75,8 +77,11 @@
 
             if (!this.spotsService.IsThisUserAddedThisSpot(userId, id))
             {
+                this.TempData["CannotEditSpot"] = $"Cannot edit this spot!";
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
+
+            this.TempData["EditSpot"] = $"The spot was successfully edited!";
 
             await this.spotsService.EditAsync(id, input);
             return this.RedirectToAction(nameof(this.ById), new { id });
