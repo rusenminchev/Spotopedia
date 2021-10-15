@@ -21,6 +21,12 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public string AddedByUserUserName { get; set; }
 
+        public string AddedByUserFirstName { get; set; }
+
+        public string AddedByUserLastName { get; set; }
+
+        public string AddedByUserAvatarImageUrl { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public ICollection<PostCommentViewModel> PostComments { get; set; }

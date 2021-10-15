@@ -165,7 +165,7 @@
     }
 
         .wrapper > div:first-child {
-            margin-right: 10px;
+            margin-left: 10px;
         }
 
     ul.nav li.dropdown:hover ul.dropdown-menu {
@@ -221,31 +221,30 @@
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-header">
-                    <div class="media flex-wrap w-100 align-items-center"> <img src="https://i.imgur.com/iNmBizf.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                        <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">@post.AddedByUserUserName</a>  
-                            <div class="text-muted small">@post.CreatedOn</div>
-                        @if (User.Identity.IsAuthenticated && User.Identity.Name == post.AddedByUserUserName)
-        {                   
+                    <div class="media flex-wrap w-100 align-items-center"> <img src="@post.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
+                        <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">@post.AddedByUserFirstName @post.AddedByUserLastName</a> 
+                         @if (User.Identity.IsAuthenticated && User.Identity.Name == post.AddedByUserUserName)
+                        {                   
                             <!-- Single button -->
-
-                            
                             <div class="wrapper float-right">
                             <div class="container">
                                   <div class="dropdown float-right">
                                     <button class="btn btn-light dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
                                     <i class="fa fa-ellipsis-h"></i>
                                     <span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">Edit</a></li>
-                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">Delete</a></li>
+                                    <ul class="dropdown-menu align-items-center" role="menu" aria-labelledby="menu1">
+                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">&nbsp;&nbsp; Edit</a></li>
+                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">&nbsp;&nbsp; Delete</a></li>
+                                    </ul>
                                   </div>
-                                    <div class="clearfix"></div>
                                 </div>
                             @*<div><a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-outline-warning float-right">Edit</a></div>
                             <div><a asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="btn btn-outline-danger float-right">Delete</a></div>*@
                             </div>
                             <div class="clearfix"></div>
-        }
+                        } 
+                            <div class="text-muted small">@post.CreatedOn</div>
+                     
                         </div>
                         <div class="text-muted small ml-3">
                         </div>
@@ -306,9 +305,9 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center">
-                                    <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <img src="@comment.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
                                     <div class="media-body ml-3">
-                                        @comment.AddedByUserUserName
+                                        @comment.AddedByUserFirstName @comment.AddedByUserLastName
                                         <div class="text-muted small">
                                             <time datetime="@comment.CreatedOn.ToString("O")"></time>
                                         </div>

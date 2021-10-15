@@ -1,12 +1,10 @@
-﻿using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.Posts
+﻿namespace Spotopedia.Web.ViewModels.Posts
 {
+    using System;
+
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+
     public class PostCommentViewModel : IMapFrom<PostComment>
     {
         public int Id { get; set; }
@@ -18,5 +16,11 @@ namespace Spotopedia.Web.ViewModels.Posts
         public DateTime CreatedOn { get; set; }
 
         public string AddedByUserUserName { get; set; }
+
+        public string AddedByUserFirstName { get; set; }
+
+        public string AddedByUserLastName { get; set; }
+
+        public string AddedByUserAvatarImageUrl { get; set; }
     }
 }

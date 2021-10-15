@@ -27,48 +27,44 @@ namespace Spotopedia.Data.Models
             this.ChallengeEntries = new HashSet<ChallengeEntry>();
         }
 
-        //[Required]
-        //[MinLength(2)]
-        //[MaxLength(30)]
-        //public string FirstName { get; set; }
+        [Required]
+        [MinLength(2)]
+        [MaxLength(30)]
+        public string FirstName { get; set; }
 
-        //[Required]
-        //[MinLength(2)]
-        //[MaxLength(30)]
-        //public string LastName { get; set; }
+        [Required]
+        [MinLength(2)]
+        [MaxLength(30)]
+        public string LastName { get; set; }
 
-        //[Required]
-        //public SportType SportType { get; set; }
+        public SportType SportType { get; set; }
 
-        //[Required]
-        //[MaxLength(1000)]
-        //public string Bio { get; set; }
+        [MaxLength(1000)]
+        public string Bio { get; set; }
 
-        //[Required]
-        //[MaxLength(30)]
-        //public string City { get; set; }
+        [MaxLength(30)]
+        public string City { get; set; }
 
-        //[Required]
-        //public Gender Gender { get; set; }
+        public Gender Gender { get; set; }
 
-        //public string ThumbnailImageUrl { get; set; }
+        public string ProfileImageUrl { get; set; }
 
-        //public string AvatarImageUrl { get; set; }
+        public string AvatarImageUrl { get; set; }
 
-        //[MaxLength(30)]
-        //public string FacebookUrl { get; set; }
+        [MaxLength(30)]
+        public string FacebookUrl { get; set; }
 
-        //[MaxLength(30)]
-        //public string InstagramUrl { get; set; }
+        [MaxLength(30)]
+        public string InstagramUrl { get; set; }
 
-        //[MaxLength(30)]
-        //public string TikTokUrl { get; set; }
+        [MaxLength(30)]
+        public string TikTokUrl { get; set; }
 
-        //[MaxLength(30)]
-        //public string TwitterUrl { get; set; }
+        [MaxLength(30)]
+        public string TwitterUrl { get; set; }
 
-        //[MaxLength(30)]
-        //public string WebsiteUrl { get; set; }
+        [MaxLength(30)]
+        public string WebsiteUrl { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
