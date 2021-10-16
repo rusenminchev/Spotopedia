@@ -130,12 +130,12 @@
 <form method="post" id="editForm" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" class="form-control" />
+        <input asp-for="FirstName" class="form-control" placeholder="What is your firts name?"></input>
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="LastName"></label>
-        <input asp-for="LastName" class="form-control"></input>
+        <input asp-for="LastName" class="form-control" placeholder="What is your last name?"></input>
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -147,7 +147,7 @@
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label asp-for="Gender" class="input-group-text">
-                    <i class="fas fa-chevron-up"></i>
+                    <i class="fas fa-chevron-down"></i>
                 </label>
             </div>
             <select asp-for="Gender" class="form-control">
@@ -169,7 +169,7 @@
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label asp-for="SportType" class="input-group-text">
-                    <i class="fas fa-chevron-up"></i>
+                    <i class="fas fa-chevron-down"></i>
                 </label>
             </div>
             <select asp-for="SportType" class="form-control">

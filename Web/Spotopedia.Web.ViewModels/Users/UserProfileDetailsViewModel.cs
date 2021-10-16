@@ -5,6 +5,7 @@ using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Spots;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Spotopedia.Web.ViewModels.Users
@@ -29,14 +30,19 @@ namespace Spotopedia.Web.ViewModels.Users
 
         public string AvatarImageUrl { get; set; }
 
+        [Url]
         public string FacebookUrl { get; set; }
 
+        [Url]
         public string InstagramUrl { get; set; }
 
+        [Url]
         public string TikTokUrl { get; set; }
 
+        [Url]
         public string TwitterUrl { get; set; }
 
+        [Url]
         public string WebsiteUrl { get; set; }
 
         public IEnumerable<SingleSpotViewModel> SpotsAddedByUser { get; set; }

@@ -222,7 +222,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="media flex-wrap w-100 align-items-center"> <img src="@post.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
-                        <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">@post.AddedByUserFirstName @post.AddedByUserLastName</a> 
+                        <div class="media-body ml-3"> <a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId" data-abc="true">@post.AddedByUserFirstName @post.AddedByUserLastName</a> 
                          @if (User.Identity.IsAuthenticated && User.Identity.Name == post.AddedByUserUserName)
                         {                   
                             <!-- Single button -->
@@ -307,7 +307,7 @@
                                 <div class="media flex-wrap w-100 align-items-center">
                                     <img src="@comment.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
                                     <div class="media-body ml-3">
-                                        @comment.AddedByUserFirstName @comment.AddedByUserLastName
+                                       <a asp-controller="Users" asp-action="Details" asp-route-id="@comment.AddedByUserId"> @comment.AddedByUserFirstName @comment.AddedByUserLastName </a>
                                         <div class="text-muted small">
                                             <time datetime="@comment.CreatedOn.ToString("O")"></time>
                                         </div>

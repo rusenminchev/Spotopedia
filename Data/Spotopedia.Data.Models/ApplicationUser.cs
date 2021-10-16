@@ -51,19 +51,19 @@ namespace Spotopedia.Data.Models
 
         public string AvatarImageUrl { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string FacebookUrl { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string InstagramUrl { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string TikTokUrl { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string TwitterUrl { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string WebsiteUrl { get; set; }
 
         // Audit info

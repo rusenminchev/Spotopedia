@@ -19,6 +19,8 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public virtual ICollection<PostImage> PostImages { get; set; } = new HashSet<PostImage>();
 
+        public string AddedByUserId { get; set; }
+
         public string AddedByUserUserName { get; set; }
 
         public string AddedByUserFirstName { get; set; }

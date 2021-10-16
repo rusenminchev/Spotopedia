@@ -15,6 +15,8 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public string AddedByUserId { get; set; }
+
         public string AddedByUserUserName { get; set; }
 
         public string AddedByUserFirstName { get; set; }
