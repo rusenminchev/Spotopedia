@@ -13,5 +13,7 @@ namespace Spotopedia.Services.Data
         T GetUserDetails<T>(string id);
 
         IEnumerable<T> AllSpotsByUser<T>(string userId);
+
+        IEnumerable<T> AllSpotsLikedByUser<T>(string userId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Spotopedia.Data.Common.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Spotopedia.Data.Common.Repositories;
 using Spotopedia.Data.Models;
 using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Users;
@@ -72,6 +73,16 @@ namespace Spotopedia.Services.Data
         {
             var spots = this.spotsRepository.All()
                 .Where(x => x.AddedByUserId == userId)
+                .To<T>()
+                .ToList();
+
+            return spots;
+        }
+
+        public IEnumerable<T> AllSpotsLikedByUser<T>(string userId)
+        {
+            var spots = this.spotsRepository.All()
+                .Include(x => x.SpotVotes.Where(x => x.Value.ToString() == "Like" && x.AddedByUserId == userId))
                 .To<T>()
                 .ToList();
 

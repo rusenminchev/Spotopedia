@@ -24,7 +24,7 @@ namespace Spotopedia.Web.Controllers
             var viewModel = this.usersService.GetUserDetails<UserProfileDetailsViewModel>(id);
 
             viewModel.SpotsAddedByUser = this.usersService.AllSpotsByUser<SingleSpotViewModel>(id);
-
+            viewModel.SpotsLikedByUser = this.usersService.AllSpotsLikedByUser<SingleSpotViewModel>(id);
             return this.View(viewModel);
         }
 

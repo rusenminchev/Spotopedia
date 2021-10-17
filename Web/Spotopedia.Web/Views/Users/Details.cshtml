@@ -98,17 +98,106 @@
                     <h5 class="mb-0">Submitted spots</h5>@*<a href="#" class="btn btn-link text-muted">Show all</a>*@
                     <hr>
                 <div>
-                  @foreach (var spot in Model.SpotsAddedByUser)
-                  {
-                            <div>
-                                <img class="card-img" src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="dog">
-                                <span class="badge badge-success">@spot.Type</span>
+                 @*Navigation card*@
+                <div class="container">
+  <h1 class="text-center">Card component with Navigation</h1>
+  <div class="row">
+    <div class="col-sm-6">
+     <div class="card text-center my-4">
+       <!-- navigation in .card-header -->
+       <div class="card-header">
+         <ul class="nav nav-tabs card-header-tabs">
+           <li class="nav-item">
+             <a class="nav-link active" data-toggle="tab" href="#tab1">Tab 1</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" data-toggle="tab" href="#tab2">Tab 2</a>
+           </li>
+         </ul>
+       </div>
+       <!-- .card-body.tab-content  -->
+       <div class="card-body tab-content">
+         <div class="tab-pane fade show active" id="tab1">
+           <h4 class="card-title">Submitted Spots</h4>
+           <p class="card-text">
 
-                                <h4 class="card-title mt-2">@spot.Title</h4>
-                                <p class="card-text">@spot.Description</p>
-                            <hr>
-                            </div>   
-                  }                
+            @foreach (var spot in Model.SpotsAddedByUser)
+                                {
+                                <div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+	<div class="product-card">
+                @if (spot.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
+                        {
+		                <div class="badge">New</div>
+                        }
+		<div class="product-tumb">
+			<img src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="">
+		</div>
+                           
+		                        <div class="product-details">
+                        <div class="product-links float-right">
+                        <div class="row">
+                         <form id="votesForm" method="post"></form>
+                            <div>
+                            @if(spot.SpotVote?.Value.ToString() == "Like")
+                            {
+                            <a href="#" onclick="sendVote(@spot.Id, false)">
+                                 <i class="fa fa-heart liked"></i>
+                                </a>
+                            }
+                            else
+                            {
+                            <a href="#" onclick="sendVote(@spot.Id, true)">
+                                  <i class="fa fa-heart notliked"></i>
+                                </a>
+                            } 
+                            </div>
+                            <div id="likesCount">@spot.LikesCount</div>
+				</div>
+</div>
+			<span class="product-catagory">@spot.Type</span>
+			<h4><a href="">@spot.Title</a></h4>
+			<p>@spot.Description</p>
+			<div class="product-bottom-details">
+				<div class="product-price">Address: @spot.Address.AddressName</div>
+<a href="https://www.google.com/maps/search/?api=1&query=@spot.Address.Latitude,@spot.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
+				
+			</div>
+		</div>
+<div>
+ <fieldset class="gllpLatlonPicker">
+	<div class="gllpMap">Google Maps</div>
+	<input type="hidden" class="gllpLatitude" value="@spot.Address.Latitude"/>
+	<input type="hidden" class="gllpLongitude" value="@spot.Address.Longitude"/>
+	<input type="hidden" class="gllpZoom" value="11"/>
+  </fieldset>
+</div>
+	</div>
+	</div>
+	</div>
+	</div>
+                                }
+           </p>
+           <a href="#" class="btn btn-primary">Read More 1</a>
+         </div>
+         <div class="tab-pane fade" id="tab2">
+           <h4 class="card-title">Liked Spots</h4>
+           <p class="card-text">
+            @foreach (var spot in Model.SpotsLikedByUser)
+                                {
+
+                                }
+
+           </p>
+           <a href="#" class="btn btn-danger">Read More 2</a>
+         </div>
+          </div><!--/.card-body -->
+      </div><!--/.card-->
+    </div><!--/.col-sm-6 -->
+  </div>
+</div><!--/.container -->
+                  @*Navigation card*@
             </div>
                     }
         </div>
