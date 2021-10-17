@@ -1,5 +1,6 @@
 ﻿namespace Spotopedia.Services.Data
 {
+    using Spotopedia.Data.Models;
     using System.Threading.Tasks;
 
     public interface ISpotVotesService
@@ -9,5 +10,7 @@
         int GetLikes(int spotId);
 
         int GetDislikes(int spotId);
+
+        T GetVoteByUser<T>(int spotId, string userId);
     }
 }

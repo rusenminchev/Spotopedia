@@ -1,11 +1,14 @@
 ﻿namespace Spotopedia.Web.ViewModels.Spots
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using AutoMapper;
     using Spotopedia.Data.Models;
     using Spotopedia.Data.Models.Enumerations;
     using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.SpotVotes;
+    using Spotopedia.Web.ViewModels.Votes;
 
     public class SingleSpotViewModel : IMapFrom<Spot>, IHaveCustomMappings
     {
@@ -27,7 +30,14 @@
 
         public int DislikesCount { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         public virtual ICollection<SpotImage> SpotImages { get; set; }
+
+        public SpotVoteViewModel SpotVote { get; set; }
+
+        public IEnumerable<GetAddressesViewModel> NearBySpots { get; set; }
+        = new HashSet<GetAddressesViewModel>();
 
         public void CreateMappings(IProfileExpression configuration)
         {

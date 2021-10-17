@@ -1,7 +1,218 @@
 ﻿@using Spotopedia.Common
 @model Spotopedia.Web.ViewModels.Spots.SingleSpotViewModel
 
+<style>
+
+    {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .product-card {
+        position: relative;
+        box-shadow: 0 2px 7px #dfdfdf;
+        background: #fafafa;
+    }
+
+    .badge {
+        position: absolute;
+        left: 0;
+        top: 20px;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 700;
+        background: #00BFFF;
+        color: #fff;
+        padding: 3px 10px;
+    }
+
+    .product-tumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: #f0f0f0;
+    }
+
+        .product-tumb img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    .product-details {
+        padding: 30px;
+    }
+
+    .product-catagory {
+        display: block;
+        font-size: 17px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #ccc;
+        margin-bottom: 18px;
+    }
+
+    .product-details h4 a {
+        font-weight: 500;
+        display: block;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+        color: #363636;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .product-details h4 a:hover {
+            color: #fbb72c;
+        }
+
+    .product-details p {
+        font-size: 17px;
+        line-height: 22px;
+        margin-bottom: 18px;
+        color: #999;
+    }
+
+    .product-bottom-details {
+        overflow: hidden;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+    }
+
+        .product-bottom-details div {
+            float: left;
+            width: 50%;
+        }
+
+    .product-price {
+        font-size: 18px;
+        color: #999;
+        font-weight: 600;
+    }
+
+        .product-price small {
+            font-size: 80%;
+            font-weight: 400;
+            text-decoration: line-through;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+    .product-links {
+    text-align: right;
+}
+
+.product-links a {
+    display: inline-block;
+    margin-right: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.product-links a:hover {
+    color: #fbb72c;
+}
+
+    .liked {
+        color: #fb672c;
+    }
+
+        .liked:hover {
+            color: #e3e3e3;
+        }
+
+    .notliked {
+        color: #e3e3e3;
+    }
+
+        .notliked:hover {
+            color: #e3e3e3;
+        }
+
+    </style>
+
 @if (this.TempData.ContainsKey("EditSpot"))
+{
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+         @this.TempData["EditSpot"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (this.TempData.ContainsKey("CannotEditSpot"))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+         @this.TempData["CannotEditSpot"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+	<div class="product-card">
+                @if (Model.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
+                        {
+		                <div class="badge">New</div>
+                        }
+		<div class="product-tumb">
+			<img src="@Model.SpotImages.FirstOrDefault().ImageUrl" alt="">
+		</div>
+                           
+		                        <div class="product-details">
+                        <div class="product-links float-right">
+                        <div class="row">
+                         <form id="votesForm" method="post"></form>
+                            <div>
+                            @if(Model.SpotVote?.Value.ToString() == "Like")
+                            {
+                            <a href="#" onclick="sendVote(@Model.Id, false)">
+                                 <i class="fa fa-heart liked"></i>
+                                </a>
+                            }
+                            else
+                            {
+                            <a href="#" onclick="sendVote(@Model.Id, true)">
+                                  <i class="fa fa-heart notliked"></i>
+                                </a>
+                            } 
+                            </div>
+                            <div id="likesCount">@Model.LikesCount</div>
+				</div>
+</div>
+			<span class="product-catagory">@Model.Type</span>
+			<h4><a href="">@Model.Title</a></h4>
+			<p>@Model.Description</p>
+			<div class="product-bottom-details">
+				<div class="product-price">Address: @Model.Address.AddressName</div>
+<a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
+				
+			</div>
+		</div>
+<div>
+ <fieldset class="gllpLatlonPicker">
+	<div class="gllpMap">Google Maps</div>
+	<input type="hidden" class="gllpLatitude" value="@Model.Address.Latitude"/>
+	<input type="hidden" class="gllpLongitude" value="@Model.Address.Longitude"/>
+	<input type="hidden" class="gllpZoom" value="11"/>
+  </fieldset>
+</div>
+	</div>
+	</div>
+	</div>
+	</div>
+
+
+
+@*@if (this.TempData.ContainsKey("EditSpot"))
 {
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
          @this.TempData["EditSpot"]
@@ -36,33 +247,9 @@
     <h4 class="card-title mt-2">@Model.Title</h4>
     <p class="card-text">@Model.Description</p>
  
-<div class="text-muted small ml-3">
-                            <form id="votesForm" method="post"></form>
-                            <div>
-                                <a href="#" onclick="sendVote(@Model.Id, true)">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
-                            </div>
-                            <div id="likesCount">@Model.LikesCount</div>
-                            <div id="dislikesCount">@Model.DislikesCount</div>
-                            <div>
-                                <a href="#" onclick="sendVote(@Model.Id, false)">
-                                    <i class="fa fa-thumbs-down"></i>
-                                </a>
-                            </div>
+<div class="text-muted small ml-3">*@
+                         
 
- <div>
-    <a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-primary">Directions</a>
-     </div>
-<div>
- <fieldset class="gllpLatlonPicker">
-	<div class="gllpMap">Google Maps</div>
-	<input type="hidden" class="gllpLatitude" value="@Model.Address.Latitude"/>
-	<input type="hidden" class="gllpLongitude" value="@Model.Address.Longitude"/>
-	<input type="hidden" class="gllpZoom" value="11"/>
-  </fieldset>
-</div>
-   </div>
 
 @section Scripts {
 <script>

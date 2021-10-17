@@ -10,18 +10,25 @@
     using Spotopedia.Data.Models;
     using Spotopedia.Services.Data;
     using Spotopedia.Web.ViewModels.Spots;
+    using Spotopedia.Web.ViewModels.Votes;
 
     public class SpotsController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ISpotsService spotsService;
         private readonly IAddressesService addressesService;
+        private readonly ISpotVotesService spotVotesService;
 
-        public SpotsController(UserManager<ApplicationUser> userManager, ISpotsService spotsService, IAddressesService addressesService)
+        public SpotsController(
+            UserManager<ApplicationUser> userManager,
+            ISpotsService spotsService,
+            IAddressesService addressesService,
+            ISpotVotesService spotVotesService)
         {
             this.userManager = userManager;
             this.spotsService = spotsService;
             this.addressesService = addressesService;
+            this.spotVotesService = spotVotesService;
         }
 
         [Authorize]
@@ -108,7 +115,10 @@
 
         public IActionResult ById(int id)
         {
+            var user = this.userManager.GetUserId(this.User);
+
             var spotViewModel = this.spotsService.GetById<SingleSpotViewModel>(id);
+            spotViewModel.SpotVote = this.spotVotesService.GetVoteByUser<SpotVoteViewModel>(id, user);
             return this.View(spotViewModel);
         }
 

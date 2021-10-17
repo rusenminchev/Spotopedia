@@ -1,6 +1,7 @@
 ﻿using Spotopedia.Data.Common.Repositories;
 using Spotopedia.Data.Models;
 using Spotopedia.Data.Models.Enumerations;
+using Spotopedia.Services.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,14 @@ namespace Spotopedia.Services.Data
             }
 
             await this.spotVotesRepository.SaveChangesAsync();
-        } 
+        }
+
+        public T GetVoteByUser<T>(int spotId, string userId)
+        {
+            return this.spotVotesRepository.All()
+                .Where(x => x.SpotId == spotId && x.AddedByUserId == userId)
+                .To<T>()
+                .FirstOrDefault();
+        }
     }
 }
