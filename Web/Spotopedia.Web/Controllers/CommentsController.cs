@@ -28,12 +28,14 @@ namespace Spotopedia.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction("All", "Posts");
+                 return this.View(input);
             }
 
             var userId = this.userManager.GetUserId(this.User);
 
             await this.commentsService.CreateAsync(input.PostId, userId, input.Content);
+
+            this.TempData["AddComment"] = "Your comment was successfully added.";
 
             return this.RedirectToAction("All", "Posts");
         }

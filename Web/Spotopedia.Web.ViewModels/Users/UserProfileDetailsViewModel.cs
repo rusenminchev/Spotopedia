@@ -46,7 +46,9 @@ namespace Spotopedia.Web.ViewModels.Users
         public string WebsiteUrl { get; set; }
 
         public IEnumerable<SingleSpotViewModel> SpotsAddedByUser { get; set; }
+         = new HashSet<SingleSpotViewModel>();
 
         public IEnumerable<SingleSpotViewModel> SpotsLikedByUser { get; set; }
+            = new HashSet<SingleSpotViewModel>();
     }
 }

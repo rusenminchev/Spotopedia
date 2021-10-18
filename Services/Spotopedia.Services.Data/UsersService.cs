@@ -17,12 +17,18 @@ namespace Spotopedia.Services.Data
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IDeletableEntityRepository<Spot> spotsRepository;
+        private readonly ISpotVotesService spotVotesService;
 
-        public UsersService(IDeletableEntityRepository<ApplicationUser> usersRepository, ICloudinaryService cloudinaryService, IDeletableEntityRepository<Spot> spotsRepository)
+        public UsersService(
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
+            ICloudinaryService cloudinaryService,
+            IDeletableEntityRepository<Spot> spotsRepository,
+            ISpotVotesService spotVotesService)
         {
             this.usersRepository = usersRepository;
             this.cloudinaryService = cloudinaryService;
             this.spotsRepository = spotsRepository;
+            this.spotVotesService = spotVotesService;
         }
 
         public async Task EditAsync(EditUserProfileInputModel input)
@@ -67,26 +73,6 @@ namespace Spotopedia.Services.Data
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefault();
-        }
-
-        public IEnumerable<T> AllSpotsByUser<T>(string userId)
-        {
-            var spots = this.spotsRepository.All()
-                .Where(x => x.AddedByUserId == userId)
-                .To<T>()
-                .ToList();
-
-            return spots;
-        }
-
-        public IEnumerable<T> AllSpotsLikedByUser<T>(string userId)
-        {
-            var spots = this.spotsRepository.All()
-                .Include(x => x.SpotVotes.Where(x => x.Value.ToString() == "Like" && x.AddedByUserId == userId))
-                .To<T>()
-                .ToList();
-
-            return spots;
         }
     }
 }

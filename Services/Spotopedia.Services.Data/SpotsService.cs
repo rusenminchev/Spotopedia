@@ -1,5 +1,6 @@
 ﻿using Spotopedia.Data.Common.Repositories;
 using Spotopedia.Data.Models;
+using Spotopedia.Data.Models.Enumerations;
 using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Spots;
 using System;
@@ -19,7 +20,8 @@ namespace Spotopedia.Services.Data
 
         public SpotsService(IDeletableEntityRepository<Spot> spotsRepository,
             IDeletableEntityRepository<Address> addressRepository,
-            ICloudinaryService cloudinaryService)
+            ICloudinaryService cloudinaryService,
+            IRepository<SpotVote> spotVoteRepository)
         {
             this.spotsRepository = spotsRepository;
             this.spotAddressRepository = addressRepository;
@@ -150,6 +152,27 @@ namespace Spotopedia.Services.Data
                 x.Id,
                 x.Title,
             }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Title));
+        }
+
+
+        public IEnumerable<T> AllSpotsByUser<T>(string userId)
+        {
+            var spots = this.spotsRepository.All()
+                .Where(x => x.AddedByUserId == userId)
+                .To<T>()
+                .ToList();
+
+            return spots;
+        }
+
+        public IEnumerable<T> AllSpotsLikedByUser<T>(string id)
+        {
+            var spots = this.spotsRepository.All()
+                .Where(x => x.SpotVotes.Any(x => x.AddedByUserId == id && x.Value == VoteType.Like))
+                .To<T>()
+                .ToList();
+
+            return spots;
         }
     }
 }

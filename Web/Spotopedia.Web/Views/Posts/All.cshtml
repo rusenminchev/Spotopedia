@@ -34,6 +34,16 @@
     </div>
 }
 
+@if (this.TempData.ContainsKey("AddComment"))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+         @this.TempData["AddComment"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 
 <style>
     #btn-back-to-top {
@@ -265,12 +275,12 @@
         <input type="hidden" name="PostId" value="@post.Id" />
     <div>
          <label for="Content"></label>
-        <textarea name="Content" id="Content" class="form-control" placeholder="Write a comment..."></textarea> 
+        <textarea name="Content" id="Content" class="form-control" placeholder="Write a comment..."></textarea>
     </div>
     <div>
         <br>
 
-        <input type="submit" class="btn btn-primary float-right" value="Add Comment" />
+        <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
         <div class="clearfix"></div>
     </div>
     </form>

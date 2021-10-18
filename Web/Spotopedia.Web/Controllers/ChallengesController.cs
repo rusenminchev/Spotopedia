@@ -75,6 +75,7 @@ namespace Spotopedia.Web.Controllers
             {
                 return this.RedirectToAction(nameof(this.Details));
             }
+
             await this.challengesService.EditAsync(id, input);
 
             return this.RedirectToAction(nameof(this.All));

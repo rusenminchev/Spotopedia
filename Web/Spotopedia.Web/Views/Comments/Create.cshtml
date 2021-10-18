@@ -1,0 +1,13 @@
+﻿@model Spotopedia.Web.ViewModels.Comments.CreatePostCommentInputModel
+
+<div class="container-fluid mt-100">
+<form method="post" class="col-md-12" enctype="multipart/form-data"> 
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div>
+        <textarea asp-for="Content" class="form-control"  placeholder="Write a comment..." ></textarea>
+    </div>
+    <p></p>
+   <input type="hidden" asp-for="PostId" />
+   <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
+        <div class="clearfix"></div>
+</form>

@@ -20,5 +20,9 @@
         Task EditAsync(int id, EditSpotInputModel input);
 
         public IEnumerable<KeyValuePair<string, string>> GetAllSpotsAsKeyValuePairs();
+
+        IEnumerable<T> AllSpotsByUser<T>(string userId);
+
+        IEnumerable<T> AllSpotsLikedByUser<T>(string id);
     }
 }

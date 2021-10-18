@@ -13,18 +13,20 @@ namespace Spotopedia.Web.Controllers
     public class UsersController : BaseController
     {
         private readonly IUsersService usersService;
+        private readonly ISpotsService spotsService;
 
-        public UsersController(IUsersService usersService)
+        public UsersController(IUsersService usersService, ISpotsService spotsService)
         {
             this.usersService = usersService;
+            this.spotsService = spotsService;
         }
 
         public IActionResult Details(string id)
         {
             var viewModel = this.usersService.GetUserDetails<UserProfileDetailsViewModel>(id);
 
-            viewModel.SpotsAddedByUser = this.usersService.AllSpotsByUser<SingleSpotViewModel>(id);
-            viewModel.SpotsLikedByUser = this.usersService.AllSpotsLikedByUser<SingleSpotViewModel>(id);
+            viewModel.SpotsAddedByUser = this.spotsService.AllSpotsByUser<SingleSpotViewModel>(id);
+            viewModel.SpotsLikedByUser = this.spotsService.AllSpotsLikedByUser<SingleSpotViewModel>(id);
             return this.View(viewModel);
         }
 

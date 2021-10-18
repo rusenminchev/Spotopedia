@@ -7,7 +7,7 @@
 
     .file-upload {
         background-color: #ffffff;
-        width: 600px;
+        width: 100%;
         margin: 0 auto;
         padding: 20px;
     }
@@ -119,7 +119,7 @@
 </style>
  
 <div class="container-fluid mt-100">
-<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data"> 
+<form method="post" class="col-md-12" enctype="multipart/form-data"> 
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <textarea asp-for="Content" class="form-control"  placeholder="What's on your mind" ></textarea>
