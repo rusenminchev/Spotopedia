@@ -36,8 +36,8 @@
 
         public SpotVoteViewModel SpotVote { get; set; }
 
-        public IEnumerable<GetAddressesViewModel> NearBySpots { get; set; }
-        = new HashSet<GetAddressesViewModel>();
+        public IEnumerable<SpotInListViewModel> NearBySpots { get; set; }
+        = new HashSet<SpotInListViewModel>();
 
         public void CreateMappings(IProfileExpression configuration)
         {

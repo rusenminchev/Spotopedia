@@ -133,6 +133,27 @@
             color: #fb672c;
         }
 
+    div {
+
+
+    }
+
+    .container {
+
+        display: flex;
+    }
+
+    .fixed {
+
+        width: 75%;
+    }
+
+    .flex-item {
+        margin-left: 10px;
+        box-shadow: 0 2px 7px #dfdfdf;
+        background: #fafafa;
+        flex-grow: 1;
+    }
     </style>
 
 @if (this.TempData.ContainsKey("EditSpot"))
@@ -155,9 +176,11 @@
     </div>
 }
 
+
 <div class="container">
+<div class="fixed">
   <div class="row">
-    <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-12">
 	<div class="product-card">
                 @if (Model.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
                         {
@@ -206,11 +229,28 @@
   </fieldset>
 </div>
 	</div>
-	</div>
-	</div>
-	</div>
+</div>
+</div>
+</div>
 
 
+<div class="flex-item">
+<h4>Spots Around</h4>
+@foreach (var spot in Model.NearBySpots)
+{
+
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">@spot.Title</h5>
+    <a href="#" class="btn btn-outline-primary float-right">Go to spot</a>
+  </div>
+</div>
+
+}
+
+</div>
+</div>
 
 @*@if (this.TempData.ContainsKey("EditSpot"))
 {

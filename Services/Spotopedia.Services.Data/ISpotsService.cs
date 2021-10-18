@@ -11,7 +11,7 @@
 
         int GetCount();
 
-        IEnumerable<T> GetAll<T>(int pageNumber, int itemsPerPage);
+        IEnumerable<T> GetAll<T>();
 
         T GetById<T>(int id);
 
@@ -24,5 +24,7 @@
         IEnumerable<T> AllSpotsByUser<T>(string userId);
 
         IEnumerable<T> AllSpotsLikedByUser<T>(string id);
+
+        //IEnumerable<T> GetSpotsNearBy<T>(int id);
     }
 }

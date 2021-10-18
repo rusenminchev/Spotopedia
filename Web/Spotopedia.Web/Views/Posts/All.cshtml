@@ -182,6 +182,21 @@
         display: block;
     }
  
+ .liked {
+        color: #fb672c;
+    }
+
+        .liked:hover {
+            color: #e3e3e3;
+        }
+
+    .notliked {
+        color: #e3e3e3;
+    }
+
+    .notliked:hover {
+            color: #fb672c;
+}
 </style>
 
 <div class="container-fluid mt-100">
@@ -285,6 +300,30 @@
     </div>
     </form>
                 </div>
+
+@*Like button*@
+
+<div class="row">
+                         <form id="votesForm" method="post"></form>
+                            <div>
+                            @if(post.PostVote?.Value.ToString() == "Like")
+                            {
+                            <a href="#" onclick="sendVote(@post.Id, false)">
+                                 <i class="fa fa-heart liked"></i>
+                                </a>
+                            }
+                            else
+                            {
+                            <a href="#" onclick="sendVote(@post.Id, true)">
+                                  <i class="fa fa-heart notliked"></i>
+                                </a>
+                            } 
+                            </div>
+                            <div id="likesCount">@post.LikesCount</div>
+				</div>
+
+@*Like button*@
+
                 <hr>
                 @if (post.PostComments.Count > 0)
 {

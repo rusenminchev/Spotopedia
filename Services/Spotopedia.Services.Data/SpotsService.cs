@@ -1,4 +1,6 @@
-﻿using Spotopedia.Data.Common.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
+using Spotopedia.Data.Common.Repositories;
 using Spotopedia.Data.Models;
 using Spotopedia.Data.Models.Enumerations;
 using Spotopedia.Services.Mapping;
@@ -76,12 +78,9 @@ namespace Spotopedia.Services.Data
             await this.spotsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>(int pageNumber, int itemsPerPage)
+        public IEnumerable<T> GetAll<T>()
         {
             return this.spotsRepository.AllAsNoTracking()
-                .OrderByDescending(x => x.Id)
-                .Skip((pageNumber - 1) * itemsPerPage)
-                .Take(itemsPerPage)
                 .To<T>()
                 .ToList();
         }
@@ -174,5 +173,18 @@ namespace Spotopedia.Services.Data
 
             return spots;
         }
+
+        //public IEnumerable<T> GetSpotsNearBy<T>(int id)
+        //{
+        //    var currentSpot = this.spotsRepository.All()
+        //        .FirstOrDefault(x => x.Id == id);
+
+
+            
+
+
+        //    return nearBySpots.AsQueryable().To<T>().ToList();          
+               
+        //}
     }
 }

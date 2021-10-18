@@ -3,6 +3,7 @@ using Spotopedia.Data.Models;
 using Spotopedia.Data.Models.Enumerations;
 using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Comments;
+using Spotopedia.Web.ViewModels.Votes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,6 +39,8 @@ namespace Spotopedia.Web.ViewModels.Posts
         public int LikesCount { get; set; }
 
         public int DislikesCount { get; set; }
+
+        public PostVoteViewModel PostVote { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
