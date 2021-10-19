@@ -48,4 +48,8 @@
     <ProjectReference Include="..\Spotopedia.Web.Infrastructure\Spotopedia.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Spotopedia.Web.ViewModels\Spotopedia.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\theme\" />
+  </ItemGroup>
 </Project>

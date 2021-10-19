@@ -118,9 +118,30 @@
             border: 0;
             transition: all .2s ease;
         }
+
+    .body-container {
+        /*remove the container default padding attribute*/
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        /*increase width as per your need*/
+        max-width: 100%;
+    } 
 </style>
 
 
+<section class="ftco-section ftco-booking bg-light">
+    	<div class="container ftco-relative">
+    		<div class="row justify-content-center pb-3">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	@*<span class="subheading">Add new spot</span>*@
+            <h2 class="mb-4">Add new spot</h2>
+            @*<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>*@
+          </div>
+        </div>
+        @*<h3 class="vr">Call Us: 012-3456-7890</h3>*@
+    		<div class="row justify-content-center">
+    			<div class="col-md-10 ftco-animate">
+    		
 <form method="post" class="col-md-12" enctype="multipart/form-data"> 
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
@@ -219,6 +240,13 @@
     <p></p>
     <input type="submit" class="btn btn-primary" />
 </form>
+
+
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
 
 @section Scripts {
    <script>
