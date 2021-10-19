@@ -18,6 +18,8 @@ namespace Spotopedia.Web.ViewModels.Spots
 
         public string SpotTitle { get; set; }
 
+        public string SpotDescription { get; set; }
+
         public ICollection<SpotImage> SpotSpotImages { get; set; }
     }
 }

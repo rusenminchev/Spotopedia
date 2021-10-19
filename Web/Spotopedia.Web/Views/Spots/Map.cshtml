@@ -27,7 +27,7 @@
 </style>
 
 <div  class="row justify-content-lg-center">
-<div id="map" style="width: 1260px; height: 720px;  border: 1px solid #AAA;"></div>
+<div id="map" style="width: 1260px; height: 720px;"></div>
 </div>
 
 @section Scripts
@@ -59,9 +59,16 @@
     integrity="sha512-AAcPGWoYOQ7VoaC13L/rv6GwvzEzyknHQlrtdJSGD6cSzuKXDYILZqUhugbJFZhM+bEXH2Ah7mA1OxPFElQmNQ=="
     crossorigin=""></script>
 
+<!-- Locate User -->
+<link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
+<script src="//unpkg.com/leaflet-gesture-handling"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {           
-            const map = L.map('map').setView([42.684653, 23.318529], 6);
+            const map = L.map('map', { gestureHandling: true }).setView([42.684653, 23.318529], 6);
             L.esri.Vector.vectorBasemapLayer("ArcGIS:Navigation", {
                 // provide either apikey or token
                 apikey: "AAPKed4b089e720f45a28dd4f35741962688S93OetKvSnm5xSFVzKUtyFE94c_BialcVX3pNAaPDPbcsAtqiBUShv7wQuDWREo4"
@@ -84,12 +91,36 @@
 
             var results = L.layerGroup().addTo(map);
 
-            //searchControl.on('results', function (data) {
-            //    results.clearLayers();
-            //    for (var i = data.results.length - 1; i >= 0; i--) {
-            //        results.addLayer(L.marker(data.results[i].latlng));
-            //    }
-            //});
+            //Locate User
+            
+            function onLocationFound(e) {
+                var radius = e.accuracy / 2;
+
+                L.marker(e.latlng).addTo(map)
+                    .bindPopup("You are here").openPopup();
+
+                L.circle(e.latlng, radius).addTo(map);
+            }
+
+            function onLocationError(e) {
+                alert(e.message);
+            }
+        
+
+            map.on('locationfound', function (event) {
+                var radius = event.accuracy / 2;
+                L.marker(event.latlng, event.accuracy).addTo(map);
+                var PopUp = L.popup().
+                    setContent("Your Location").
+                    setLatLng(event.latlng).addTo(map);
+                    L.circle(event.latlng, radius).addTo(map);
+            });
+            map.on('locationerror', onLocationError);
+
+            L.easyButton('<i class="fas fa-map-marker-alt"></i>', function (btn, map) {
+                map.locate({ setView: true, maxZoom: 16 });
+            }).addTo(map); 
+
 
             $.ajax({
                 url: '/Spots/GetAddress',
@@ -97,11 +128,10 @@
                         var result = JSON.stringify(data);
 
                         for (var i = 0; i < result.length; ++i) {
-                            var popup = '<b><img src="' + data[i].spotSpotImages[0].imageUrl +'" width="220px"><b>' +
-                                '<br><a href="https://localhost:44319/Spots/ById/' + data[i].spotId + '"target="_blank">' + data[i].spotTitle + '</a></br> ' +
-                                '<br>Address:</br> ' + data[i].addressName +
-                                '<br/><b>Latitude:</b> ' + data[i].latitude +
-                                '<br/><b>Longitude:</b> ' + data[i].longitude;
+                            var popup = '<br><b><img src="' + data[i].spotSpotImages[0].imageUrl + '" width="100%"><b></br>' +
+                                '<br><h5><a href="https://localhost:44319/Spots/ById/' + data[i].spotId + '"target="_blank">' + data[i].spotTitle + '</a></h5></br> ' + data[i].spotDescription;
+                                //'<br/><b>Latitude:</b> ' + data[i].latitude +
+                                //'<br/><b>Longitude:</b> ' + data[i].longitude;
 
                             L.marker([data[i].latitude, data[i].longitude])
                                 .bindPopup(popup)
