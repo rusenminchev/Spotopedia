@@ -122,43 +122,7 @@
             var spotViewModel = this.spotsService.GetById<SingleSpotViewModel>(id);
             spotViewModel.SpotVote = this.spotVotesService.GetVoteByUser<SpotVoteViewModel>(id, user);
 
-            var allSpots = this.spotsService.GetAll<SpotInListViewModel>();
-
-            var currentCoordinates = new Coordinate(double.Parse(spotViewModel.Address.Longitude), double.Parse(spotViewModel.Address.Latitude));
-
-            var currentLocation = new Point(currentCoordinates)
-            {
-                SRID = 4326,
-            };
-
-            double radiusMeters = 3;
-
-            var nearBySpots = new List<SpotInListViewModel>();
-
-            foreach (var spot in allSpots)
-            {
-                if (spot.Id == spotViewModel.Id)
-                {
-                    continue;
-                }
-
-                var lat = double.Parse(spot.Address.Latitude);
-                var lon = double.Parse(spot.Address.Longitude);
-
-                var coordinates = new Coordinate(lon, lat);
-
-                var location = new Point(coordinates)
-                {
-                    SRID = 4326,
-                };
-
-                if (location.Distance(currentLocation) <= radiusMeters)
-                {
-                    nearBySpots.Add(spot);
-                }
-            }
-
-            spotViewModel.NearBySpots = nearBySpots;
+            spotViewModel.NearBySpots = this.spotsService.GetNearBySpots(spotViewModel);
 
             return this.View(spotViewModel);
         }

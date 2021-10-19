@@ -174,17 +174,47 @@ namespace Spotopedia.Services.Data
             return spots;
         }
 
-        //public IEnumerable<T> GetSpotsNearBy<T>(int id)
-        //{
-        //    var currentSpot = this.spotsRepository.All()
-        //        .FirstOrDefault(x => x.Id == id);
+        public IEnumerable<SpotInListViewModel> GetNearBySpots(SingleSpotViewModel spotViewModel)
+        {
+            var allSpots = this.GetAll<SpotInListViewModel>();
 
+            var currentCoordinates = new Coordinate(
+                double.Parse(spotViewModel.Address.Longitude),
+                double.Parse(spotViewModel.Address.Latitude));
 
-            
+            var currentLocation = new Point(currentCoordinates)
+            {
+                SRID = 4326,
+            };
 
+            double radiusMeters = 3;
 
-        //    return nearBySpots.AsQueryable().To<T>().ToList();          
-               
-        //}
+            var nearBySpots = new List<SpotInListViewModel>();
+
+            foreach (var spot in allSpots)
+            {
+                if (spot.Id == spotViewModel.Id)
+                {
+                    continue;
+                }
+
+                var lat = double.Parse(spot.Address.Latitude);
+                var lon = double.Parse(spot.Address.Longitude);
+
+                var coordinates = new Coordinate(lon, lat);
+
+                var location = new Point(coordinates)
+                {
+                    SRID = 4326,
+                };
+
+                if (location.Distance(currentLocation) <= radiusMeters)
+                {
+                    nearBySpots.Add(spot);
+                }
+            }
+
+            return nearBySpots;
+        }
     }
 }

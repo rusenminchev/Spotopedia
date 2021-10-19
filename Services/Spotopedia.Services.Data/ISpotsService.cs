@@ -25,6 +25,6 @@
 
         IEnumerable<T> AllSpotsLikedByUser<T>(string id);
 
-        //IEnumerable<T> GetSpotsNearBy<T>(int id);
+        IEnumerable<SpotInListViewModel> GetNearBySpots(SingleSpotViewModel spotViewModel);
     }
 }
