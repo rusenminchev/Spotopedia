@@ -14,7 +14,7 @@ namespace Spotopedia.Web.ViewModels.Posts
         [Required(ErrorMessage = "Please insert text.")]
         public string Content { get; set; }
 
-        public IEnumerable<PostImage> PostImages { get; set; }
-            = new HashSet<PostImage>();
+        public IEnumerable<IFormFile> Images { get; set; }
+            = new HashSet<IFormFile>();
     }
 }

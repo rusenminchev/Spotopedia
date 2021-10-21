@@ -1,4 +1,5 @@
-﻿using Spotopedia.Data.Common.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Spotopedia.Data.Common.Repositories;
 using Spotopedia.Data.Models;
 using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Posts;
@@ -15,11 +16,16 @@ namespace Spotopedia.Services.Data
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IDeletableEntityRepository<PostImage> postImagesRepository;
 
-        public PostsService(IDeletableEntityRepository<Post> postsRepository, ICloudinaryService cloudinaryService)
+        public PostsService(
+            IDeletableEntityRepository<Post> postsRepository,
+            ICloudinaryService cloudinaryService,
+            IDeletableEntityRepository<PostImage> postImagesRepository)
         {
             this.postsRepository = postsRepository;
             this.cloudinaryService = cloudinaryService;
+            this.postImagesRepository = postImagesRepository;
         }
 
         public async Task CreateAsync(CreatePostInputModel input, string userId)
@@ -85,10 +91,27 @@ namespace Spotopedia.Services.Data
                 .Any(x => x.Id == postId && x.AddedByUserId == userId);
         }
 
-        public async Task EditAsync(int id, EditPostInputModel input)
+        public async Task EditAsync(int id, string userId, EditPostInputModel input)
         {
             var post = this.postsRepository.All()
+                .Include(x => x.PostImages)
                 .FirstOrDefault(x => x.Id == id);
+
+            // TODO: Change the logic to use the entrie collection of images and display it with a carousel in the view.
+
+            if (input.Images is not null)
+            {
+                var postImage = input.Images.FirstOrDefault();
+
+                await using var memoryStream = new MemoryStream();
+                await postImage.CopyToAsync(memoryStream);
+                var destinationData = memoryStream.ToArray();
+
+                var postImageUrl = await this.cloudinaryService.UploadPictureAsync(destinationData, postImage.FileName, "PostImages", 900, 600);
+
+                // TODO: Change the logic to use the entrie collection of images and display it with a carousel in the view.
+                post.PostImages.FirstOrDefault().ImageUrl = postImageUrl;
+            }
 
             post.Content = input.Content;
 

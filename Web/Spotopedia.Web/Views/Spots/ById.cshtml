@@ -178,7 +178,29 @@
 		                <div class="badge">New</div>
                         }
 		<div class="product-tumb">
-			<img src="@Model.SpotImages.FirstOrDefault().ImageUrl" alt="">
+			@*//carousel*@
+   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                              <div class="carousel-inner">
+
+                                @for (int i = 0; i < Model.SpotImages.Count; i++)
+                   {
+                       var imagesAsArray = Model.SpotImages.OrderBy(x=>x.CreatedOn).ToArray();
+                       var item = imagesAsArray[i];
+                       var itemClass = i == 0 ? "item active" : "item";
+             <div class="carousel-@itemClass">
+                <img class="d-block w-100" src="@item.ImageUrl" alt="Slide">               
+                </div>                                                  
+                   }
+                              </div>
+                              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </div>
 		</div>
                            
 		                        <div class="product-details">
@@ -209,6 +231,12 @@
 				<div class="product-price">Address: @Model.Address.AddressName</div>
 <a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
 				
+    @*@if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
+{*@
+                     <span class="single-meta">
+                        <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+                    </span>
+
 			</div>
 		</div>
 <div>
@@ -247,6 +275,8 @@
 </div>
 </div>
 </div>
+
+
 @*@if (this.TempData.ContainsKey("EditSpot"))
 {
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -270,20 +300,14 @@
 <div>
     <img class="card-img" src="@Model.SpotImages.First().ImageUrl" alt="dog">
     <span class="badge badge-success">@Model.Type</span>
-<span>
 
-    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
-{
-                     <span class="single-meta">
-                        <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-                    </span>
-}
-</span>
     <h4 class="card-title mt-2">@Model.Title</h4>
     <p class="card-text">@Model.Description</p>
  
 <div class="text-muted small ml-3">*@
-                         
+          
+
+                
 
 
 @section Scripts {

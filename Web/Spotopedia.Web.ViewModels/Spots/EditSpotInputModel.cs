@@ -36,5 +36,7 @@
 
         public IEnumerable<IFormFile> Images { get; set; }
             = new HashSet<IFormFile>();
+
+        public IEnumerable<SpotImage> ExistingSpotImages { get; set; }
     }
 }

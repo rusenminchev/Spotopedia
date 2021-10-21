@@ -20,17 +20,20 @@
         private readonly ISpotsService spotsService;
         private readonly IAddressesService addressesService;
         private readonly ISpotVotesService spotVotesService;
+        private readonly ISpotImagesService spotImagesService;
 
         public SpotsController(
             UserManager<ApplicationUser> userManager,
             ISpotsService spotsService,
             IAddressesService addressesService,
-            ISpotVotesService spotVotesService)
+            ISpotVotesService spotVotesService,
+            ISpotImagesService spotImagesService)
         {
             this.userManager = userManager;
             this.spotsService = spotsService;
             this.addressesService = addressesService;
             this.spotVotesService = spotVotesService;
+            this.spotImagesService = spotImagesService;
         }
 
         [Authorize]
@@ -70,6 +73,8 @@
 
             var inputModel = this.spotsService.GetById<EditSpotInputModel>(id);
 
+            inputModel.ExistingSpotImages = this.spotImagesService.GetAllImagesBySpotId(id);
+
             return this.View(inputModel);
         }
 
@@ -92,7 +97,7 @@
 
             this.TempData["EditSpot"] = $"The spot was successfully edited!";
 
-            await this.spotsService.EditAsync(id, input);
+            await this.spotsService.EditAsync(id, userId, input);
             return this.RedirectToAction(nameof(this.ById), new { id });
         }
 

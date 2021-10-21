@@ -99,7 +99,7 @@ namespace Spotopedia.Web.Controllers
                 return this.RedirectToAction(nameof(this.All));
             }
 
-            await this.postsService.EditAsync(id, input);
+            await this.postsService.EditAsync(id, userId, input);
 
             this.TempData["Edit"] = "Your post was successfully edited!";
             return this.RedirectToAction(nameof(this.All));

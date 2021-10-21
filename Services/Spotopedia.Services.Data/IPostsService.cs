@@ -17,7 +17,7 @@ namespace Spotopedia.Services.Data
 
         public bool IsThisPostAddedByThisUser(int postId, string userId);
 
-        Task EditAsync(int id, EditPostInputModel input);
+        Task EditAsync(int id,string userId, EditPostInputModel input);
 
         Task DeleteAsync(int id);
     }

@@ -66,7 +66,6 @@ namespace Spotopedia.Services.Data
 
             foreach (var imageUrl in imageUrls)
             {
-
                 spot.SpotImages.Add(new SpotImage
                 {
                     ImageUrl = imageUrl,
@@ -99,7 +98,7 @@ namespace Spotopedia.Services.Data
             return spot;
         }
 
-        public async Task EditAsync(int id, EditSpotInputModel input)
+        public async Task EditAsync(int id, string userId, EditSpotInputModel input)
         {
             var spot = this.spotsRepository.All().FirstOrDefault(x => x.Id == id);
             var address = this.spotAddressRepository.All().FirstOrDefault(x => x.SpotId == id);
@@ -132,7 +131,12 @@ namespace Spotopedia.Services.Data
 
             foreach (var imageUrl in imageUrls.Where(x => x != null))
             {
-                spot.SpotImages.Add(new SpotImage() { ImageUrl = imageUrl });
+                spot.SpotImages.Add(new SpotImage()
+                {
+                    ImageUrl = imageUrl,
+                    AddedByUserId = userId,
+                    SpotId = id,
+                });
             }
 
             this.spotsRepository.Update(spot);
