@@ -112,7 +112,7 @@
                 var radius = event.accuracy / 2;
                 L.marker(event.latlng, event.accuracy).addTo(map);
                 var PopUp = L.popup().
-                    setContent("Your Location").
+                    setContent("You are here.").
                     setLatLng(event.latlng).addTo(map);
                     L.circle(event.latlng, radius).addTo(map);
             });
