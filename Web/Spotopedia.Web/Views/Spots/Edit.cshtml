@@ -163,7 +163,7 @@
 @foreach (var img in Model.ExistingSpotImages)
 {
     <p>@img.ImageUrl</p>
-    <a asp-controller="SpotImages" asp-action="Delete" asp-route-id="@img.Id">&nbsp;&nbsp; Delete</a>
+    <a asp-controller="SpotImages" asp-action="Delete" asp-route-id="@img.Id" asp-route-id="@Model.Id">&nbsp;&nbsp; Delete</a>
 }
 </form>
 

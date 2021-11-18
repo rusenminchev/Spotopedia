@@ -23,7 +23,10 @@ namespace Spotopedia.Web.Controllers
 
             await this.spotImagesService.DeleteAsync(id);
 
-            return this.RedirectToAction("Edit", "Spots", new { image.SpotId });
+            int spotId = image.SpotId;
+
+            //TODO: Change to code to avoid hard coded url address
+            return this.Redirect("https://localhost:44319/Spots/Edit/" + spotId);
         }
     }
 }
