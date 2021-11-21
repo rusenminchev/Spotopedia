@@ -206,6 +206,12 @@
 		                        <div class="product-details">
                         <div class="product-links float-right">
                         <div class="row">
+                          @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
+                            {
+                             <span class="single-meta">
+                                <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+                            </span>
+                            }
                          <form id="votesForm" method="post"></form>
                             <div>
                             @if(Model.SpotVote?.Value.ToString() == "Like")
@@ -231,12 +237,6 @@
 				<div class="product-price">Address: @Model.Address.AddressName</div>
 <a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
 				
-    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
-    {
-                     <span class="single-meta">
-                        <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-                    </span>
-    }
 			</div>
 		</div>
 <div>
