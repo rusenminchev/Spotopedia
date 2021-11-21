@@ -11,7 +11,6 @@
     using NetTopologySuite.Geometries;
     using Spotopedia.Data.Models;
     using Spotopedia.Services.Data;
-    using Spotopedia.Web.ViewModels.SpotImages;
     using Spotopedia.Web.ViewModels.Spots;
     using Spotopedia.Web.ViewModels.Votes;
 

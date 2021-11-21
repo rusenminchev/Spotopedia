@@ -231,12 +231,12 @@
 				<div class="product-price">Address: @Model.Address.AddressName</div>
 <a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
 				
-    @*@if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
-{*@
+    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
+    {
                      <span class="single-meta">
                         <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
                     </span>
-
+    }
 			</div>
 		</div>
 <div>
@@ -264,7 +264,7 @@
     <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">@spot.Title</h5>
+        <h5 class="card-title"><a asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></h5>
     @*<a href="#" class="btn btn-outline-primary float-right">Go to spot</a>*@
   </div>
 </div>
