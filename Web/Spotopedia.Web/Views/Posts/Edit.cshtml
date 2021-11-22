@@ -87,12 +87,13 @@
         <textarea asp-for="Content" class="form-control"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
-
+@if(Model.ExistingImages.Count() > 0)
+{
   <label class="form__container" id="upload-container">Choose or Drag & Drop Photo
     <input class="form__file" id="upload-files" type="file"  asp-for="Images" accept="image/*"/>
   </label>
   <div class="form__files-container" id="files-list-container"></div>
-
+}
    <input type="hidden" asp-for="Id" />
 <button type="submit" class="btn btn-outline-success float-right">Save changes</button>
 

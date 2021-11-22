@@ -20,5 +20,7 @@ namespace Spotopedia.Services.Data
         Task EditAsync(int id,string userId, EditPostInputModel input);
 
         Task DeleteAsync(int id);
+
+        IEnumerable<PostImage> GetAllImagesByPostId(int postId);
     }
 }

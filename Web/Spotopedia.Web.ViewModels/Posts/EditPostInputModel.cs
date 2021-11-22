@@ -16,5 +16,8 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public IEnumerable<IFormFile> Images { get; set; }
             = new HashSet<IFormFile>();
+
+        public IEnumerable<PostImage> ExistingImages { get; set; }
+      = new HashSet<PostImage>();
     }
 }

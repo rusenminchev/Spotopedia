@@ -80,6 +80,7 @@ namespace Spotopedia.Web.Controllers
             }
 
             var inputModel = this.postsService.GetPostDetails<EditPostInputModel>(id);
+            inputModel.ExistingImages = this.postsService.GetAllImagesByPostId(id);
             return this.View(inputModel);
         }
 

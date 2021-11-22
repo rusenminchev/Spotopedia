@@ -70,6 +70,7 @@ namespace Spotopedia.Services.Data
         public T GetPostDetails<T>(int id)
         {
             var post = this.postsRepository.AllAsNoTracking()
+                 .Include(x => x.PostImages)
                  .Where(x => x.Id == id)
                  .To<T>()
                  .FirstOrDefault();
@@ -99,7 +100,7 @@ namespace Spotopedia.Services.Data
 
             // TODO: Change the logic to use the entrie collection of images and display it with a carousel in the view.
 
-            if (input.Images is not null)
+            if (input.Images.Count() > 0)
             {
                 var postImage = input.Images.FirstOrDefault();
 
@@ -126,6 +127,13 @@ namespace Spotopedia.Services.Data
 
             this.postsRepository.Delete(post);
             await this.postsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<PostImage> GetAllImagesByPostId(int postId)
+        {
+            return this.postImagesRepository.All()
+                .Where(x => x.PostId == postId)
+                .ToList();
         }
     }
 }
