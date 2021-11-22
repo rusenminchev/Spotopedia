@@ -12,5 +12,6 @@
         Downhill = 8,
         Shop = 9,
         Flat = 10,
+        Plaza = 11,
     }
 }

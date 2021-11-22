@@ -19,6 +19,7 @@ namespace Spotopedia.Services.Data
         private readonly IDeletableEntityRepository<Spot> spotsRepository;
         private readonly IDeletableEntityRepository<Address> spotAddressRepository;
         private readonly ICloudinaryService cloudinaryService;
+        private int lastAddedSpotId;
 
         public SpotsService(IDeletableEntityRepository<Spot> spotsRepository,
             IDeletableEntityRepository<Address> addressRepository,
@@ -75,6 +76,13 @@ namespace Spotopedia.Services.Data
 
             await this.spotsRepository.AddAsync(spot);
             await this.spotsRepository.SaveChangesAsync();
+
+            this.lastAddedSpotId = spot.Id;
+        }
+
+        public int GetLastAddedSpotId()
+        {
+            return this.lastAddedSpotId;
         }
 
         public IEnumerable<T> GetAll<T>()

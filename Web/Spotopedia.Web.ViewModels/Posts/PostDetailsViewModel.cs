@@ -42,6 +42,8 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public PostVoteViewModel PostVote { get; set; }
 
+        public PostType Type { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Post, PostDetailsViewModel>()

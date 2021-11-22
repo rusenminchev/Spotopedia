@@ -33,5 +33,7 @@
         public virtual ICollection<PostComment> PostComments { get; set; }
 
         public virtual ICollection<PostVote> PostVotes { get; set; }
+
+        public PostType Type { get; set; }
     }
 }
