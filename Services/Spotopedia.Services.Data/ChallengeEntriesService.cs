@@ -16,6 +16,7 @@ namespace Spotopedia.Services.Data
         private readonly IDeletableEntityRepository<ChallengeEntry> challengeEntriesRepository;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IDeletableEntityRepository<Challenge> challengesRepository;
+        private int lastAddedChallengeEntryId;
 
         public ChallengeEntriesService(IDeletableEntityRepository<ChallengeEntry> challengeEntriesRepository, ICloudinaryService cloudinaryService, IDeletableEntityRepository<Challenge> challengesRepository)
         {
@@ -40,7 +41,6 @@ namespace Spotopedia.Services.Data
             var challengeEntry = new ChallengeEntry
             {
                 Caption = input.Caption,
-
                 AddedByUserId = userId,
             };
 
@@ -57,6 +57,8 @@ namespace Spotopedia.Services.Data
 
             this.challengesRepository.Update(challenge);
             await this.challengesRepository.SaveChangesAsync();
+
+            this.lastAddedChallengeEntryId = challengeEntry.Id;
         }
 
         public bool IsThisChallengeEntryAddedByThisUser(int challengeEntryId, string userId)
@@ -82,6 +84,11 @@ namespace Spotopedia.Services.Data
                  .FirstOrDefault();
 
             return entry;
+        }
+
+        public int GetLastAddedChallengeEntryId()
+        {
+            return this.lastAddedChallengeEntryId;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Spotopedia.Web.ViewModels.Posts
         [Required(ErrorMessage = "Please insert text.")]
         public string Content { get; set; }
 
-        public IEnumerable<IFormFile> PostImages { get; set; }
+        public ICollection<IFormFile> PostImages { get; set; }
             = new HashSet<IFormFile>();
 
         public string AddedByUserFirstName { get; set; }
@@ -25,6 +25,8 @@ namespace Spotopedia.Web.ViewModels.Posts
         public string AdminLastName { get; set; }
 
         public int SpotId { get; set; }
+
+        public string ChallengeId { get; set; }
 
         public virtual IEnumerable<KeyValuePair<string, string>> SpotItems { get; set; }
 

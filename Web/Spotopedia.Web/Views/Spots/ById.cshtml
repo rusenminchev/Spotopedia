@@ -1,6 +1,16 @@
 ﻿@using Spotopedia.Common
 @model Spotopedia.Web.ViewModels.Spots.SingleSpotViewModel
 
+@if (this.TempData.ContainsKey("AddNewSpot"))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+         @this.TempData["AddNewSpot"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 <style>
 
     {

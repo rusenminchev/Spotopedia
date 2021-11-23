@@ -25,6 +25,10 @@
 
         public virtual Spot Spot { get; set; }
 
+        public string ChallengeId { get; set; }
+
+        public virtual Challenge Challenge { get; set; }
+
         [Required]
         public string AddedByUserId { get; set; }
 

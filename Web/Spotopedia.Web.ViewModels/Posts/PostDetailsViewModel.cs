@@ -46,6 +46,10 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public int SpotId { get; set; }
 
+        public string ChallengeId { get; set; }
+
+        public DateTime? ChallengeEndDate { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Post, PostDetailsViewModel>()
