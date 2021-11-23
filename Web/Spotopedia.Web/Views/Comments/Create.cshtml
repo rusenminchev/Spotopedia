@@ -8,6 +8,9 @@
     </div>
     <p></p>
    <input type="hidden" asp-for="PostId" />
-   <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
+    <div class="float-right">
+    <input type="submit" class="btn btn-outline-primary" value="Add Comment" />
+    <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+    </div>
         <div class="clearfix"></div>
 </form>
