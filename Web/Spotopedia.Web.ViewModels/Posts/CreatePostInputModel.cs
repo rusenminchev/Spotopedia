@@ -20,6 +20,10 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public string AddedByUserLastName { get; set; }
 
+        public string AdminFirstName { get; set; }
+
+        public string AdminLastName { get; set; }
+
         public int SpotId { get; set; }
 
         public virtual IEnumerable<KeyValuePair<string, string>> SpotItems { get; set; }

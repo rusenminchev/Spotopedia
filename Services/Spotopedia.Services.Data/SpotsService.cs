@@ -170,6 +170,7 @@ namespace Spotopedia.Services.Data
         {
             var spots = this.spotsRepository.All()
                 .Where(x => x.AddedByUserId == userId)
+                .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToList();
 
@@ -199,7 +200,7 @@ namespace Spotopedia.Services.Data
                 SRID = 4326,
             };
 
-            double radiusMeters = 3;
+            double radiusMeters = 1;
 
             var nearBySpots = new List<SpotInListViewModel>();
 

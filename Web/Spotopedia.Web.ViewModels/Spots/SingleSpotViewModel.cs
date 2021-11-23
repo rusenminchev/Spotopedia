@@ -24,7 +24,13 @@
 
         public Address Address { get; set; }
 
+        public string AddedByUserId { get; set; }
+
         public string AddedByUserUsername { get; set; }
+
+        public string AddedByUserFirstName { get; set; }
+
+        public string AddedByUserLastName { get; set; }
 
         public int LikesCount { get; set; }
 

@@ -44,6 +44,8 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public PostType Type { get; set; }
 
+        public int SpotId { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Post, PostDetailsViewModel>()

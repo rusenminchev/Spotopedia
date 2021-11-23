@@ -53,6 +53,7 @@ namespace Spotopedia.Services.Data
                 Content = input.Content,
                 AddedByUserId = userId,
                 Type = input.Type,
+                SpotId = input.SpotId,
             };
 
             foreach (var imageUrl in imageUrls)

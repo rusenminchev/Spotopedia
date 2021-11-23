@@ -232,6 +232,7 @@
 </div>
 			<span class="product-catagory">@Model.Type</span>
 			<h4><a href="">@Model.Title</a></h4>
+            <p>Added by <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.AddedByUserId" data-abc="true">@Model.AddedByUserFirstName @Model.AddedByUserLastName</a></p>
 			<p>@Model.Description</p>
 			<div class="product-bottom-details">
 				<div class="product-price">Address: @Model.Address.AddressName</div>
