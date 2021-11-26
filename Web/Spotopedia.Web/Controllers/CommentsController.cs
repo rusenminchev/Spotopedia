@@ -28,7 +28,7 @@ namespace Spotopedia.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                 return this.View(input);
+                return this.View(input);
             }
 
             var userId = this.userManager.GetUserId(this.User);
@@ -36,6 +36,15 @@ namespace Spotopedia.Web.Controllers
             await this.commentsService.CreateAsync(input.PostId, userId, input.Content);
 
             this.TempData["AddComment"] = "Your comment was successfully added.";
+
+            return this.RedirectToAction("All", "Posts");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.commentsService.DeleteAsync(id);
+
+            this.TempData["DeleteComment"] = "Your comment was successfully deleted!";
 
             return this.RedirectToAction("All", "Posts");
         }
