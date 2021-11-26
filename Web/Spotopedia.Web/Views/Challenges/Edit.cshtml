@@ -1,7 +1,7 @@
 ﻿@model Spotopedia.Web.ViewModels.Challenges.EditChallengeInputModel
 
-@{ 
-    ViewData["Title"] = "Edit challenge";
+@{
+    ViewData["Title"] = "Edit Challenge";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -16,24 +16,54 @@
     });
 </script>
 
-<form method="post" class="col-md-6 offset-3"> 
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-        <div>
-        <label asp-for="EndDate"></label>
-        <input asp-for="EndDate" class="form-control" id="date_info" type="date" asp-format="{0:yyyy-MM-dd}" />
-        <span asp-validation-for="EndDate" class="text-danger"></span>
-    </div>
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-outline-success float-right">Save changes</button>
-</form>
 
+<div class="col-md-8 offset-2">
+    <form method="post" id="editForm">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <br>
+        <div>
+            <label asp-for="EndDate"></label>
+            <input asp-for="EndDate" class="form-control" id="date_info" type="date" asp-format="{0:yyyy-MM-dd}" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+        <br>
+    </form>
+
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+    <a asp-controller="Challenges" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Challenge Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Do you confirm this changes?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-primary" onclick="editForm.submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -78,6 +78,8 @@ namespace Spotopedia.Web.Controllers
 
             await this.challengesService.EditAsync(id, input);
 
+            this.TempData["EditChallenge"] = $"The challenge was successfully edited!";
+
             return this.RedirectToAction(nameof(this.All));
         }
 
@@ -85,6 +87,8 @@ namespace Spotopedia.Web.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             await this.challengesService.DeleteAsync(id);
+
+            this.TempData["DeleteChallenge"] = $"The challenge was successfully deleted!";
 
             return this.RedirectToAction(nameof(this.All));
         }

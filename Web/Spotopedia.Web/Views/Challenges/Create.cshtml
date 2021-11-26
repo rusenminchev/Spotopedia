@@ -1,7 +1,7 @@
 ﻿@model Spotopedia.Web.ViewModels.Challenges.CreateChallengeInputModel
 
-@{ 
-    ViewData["Title"] = "Create new challenge";
+@{
+    ViewData["Title"] = "Create New Challenge";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -13,78 +13,88 @@
         display: none;
     }
 
-@@charset "UTF-8";
-.form {
-  width: 500px;
-  margin: 5% auto;
-}
-.form__container {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  border: 2px dashed silver;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  color: silver;
-  margin-bottom: 5px;
-}
-.form__container.active {
-  background-color: rgba(192, 192, 192, 0.2);
-}
-.form__file {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-  opacity: 0;
-}
-.form__files-container {
-  display: block;
-  width: 100%;
-  font-size: 0;
-  margin-top: 20px;
-}
-.form__image-container {
-  display: inline-block;
-  width: 100%;
-  height: 300px;
-  margin-bottom: 10px;
-  position: relative;
-  align-content: center
-}
-.form__image-container:not(:nth-child(2n)) {
-  margin-right: 2%;
-}
-.form__image-container:after {
-  content: "✕";
-  position: absolute;
-  line-height: 50px;
-  font-size: 30px;
-  margin: auto;
-  top: 0;
-  right: 0;
-  left: 0;
-  text-align: center;
-  font-weight: bold;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-.form__image-container:hover:after {
-  opacity: 1;
-  cursor: pointer;
-}
-.form__image {
-  -o-object-fit: contain;
-     object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
+    @@charset "UTF-8";
+
+    .form {
+        width: 500px;
+        margin: 5% auto;
+    }
+
+    .form__container {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        border: 2px dashed silver;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        color: silver;
+        margin-bottom: 5px;
+    }
+
+        .form__container.active {
+            background-color: rgba(192, 192, 192, 0.2);
+        }
+
+    .form__file {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    .form__files-container {
+        display: block;
+        width: 100%;
+        font-size: 0;
+        margin-top: 20px;
+    }
+
+    .form__image-container {
+        display: inline-block;
+        width: 100%;
+        height: 300px;
+        margin-bottom: 10px;
+        position: relative;
+        align-content: center
+    }
+
+        .form__image-container:not(:nth-child(2n)) {
+            margin-right: 2%;
+        }
+
+        .form__image-container:after {
+            content: "✕";
+            position: absolute;
+            line-height: 50px;
+            font-size: 30px;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .form__image-container:hover:after {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+    .form__image {
+        -o-object-fit: contain;
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
@@ -97,7 +107,7 @@
     });
 </script>
 
-<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
+<form method="post" class="col-md-8 offset-2" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label asp-for="Name"></label>
@@ -126,106 +136,106 @@
     <a asp-controller="Challenges" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
 </form>
 
-@section Scripts{ 
-<script>
-$(document).ready(function () {
-    var time = new Date();
-    var day = ("0" + time.getDate()).slice(-2);
-    var month = ("0" + (time.getMonth() + 1)).slice(-2);
-    var today = time.getFullYear() + "-" + (month) + "-" + (day);
-    $('#date_info').val(today);
-})
-</script>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var time = new Date();
+            var day = ("0" + time.getDate()).slice(-2);
+            var month = ("0" + (time.getMonth() + 1)).slice(-2);
+            var today = time.getFullYear() + "-" + (month) + "-" + (day);
+            $('#date_info').val(today);
+        })
+    </script>
 
-<script>
-    const INPUT_FILE = document.querySelector('#upload-files');
-    const INPUT_CONTAINER = document.querySelector('#upload-container');
-    const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
-    const FILE_LIST = [];
-    let UPLOADED_FILES = [];
+    <script>
+        const INPUT_FILE = document.querySelector('#upload-files');
+        const INPUT_CONTAINER = document.querySelector('#upload-container');
+        const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
+        const FILE_LIST = [];
+        let UPLOADED_FILES = [];
 
-    const multipleEvents = (element, eventNames, listener) => {
-        const events = eventNames.split(' ');
+        const multipleEvents = (element, eventNames, listener) => {
+            const events = eventNames.split(' ');
 
-        events.forEach(event => {
-            element.addEventListener(event, listener, false);
-        });
-    };
-
-    const previewImages = () => {
-        FILES_LIST_CONTAINER.innerHTML = '';
-        if (FILE_LIST.length > 0) {
-            FILE_LIST.forEach((addedFile, index) => {
-                const content = `
-        <div class="form__image-container js-remove-image" data-index="${index}">
-          <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-        </div>
-      `;
-
-                FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
+            events.forEach(event => {
+                element.addEventListener(event, listener, false);
             });
-        } else {
-            console.log('empty')
-            INPUT_FILE.value = "";
+        };
+
+        const previewImages = () => {
+            FILES_LIST_CONTAINER.innerHTML = '';
+            if (FILE_LIST.length > 0) {
+                FILE_LIST.forEach((addedFile, index) => {
+                    const content = `
+            <div class="form__image-container js-remove-image" data-index="${index}">
+              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+            </div>
+          `;
+
+                    FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
+                });
+            } else {
+                console.log('empty')
+                INPUT_FILE.value = "";
+            }
         }
-    }
 
-    const fileUpload = () => {
-        if (FILES_LIST_CONTAINER) {
-            multipleEvents(INPUT_FILE, 'click dragstart dragover', () => {
-                INPUT_CONTAINER.classList.add('active');
-            });
-
-            multipleEvents(INPUT_FILE, 'dragleave dragend drop change blur', () => {
-                INPUT_CONTAINER.classList.remove('active');
-            });
-
-            INPUT_FILE.addEventListener('change', () => {
-                const files = [...INPUT_FILE.files];
-                console.log("changed")
-                files.forEach(file => {
-                    const fileURL = URL.createObjectURL(file);
-                    const fileName = file.name;
-                    if (!file.type.match("image/")) {
-                        alert(file.name + " is not an image");
-                        console.log(file.type)
-                    } else {
-                        const uploadedFiles = {
-                            name: fileName,
-                            url: fileURL,
-                        };
-
-                        FILE_LIST.push(uploadedFiles);
-                    }
+        const fileUpload = () => {
+            if (FILES_LIST_CONTAINER) {
+                multipleEvents(INPUT_FILE, 'click dragstart dragover', () => {
+                    INPUT_CONTAINER.classList.add('active');
                 });
 
-                console.log(FILE_LIST)//final list of uploaded files
-                previewImages();
-                UPLOADED_FILES = document.querySelectorAll(".js-remove-image");
-                removeFile();
-            });
-        }
-    };
+                multipleEvents(INPUT_FILE, 'dragleave dragend drop change blur', () => {
+                    INPUT_CONTAINER.classList.remove('active');
+                });
 
-    const removeFile = () => {
-        UPLOADED_FILES = document.querySelectorAll(".js-remove-image");
+                INPUT_FILE.addEventListener('change', () => {
+                    const files = [...INPUT_FILE.files];
+                    console.log("changed")
+                    files.forEach(file => {
+                        const fileURL = URL.createObjectURL(file);
+                        const fileName = file.name;
+                        if (!file.type.match("image/")) {
+                            alert(file.name + " is not an image");
+                            console.log(file.type)
+                        } else {
+                            const uploadedFiles = {
+                                name: fileName,
+                                url: fileURL,
+                            };
 
-        if (UPLOADED_FILES) {
-            UPLOADED_FILES.forEach(image => {
-                image.addEventListener('click', function () {
-                    const fileIndex = this.getAttribute('data-index');
+                            FILE_LIST.push(uploadedFiles);
+                        }
+                    });
 
-                    FILE_LIST.splice(fileIndex, 1);
+                    console.log(FILE_LIST)//final list of uploaded files
                     previewImages();
+                    UPLOADED_FILES = document.querySelectorAll(".js-remove-image");
                     removeFile();
                 });
-            });
-        } else {
-            [...INPUT_FILE.files] = [];
-        }
-    };
+            }
+        };
 
-    fileUpload();
-    removeFile();
-</script>
+        const removeFile = () => {
+            UPLOADED_FILES = document.querySelectorAll(".js-remove-image");
+
+            if (UPLOADED_FILES) {
+                UPLOADED_FILES.forEach(image => {
+                    image.addEventListener('click', function () {
+                        const fileIndex = this.getAttribute('data-index');
+
+                        FILE_LIST.splice(fileIndex, 1);
+                        previewImages();
+                        removeFile();
+                    });
+                });
+            } else {
+                [...INPUT_FILE.files] = [];
+            }
+        };
+
+        fileUpload();
+        removeFile();
+    </script>
 }
