@@ -4,7 +4,7 @@
 @if (this.TempData.ContainsKey("Add"))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-         @this.TempData["Add"]
+        @this.TempData["Add"]
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -14,7 +14,7 @@
 @if (this.TempData.ContainsKey("Edit"))
 {
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
-         @this.TempData["Edit"]
+        @this.TempData["Edit"]
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -24,7 +24,7 @@
 @if (this.TempData.ContainsKey("Delete"))
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-         @this.TempData["Delete"]
+        @this.TempData["Delete"]
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -32,14 +32,14 @@
 }
 
 @if (this.TempData.ContainsKey("AddComment"))
-    {
+{
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-         @this.TempData["AddComment"]
+        @this.TempData["AddComment"]
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    }
+}
 
 
 <style>
@@ -61,8 +61,8 @@
     ul.nav li.dropdown:hover ul.dropdown-menu {
         display: block;
     }
- 
- .liked {
+
+    .liked {
         color: #fb672c;
     }
 
@@ -78,356 +78,413 @@
             color: #fb672c;
         }
 
-@@charset "UTF-8";
-.form {
-  width: 500px;
-  margin: 5% auto;
-}
-.form__container {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  border: 2px dashed silver;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  color: silver;
-  margin-bottom: 5px;
-}
-.form__container.active {
-  background-color: rgba(192, 192, 192, 0.2);
-}
-.form__file {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-  opacity: 0;
-}
-.form__files-container {
-  display: block;
-  width: 100%;
-  font-size: 0;
-  margin-top: 20px;
-}
-.form__image-container {
-  display: inline-block;
-  width: 100%;
-  height: 300px;
-  margin-bottom: 10px;
-  position: relative;
-  align-content: center
-}
-.form__image-container:not(:nth-child(2n)) {
-  margin-right: 2%;
-}
-.form__image-container:after {
-  content: "✕";
-  position: absolute;
-  line-height: 50px;
-  font-size: 30px;
-  margin: auto;
-  top: 0;
-  right: 0;
-  left: 0;
-  text-align: center;
-  font-weight: bold;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-.form__image-container:hover:after {
-  opacity: 1;
-  cursor: pointer;
-}
-.form__image {
-  -o-object-fit: contain;
-     object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
+    @@charset "UTF-8";
 
-}
+    .form {
+        width: 500px;
+        margin: 5% auto;
+    }
+
+    .form__container {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        border: 2px dashed silver;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        color: silver;
+        margin-bottom: 5px;
+    }
+
+        .form__container.active {
+            background-color: rgba(192, 192, 192, 0.2);
+        }
+
+    .form__file {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    .form__files-container {
+        display: block;
+        width: 100%;
+        font-size: 0;
+        margin-top: 20px;
+    }
+
+    .form__image-container {
+        display: inline-block;
+        width: 100%;
+        height: 300px;
+        margin-bottom: 10px;
+        position: relative;
+        align-content: center
+    }
+
+        .form__image-container:not(:nth-child(2n)) {
+            margin-right: 2%;
+        }
+
+        .form__image-container:after {
+            content: "✕";
+            position: absolute;
+            line-height: 50px;
+            font-size: 30px;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .form__image-container:hover:after {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+    .form__image {
+        -o-object-fit: contain;
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
+
+    button.btn-primary {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -100px;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
 </style>
 
 <div class="container-fluid mt-100">
-<div>
- <div class="text-muted small ml-3"> <button type="button"  asp-controller="Posts" asp-action="Create" class="btn btn-outline-primary float-right" onclick="showAddPostForm()"><i class="fa fa-plus"></i>&nbsp; New Post</button> </div>
-
-<div class="clearfix"></div>
-
-<div>
-    <form asp-controller="Posts" asp-action="Create" method="post" id="AddPostForm" enctype="multipart/form-data"  style="display: none">
-        <input type="hidden" name="PostId" value="PostId" />
     <div>
-         <label for="Content"></label>
-        <textarea name="Content" id="Content" class="form-control" placeholder="Write a post..."></textarea> 
-    </div>
-<br>
-<div>
-<label class="form__container" id="upload-container">Choose or Drag & Drop Photo
-    <input class="form__file" id="upload-files" type="file"  name="PostImages" accept="image/*"/>
-  </label>
-  <div class="form__files-container" id="files-list-container"></div>
-</div>
+        <div class="text-muted small ml-3"> <button type="button" asp-controller="Posts" asp-action="Create" class="btn btn-outline-primary float-right" onclick="showAddPostForm()"><i class="fa fa-plus"></i>&nbsp; New Post</button> </div>
 
-    <div>
-        <input type="submit" class="btn btn-outline-primary float-right" value="Publish" />
         <div class="clearfix"></div>
-    </div>
-    </form>
- </div>
 
-<br>
-
-</div>
-
-       @foreach (var post in Model.Posts)
-    {
-        <div class="row">
-        <div class="col-md-12">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <div class="media flex-wrap w-100 align-items-center"> <img src="@post.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
-                        <div class="media-body ml-3"><a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId" data-abc="true">@post.AddedByUserFirstName @post.AddedByUserLastName</a> 
-                         @if (User.Identity.IsAuthenticated && User.Identity.Name == post.AddedByUserUserName && post.Type != PostType.AutogeneratedSpotPost && post.Type != PostType.AutogeneratedChallengeEntryPost)
-                         {
-                            <!-- Single button -->
-                            <div class="wrapper float-right">
-                            <div class="container">
-                                  <div class="dropdown float-right">
-                                    <button class="btn btn-light dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-                                    <i class="fa fa-ellipsis-h"></i>
-                                    <span class="caret"></span></button>
-                                    <ul class="dropdown-menu align-items-center" role="menu" aria-labelledby="menu1">
-                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">&nbsp;&nbsp; Edit</a></li>
-                                      <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">&nbsp;&nbsp; Delete</a></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                         } 
-                            <div class="text-muted small">@post.CreatedOn</div> 
-                        </div>
-                        <div class="text-muted small ml-3">
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-@{
-        if (post.Type == PostType.AutogeneratedSpotPost)
-        {
-                <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a>(Auto-generated Post)</h5>
-                <p class="card-text"><a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId">@post.AddedByUserFirstName @post.AddedByUserLastName</a> added new spot: <a asp-controller="Spots" asp-action="ById" asp-route-id="@post.SpotId"> @post.Content</a>.</p>
-        }
-
-        else if (post.Type == PostType.AutogeneratedChallengeEntryPost)
-        {
-
-            if (post.ChallengeEndDate > DateTime.UtcNow)
-            {
-                                    <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a>(Auto-generated Post)</h5>
-                                    <p class="card-text"><a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId">@post.AddedByUserFirstName @post.AddedByUserLastName</a> added new entry for <a asp-controller="Challenges" asp-action="Details" asp-route-id="@post.ChallengeId"> @post.Content</a> Challenge. The challenge is still active! You can join until @post.ChallengeEndDate!</p>
-            }
-            else if (post.ChallengeEndDate <= DateTime.UtcNow)
-            {
-                                    <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a>(Auto-generated Post)</h5>
-                                    <p class="card-text"><a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId">@post.AddedByUserFirstName @post.AddedByUserLastName</a> added new entry for <a asp-controller="Challenges" asp-action="Details" asp-route-id="@post.ChallengeId"> @post.Content</a> Challenge.</p>
-            }           
-        }
-        else
-        {
-                <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a></h5>
-                <p class="card-text">@post.Content</p>
-        }
-
- }         
-                </div>
-                <div class="card-body">
-                           @if (post.PostImages.Count > 0)
-                            {
-                            <img src="@post.PostImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
-                            }
-                <hr>
+        <div>
+            <form asp-controller="Posts" asp-action="Create" method="post" id="AddPostForm" enctype="multipart/form-data" style="display: none">
+                <input type="hidden" name="PostId" value="PostId" />
                 <div>
-    <form asp-controller="Comments" asp-action="Create" method="post" id="AddCommentForm" >
-        <input type="hidden" name="PostId" value="@post.Id" />
-    <div>
-         <label for="Content"></label>
-        <textarea name="Content" id="Content" class="form-control" placeholder="Write a comment..."></textarea>
-    </div>
-    <div>
+                    <label for="Content"></label>
+                    <textarea name="Content" id="Content" class="form-control" placeholder="Write a post..."></textarea>
+                </div>
+                <br>
+                <div>
+                    <label class="form__container" id="upload-container">
+                        Choose or Drag & Drop Photo
+                        <input class="form__file" id="upload-files" type="file" name="PostImages" accept="image/*" />
+                    </label>
+                    <div class="form__files-container" id="files-list-container"></div>
+                </div>
+
+                <div class="float-right">
+                    <input type="submit" class="btn btn-outline-primary" value="Publish" />
+                    <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+                <div class="clearfix"></div>
+
+            </form>
+        </div>
+
         <br>
 
-        <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
-        <div class="clearfix"></div>
     </div>
-    </form>
-                </div>
 
-@*Like button*@
-
-@*<div class="row">
-                         <form id="votesForm" method="post"></form>
-                            <div>
-                            @if(post.PostVote?.Value.ToString() == "Like")
+    @foreach (var post in Model.Posts)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="media flex-wrap w-100 align-items-center">
+                            <img src="@post.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
+                            <div class="media-body ml-3">
+                                <a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId" data-abc="true">@post.AddedByUserFirstName @post.AddedByUserLastName</a>
+                                @if (User.Identity.IsAuthenticated && User.Identity.Name == post.AddedByUserUserName && post.Type != PostType.AutogeneratedSpotPost && post.Type != PostType.AutogeneratedChallengeEntryPost)
+                                {
+                                    <!-- Single button -->
+                                    <div class="wrapper float-right">
+                                        <div class="container">
+                                            <div class="dropdown float-right">
+                                                <button class="btn btn-light dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-h"></i>
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu align-items-center" role="menu" aria-labelledby="menu1">
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">&nbsp;&nbsp; Edit</a></li>
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" data-toggle="modal" data-target="#myModal" onclick="openModal()">&nbsp;&nbsp; Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                }
+                                <div class="text-muted small">@post.CreatedOn</div>
+                            </div>
+                            <div class="text-muted small ml-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @{
+                            if (post.Type == PostType.AutogeneratedSpotPost)
                             {
-                            <a href="#" onclick="sendVote(@post.Id, false)">
-                                 <i class="fa fa-heart liked"></i>
-                                </a>
+                                <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a>(Auto-generated Post)</h5>
+                                <p class="card-text"><a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId">@post.AddedByUserFirstName @post.AddedByUserLastName</a> added new spot: <a asp-controller="Spots" asp-action="ById" asp-route-id="@post.SpotId"> @post.Content</a>.</p>
+                            }
+
+                            else if (post.Type == PostType.AutogeneratedChallengeEntryPost)
+                            {
+
+                                if (post.ChallengeEndDate > DateTime.UtcNow)
+                                {
+                                    <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a>(Auto-generated Post)</h5>
+                                    <p class="card-text"><a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId">@post.AddedByUserFirstName @post.AddedByUserLastName</a> added new entry for <a asp-controller="Challenges" asp-action="Details" asp-route-id="@post.ChallengeId"> @post.Content</a> Challenge. The challenge is still active! You can join until @post.ChallengeEndDate!</p>
+                                }
+                                else if (post.ChallengeEndDate <= DateTime.UtcNow)
+                                {
+                                    <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a>(Auto-generated Post)</h5>
+                                    <p class="card-text"><a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId">@post.AddedByUserFirstName @post.AddedByUserLastName</a> added new entry for <a asp-controller="Challenges" asp-action="Details" asp-route-id="@post.ChallengeId"> @post.Content</a> Challenge.</p>
+                                }
                             }
                             else
                             {
-                            <a href="#" onclick="sendVote(@post.Id, true)">
-                                  <i class="fa fa-heart notliked"></i>
-                                </a>
-                            } 
-                            </div>
-                            <div id="likesCount">@post.LikesCount</div>
-				</div>*@
+                                <h5 class="card-title"><a asp-action="Details" asp-route-id="@post.Id"></a></h5>
+                                <p class="card-text">@post.Content</p>
+                            }
 
-@*Like button*@
+                        }
+                    </div>
+                    <div class="card-body">
+                        @if (post.PostImages.Count > 0)
+                        {
+                            <img src="@post.PostImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
+                        }
+                        <hr>
+                        <div>
+                            <form asp-controller="Comments" asp-action="Create" method="post" id="AddCommentForm">
+                                <input type="hidden" name="PostId" value="@post.Id" />
+                                <div>
+                                    <label for="Content"></label>
+                                    <textarea name="Content" id="Content" class="form-control" placeholder="Write a comment..."></textarea>
+                                </div>
+                                <div>
+                                    <br>
 
-                <hr>
-                @if (post.PostComments.Count > 0)
-                                       {
-                <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
-                                @*Voting 
-                            <div class="text-muted small ml-3 row">
-                            <form id="votesForm" method="post"></form>
-                            <div>
-                                <a href="#" onclick="sendVote(@post.Id, true)">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
-                            </div>
-                            <div id="likesCount">@post.LikesCount</div>
-                            <div id="dislikesCount">@post.DislikesCount</div>
-                            <div>
-                                <a href="#" onclick="sendVote(@post.Id, false)">
-                                    <i class="fa fa-thumbs-down"></i>
-                                </a>
+                                    <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+
+                        @*Like button*@
+
+                        @*<div class="row">
+                                     <form id="votesForm" method="post"></form>
+                                        <div>
+                                        @if(post.PostVote?.Value.ToString() == "Like")
+                                        {
+                                        <a href="#" onclick="sendVote(@post.Id, false)">
+                                             <i class="fa fa-heart liked"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                        <a href="#" onclick="sendVote(@post.Id, true)">
+                                              <i class="fa fa-heart notliked"></i>
+                                            </a>
+                                        }
+                                        </div>
+                                        <div id="likesCount">@post.LikesCount</div>
                             </div>*@
-                     @*<div class="text-muted small ml-3"> <button type="button" class="btn btn-ppr" onclick="showAddCommentForm(@post.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>*@
-         
-                     @foreach (var comment in post.PostComments)
-    {
-            <div class="container-fluid mt-100">
-                <br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center">
-                                    <img src="@comment.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3">
-                                       <a asp-controller="Users" asp-action="Details" asp-route-id="@comment.AddedByUserId"> @comment.AddedByUserFirstName @comment.AddedByUserLastName </a>
-                                        <div class="text-muted small">
-                                            <time datetime="@comment.CreatedOn.ToString("O")"></time>
+
+                        @*Like button*@
+
+                        <hr>
+                        @if (post.PostComments.Count > 0)
+                        {
+                            <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
+                                @*Voting
+                                    <div class="text-muted small ml-3 row">
+                                    <form id="votesForm" method="post"></form>
+                                    <div>
+                                        <a href="#" onclick="sendVote(@post.Id, true)">
+                                            <i class="fa fa-thumbs-up"></i>
+                                        </a>
+                                    </div>
+                                    <div id="likesCount">@post.LikesCount</div>
+                                    <div id="dislikesCount">@post.DislikesCount</div>
+                                    <div>
+                                        <a href="#" onclick="sendVote(@post.Id, false)">
+                                            <i class="fa fa-thumbs-down"></i>
+                                        </a>
+                                    </div>*@
+                                @*<div class="text-muted small ml-3"> <button type="button" class="btn btn-ppr" onclick="showAddCommentForm(@post.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>*@
+
+                                @foreach (var comment in post.PostComments)
+                                {
+                                    <div class="container-fluid mt-100">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <div class="media flex-wrap w-100 align-items-center">
+                                                            <img src="@comment.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
+                                                            <div class="media-body ml-3">
+                                                                <a asp-controller="Users" asp-action="Details" asp-route-id="@comment.AddedByUserId"> @comment.AddedByUserFirstName @comment.AddedByUserLastName </a>
+                                                                <div class="text-muted small">
+                                                                    <div class="text-muted small">@comment.CreatedOn</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-muted small ml-3">
+                                                                @*@if (this.User.Identity.IsAuthenticated)*@
+                                                                @*<div class="px-4 pt-3"> <button type="button" class="btn btn-secondary" onclick="showAddCommentForm(@comment.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p class="card-text">@comment.Content</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="text-muted small ml-3">
-                                        @*@if (this.User.Identity.IsAuthenticated)*@
-                                            @*<div class="px-4 pt-3"> <button type="button" class="btn btn-secondary" onclick="showAddCommentForm(@comment.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>*@
-                                    </div>
-                                </div>
+                                }
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">@comment.Content</p>
-                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+        @*</div>*@
+
+        <!-- The Modal -->
+        <div class="container">
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Post Confirmation</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Do you want to delete this post?
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="btn btn-outline-danger float-right" onclick="confirmDelete()">Delete</a>
                         </div>
                     </div>
                 </div>
-            </div>            
-    }
-                </div>
-                                       }
             </div>
         </div>
-    </div>
+    }
+
+    <!-- Back to top button -->
+    <button type="button"
+            class="btn btn-secondary btn-floating btn-lg"
+            id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 </div>
-     <hr>
-        <br>
-@*</div>*@
+
+
+
+@section Scripts{
+    <script>
+        function showAddPostForm() {
+            $("#AddPostForm").toggle();
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#AddPostForm").offset().top - $(window).height() / 2
+            }, 1000);
         }
 
-<!-- Back to top button -->
-<button
-        type="button"
-        class="btn btn-secondary btn-floating btn-lg"
-        id="btn-back-to-top"
-        >
-  <i class="fas fa-arrow-up"></i>
-</button>
-</div>
+        function showAddCommentForm() {
+            $("#AddCommentForm").show();
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#AddCommentForm").offset().top - $(window).height() / 2
+            }, 1000);
+        }
 
-@section Scripts{ 
-<script>
-    function showAddPostForm() {
-        $("#AddPostForm").toggle();
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("#AddPostForm").offset().top - $(window).height() / 2
-        }, 1000);
-    }
-
-    function showAddCommentForm() {
-        $("#AddCommentForm").show();
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("#AddCommentForm").offset().top - $(window).height() / 2
-        }, 1000);
-    }
-
-    function sendVote(postId, isLiked) {
-        var token = $("#votesForm input[name=__RequestVerificationToken]").val();
-        var json = { postId: postId, isLiked: isLiked };
-        $.ajax({
-            url: "/api/postVotes",
-            type: "POST",
-            data: JSON.stringify(json),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'X-CSRF-TOKEN': token },
-            success: function (data) {
-                $("#likesCount").html(data.likesCount);
-                $("#dislikesCount").html(data.dislikesCount);
-            }
-        });
-    }
+        function sendVote(postId, isLiked) {
+            var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+            var json = { postId: postId, isLiked: isLiked };
+            $.ajax({
+                url: "/api/postVotes",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function (data) {
+                    $("#likesCount").html(data.likesCount);
+                    $("#dislikesCount").html(data.dislikesCount);
+                }
+            });
+        }
     </script>
 
-<script>
-    //Get the button
-    let mybutton = document.getElementById("btn-back-to-top");
+    <script>
+        //Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
 
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function () {
-        scrollFunction();
-    };
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction();
+        };
 
-    function scrollFunction() {
-        if (
-            document.body.scrollTop > 20 ||
-            document.documentElement.scrollTop > 20
-        ) {
-            mybutton.style.display = "block";
-        } else {
-            mybutton.style.display = "none";
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
         }
-    }
-    // When the user clicks on the button, scroll to the top of the document
-    mybutton.addEventListener("click", backToTop);
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
 
-    function backToTop() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-</script>
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 
-<script>
+    <script>
         const INPUT_FILE = document.querySelector('#upload-files');
         const INPUT_CONTAINER = document.querySelector('#upload-container');
         const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
@@ -447,10 +504,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-        <div class="form__image-container js-remove-image" data-index="${index}">
-          <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-        </div>
-      `;
+                <div class="form__image-container js-remove-image" data-index="${index}">
+                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                </div>
+              `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });
@@ -517,14 +574,28 @@
 
         fileUpload();
         removeFile();
-</script>
+    </script>
 
-<script>
-          $('.dropdown').hover(function () {
-              $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-          }, function () {
-              $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-          });
-</script>
+    <script>
+        $('.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+        }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+        });
+    </script>
 
+    <script>
+        function confirmDelete() {
+            console.log("Deleting...");
+            $('.modal-header, .modal-footer, .modal-body').addClass('hide');
+            $('.confirm-delete').removeClass('hide');
+            //$('#myModal').modal('hide');
+        }
+
+        function openModal() {
+            $('.confirm-delete').addClass('hide');
+            $('#myModal .modal-header, .modal-footer, .modal-body').removeClass('hide');
+            $('#myModal').modal('show');
+        }
+    </script>
 }

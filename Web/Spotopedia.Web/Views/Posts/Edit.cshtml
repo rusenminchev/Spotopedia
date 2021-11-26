@@ -1,107 +1,145 @@
 ﻿@model Spotopedia.Web.ViewModels.Posts.EditPostInputModel
 
-@{ 
+@{
     ViewData["Title"] = "Edit post";
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <style>
-@@charset "UTF-8";
-.form {
-  width: 500px;
-  margin: 5% auto;
-}
-.form__container {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  border: 2px dashed silver;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  color: silver;
-  margin-bottom: 5px;
-}
-.form__container.active {
-  background-color: rgba(192, 192, 192, 0.2);
-}
-.form__file {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-  opacity: 0;
-}
-.form__files-container {
-  display: block;
-  width: 100%;
-  font-size: 0;
-  margin-top: 20px;
-}
-.form__image-container {
-  display: inline-block;
-  width: 100%;
-  height: 300px;
-  margin-bottom: 10px;
-  position: relative;
-  align-content: center
-}
-.form__image-container:not(:nth-child(2n)) {
-  margin-right: 2%;
-}
-.form__image-container:after {
-  content: "✕";
-  position: absolute;
-  line-height: 50px;
-  font-size: 30px;
-  margin: auto;
-  top: 0;
-  right: 0;
-  left: 0;
-  text-align: center;
-  font-weight: bold;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-.form__image-container:hover:after {
-  opacity: 1;
-  cursor: pointer;
-}
-.form__image {
-  -o-object-fit: contain;
-     object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
+    @@charset "UTF-8";
+
+    .form {
+        width: 500px;
+        margin: 5% auto;
+    }
+
+    .form__container {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        border: 2px dashed silver;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        color: silver;
+        margin-bottom: 5px;
+    }
+
+        .form__container.active {
+            background-color: rgba(192, 192, 192, 0.2);
+        }
+
+    .form__file {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    .form__files-container {
+        display: block;
+        width: 100%;
+        font-size: 0;
+        margin-top: 20px;
+    }
+
+    .form__image-container {
+        display: inline-block;
+        width: 100%;
+        height: 300px;
+        margin-bottom: 10px;
+        position: relative;
+        align-content: center
+    }
+
+        .form__image-container:not(:nth-child(2n)) {
+            margin-right: 2%;
+        }
+
+        .form__image-container:after {
+            content: "✕";
+            position: absolute;
+            line-height: 50px;
+            font-size: 30px;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .form__image-container:hover:after {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+    .form__image {
+        -o-object-fit: contain;
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
- <form method="post" id="editForm" enctype="multipart/form-data">
+<form method="post" id="editForm" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Content"></label>
         <textarea asp-for="Content" class="form-control"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
-@if(Model.ExistingImages.Count() > 0)
-{
-  <label class="form__container" id="upload-container">Choose or Drag & Drop Photo
-    <input class="form__file" id="upload-files" type="file"  asp-for="Images" accept="image/*"/>
-  </label>
-  <div class="form__files-container" id="files-list-container"></div>
-}
-   <input type="hidden" asp-for="Id" />
-<button type="submit" class="btn btn-outline-success float-right">Save changes</button>
+    @if (Model.ExistingImages.Count() > 0)
+    {
+        <label class="form__container" id="upload-container">
+            Choose or Drag & Drop Photo
+            <input class="form__file" id="upload-files" type="file" asp-for="Images" accept="image/*" />
+        </label>
+        <div class="form__files-container" id="files-list-container"></div>
+    }
 
 </form>
 
-@section Scripts{ 
+<div class="float-right">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+    <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+</div>
 
-<script>
+<!-- Modal -->
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Post Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Do you confirm this changes?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
         const INPUT_FILE = document.querySelector('#upload-files');
         const INPUT_CONTAINER = document.querySelector('#upload-container');
         const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
@@ -121,10 +159,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-        <div class="form__image-container js-remove-image" data-index="${index}">
-          <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-        </div>
-      `;
+                <div class="form__image-container js-remove-image" data-index="${index}">
+                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                </div>
+              `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });
@@ -191,5 +229,5 @@
 
         fileUpload();
         removeFile();
-</script>
+    </script>
 }

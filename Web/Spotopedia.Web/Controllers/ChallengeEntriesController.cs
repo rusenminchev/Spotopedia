@@ -80,7 +80,7 @@ namespace Spotopedia.Web.Controllers
         {
             await this.challengeEntriesService.DeleteAsync(id);
 
-            this.TempData["DeleteNewEntry"] = $"Your entry was successfully deleted!";
+            this.TempData["DeleteEntry"] = $"Your entry was successfully deleted!";
 
             return this.RedirectToAction("All", "Challenges");
         }

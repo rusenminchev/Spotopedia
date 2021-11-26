@@ -15,6 +15,12 @@ namespace Spotopedia.Web.ViewModels.ChallengeEntries
 
         public string AddedByUserUserName { get; set; }
 
+        public string AddedByUserFirstName { get; set; }
+
+        public string AddedByUserLastName { get; set; }
+
+        public string AddedByUserAvatarImageUrl { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public int ChallengeId { get; set; }
