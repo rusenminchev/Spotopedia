@@ -3,83 +3,92 @@
 
 <style>
 
-@@charset "UTF-8";
-.form {
-  width: 500px;
-  margin: 5% auto;
-}
-.form__container {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  border: 2px dashed silver;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  color: silver;
-  margin-bottom: 5px;
-}
-.form__container.active {
-  background-color: rgba(192, 192, 192, 0.2);
-}
-.form__file {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-  opacity: 0;
-}
-.form__files-container {
-  display: block;
-  width: 100%;
-  font-size: 0;
-  margin-top: 20px;
-}
-.form__image-container {
-  display: inline-block;
-  width: 20%;
-  height: 200px;
-  margin-bottom: 10px;
-  position: relative;
-  align-content: center
-}
-.form__image-container:not(:nth-child(2n)) {
-  margin-right: 2%;
-}
-.form__image-container:after {
-  content: "✕";
-  position: absolute;
-  line-height: 50px;
-  font-size: 30px;
-  margin: auto;
-  top: 0;
-  right: 0;
-  left: 0;
-  text-align: center;
-  font-weight: bold;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-.form__image-container:hover:after {
-  opacity: 1;
-  cursor: pointer;
-}
-.form__image {
-  -o-object-fit: contain;
-     object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
+    @@charset "UTF-8";
 
+    .form {
+        width: 500px;
+        margin: 5% auto;
+    }
+
+    .form__container {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        border: 2px dashed silver;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        color: silver;
+        margin-bottom: 5px;
+    }
+
+        .form__container.active {
+            background-color: rgba(192, 192, 192, 0.2);
+        }
+
+    .form__file {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    .form__files-container {
+        display: block;
+        width: 100%;
+        font-size: 0;
+        margin-top: 20px;
+    }
+
+    .form__image-container {
+        display: inline-block;
+        width: 20%;
+        height: 200px;
+        margin-bottom: 10px;
+        position: relative;
+        align-content: center
+    }
+
+        .form__image-container:not(:nth-child(2n)) {
+            margin-right: 2%;
+        }
+
+        .form__image-container:after {
+            content: "✕";
+            position: absolute;
+            line-height: 50px;
+            font-size: 30px;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .form__image-container:hover:after {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+    .form__image {
+        -o-object-fit: contain;
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 
-<form method="post" class="col-md-8 offset-2" enctype="multipart/form-data"> 
+<form method="post" class="col-md-8 offset-2" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label asp-for="Title"></label>
@@ -91,7 +100,7 @@
         <textarea asp-for="Description" class="form-control" rows="5"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-  <p></p>
+    <p></p>
     <div>
         <span asp-validation-for="Type" class="text-danger"></span>
 
@@ -129,42 +138,42 @@
         </div>
     </div>
     <p></p>
-  <div>    
-    <p></p>
- <fieldset class="gllpLatlonPicker">
-    <label>Insert address or point it on the map</label>
-    <input type="text" class="form-control gllpSearchField" >   
-    <br>
-    <input type="button" class="btn btn-outline-primary gllpSearchButton" value="Search"/>
-    <br>
-    <br>
-    @*<input type="button" class="gllpSearchButton" value="search">*@
-	<div class="gllpMap">Google Maps</div>
-    <input asp-for="Address.AddressName" type="hidden" class="gllpLocationName" value=""/>
-	<input asp-for="Address.Latitude"   type="hidden" class="gllpLatitude" value="42.6851881"/>
-	<input asp-for="Address.Longitude"  type="hidden" class="gllpLongitude" value="23.3190205"/>
-	<input type="hidden" class="gllpZoom" value="3"/>
-  </fieldset>
-</div>
+    <div>
+        <p></p>
+        <fieldset class="gllpLatlonPicker">
+            <label>Insert address or point it on the map</label>
+            <input type="text" class="form-control gllpSearchField">
+            <br>
+            <input type="button" class="btn btn-outline-primary gllpSearchButton" value="Search" />
+            <br>
+            <br>
+            @*<input type="button" class="gllpSearchButton" value="search">*@
+            <div class="gllpMap">Google Maps</div>
+            <input asp-for="Address.AddressName" type="hidden" class="gllpLocationName" value="" />
+            <input asp-for="Address.Latitude" type="hidden" class="gllpLatitude" value="42.6851881" />
+            <input asp-for="Address.Longitude" type="hidden" class="gllpLongitude" value="23.3190205" />
+            <input type="hidden" class="gllpZoom" value="3" />
+        </fieldset>
+    </div>
     <p></p>
 
-<div>
-<label class="form__container" id="upload-container">Choose or Drag & Drop Photo
-    <input class="form__file" id="upload-files" type="file" asp-for="Images" accept="image/*" multiple="multiple"/>
-  </label>
-  <div class="form__files-container" id="files-list-container"></div>
-</div>
+    <div>
+        <label class="form__container" id="upload-container">
+            Choose or Drag & Drop Photo
+            <input class="form__file" id="upload-files" type="file" asp-for="Images" accept="image/*" multiple="multiple" />
+        </label>
+        <div class="form__files-container" id="files-list-container"></div>
+    </div>
 
-<div>
-    <p></p>
-    <input type="submit" class="btn btn-outline-primary" value="Submit" />
-    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        <p></p>
+        <input type="submit" class="btn btn-outline-primary" value="Submit" />
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
 </form>
 
 
 
 @section Scripts {
-   <script>
+    <script>
         const INPUT_FILE = document.querySelector('#upload-files');
         const INPUT_CONTAINER = document.querySelector('#upload-container');
         const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
@@ -184,10 +193,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-        <div class="form__image-container js-remove-image" data-index="${index}">
-          <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-        </div>
-      `;
+            <div class="form__image-container js-remove-image" data-index="${index}">
+              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+            </div>
+          `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });
@@ -254,5 +263,5 @@
 
         fileUpload();
         removeFile();
-</script>
+    </script>
 }

@@ -6,26 +6,31 @@
                      <hr />
                     </span>
 
- <div class="row">
-        <div class="col-md-12">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <div class="media flex-wrap w-100 align-items-center"> <img src="https://i.imgur.com/iNmBizf.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                        <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">@Model.AddedByUserUserName</a>
-                            <div class="text-muted small">@Model.CreatedOn</div>
-                        </div>
-                        <div class="text-muted small ml-3">
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                <h5 class="card-title"><a asp-action="Details" asp-route-id="@Model.Id"></a></h5>
-                <p class="card-text">@Model.Content</p>
-                </div>
-                <div class="card-body">
-                           @if (Model.PostImages.Count > 0)
-                {
-                            <img src="@Model.PostImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
-                }
-                <hr>
-                <div>
+  <div class="row">
+      <div class="col-md-12">
+          <div class="card mb-4">
+              <div class="card-header">
+                  <div class="media flex-wrap w-100 align-items-center">
+                      <img src="https://i.imgur.com/iNmBizf.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                      <div class="media-body ml-3">
+                          <a href="javascript:void(0)" data-abc="true">@Model.AddedByUserUserName</a>
+                          <div class="text-muted small">@Model.CreatedOn</div>
+                      </div>
+                      <div class="text-muted small ml-3">
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <h5 class="card-title"><a asp-action="Details" asp-route-id="@Model.Id"></a></h5>
+                  <p class="card-text">@Model.Content</p>
+              </div>
+              <div class="card-body">
+                  @if (Model.PostImages.Count > 0)
+                  {
+                      <img src="@Model.PostImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
+                  }
+                  <hr>
+              </div>
+          </div>
+      </div>
+  </div>

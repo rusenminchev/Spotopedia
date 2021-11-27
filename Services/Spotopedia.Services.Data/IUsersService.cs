@@ -11,5 +11,7 @@ namespace Spotopedia.Services.Data
         Task EditAsync(EditUserProfileInputModel input);
 
         T GetUserDetails<T>(string id);
+
+        int GetUsersCount();
     }
 }

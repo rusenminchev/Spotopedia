@@ -7,6 +7,7 @@ using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Spots;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -101,19 +102,22 @@ namespace Spotopedia.Services.Data
                 .ToList();
         }
 
-        public async Task ApproveSpotAsync(int id)
+        public async Task ApproveSpotAsync(int id, string approvedByUsername)
         {
+
             var spot = this.spotsRepository.All()
                 .FirstOrDefault(x => x.Id == id);
 
             spot.IsApproved = true;
+            spot.ApprovedByUsername = approvedByUsername;
+            spot.ApprovedOn = DateTime.UtcNow;
             this.spotsRepository.Update(spot);
             await this.spotsRepository.SaveChangesAsync();
         }
 
-        public int GetCount()
+        public int GetSpotsCount()
         {
-            return this.spotsRepository.All().Count();
+            return this.spotsRepository.AllAsNoTracking().Count();
         }
 
         public T GetById<T>(int id)
@@ -210,9 +214,10 @@ namespace Spotopedia.Services.Data
         {
             var allSpots = this.GetAllApproved<SpotInListViewModel>();
 
-            var currentCoordinates = new Coordinate(
-                double.Parse(spotViewModel.Address.Longitude),
-                double.Parse(spotViewModel.Address.Latitude));
+            var isValidLongitude = double.TryParse(spotViewModel.Address.Longitude, NumberStyles.Any, CultureInfo.InvariantCulture, out double longitude);
+            var isValidLatitude = double.TryParse(spotViewModel.Address.Latitude, NumberStyles.Any, CultureInfo.InvariantCulture, out double latitude);
+
+            var currentCoordinates = new Coordinate(longitude, latitude);
 
             var currentLocation = new Point(currentCoordinates)
             {
@@ -230,8 +235,8 @@ namespace Spotopedia.Services.Data
                     continue;
                 }
 
-                var lat = double.Parse(spot.Address.Latitude);
-                var lon = double.Parse(spot.Address.Longitude);
+                var isValidLon = double.TryParse(spot.Address.Longitude, NumberStyles.Any, CultureInfo.InvariantCulture, out double lon);
+                var isValidLat = double.TryParse(spot.Address.Latitude, NumberStyles.Any, CultureInfo.InvariantCulture, out double lat);
 
                 var coordinates = new Coordinate(lon, lat);
 

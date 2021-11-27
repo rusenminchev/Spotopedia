@@ -39,7 +39,9 @@ namespace Spotopedia.Web.Areas.Administration.Controllers
 
         public async Task<IActionResult> ApproveSpot(int id)
         {
-            await this.spotsService.ApproveSpotAsync(id);
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.spotsService.ApproveSpotAsync(id, user.UserName);
 
             return this.RedirectToAction("Index", "Dashboard");
         }

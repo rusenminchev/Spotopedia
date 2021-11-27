@@ -9,7 +9,7 @@
     {
         Task CreateAsync(CreateSpotInputModel inputModel, string userId);
 
-        int GetCount();
+        int GetSpotsCount();
 
         IEnumerable<T> GetAllApproved<T>();
 
@@ -31,7 +31,7 @@
 
         int GetLastAddedSpotId();
 
-        Task ApproveSpotAsync(int id);
+        Task ApproveSpotAsync(int id, string approvedByUsername);
 
         Task DeleteAsync(int id);
     }

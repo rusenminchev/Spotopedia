@@ -1,5 +1,6 @@
 ﻿namespace Spotopedia.Data.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -34,6 +35,10 @@
 
         [Required]
         public bool IsApproved { get; set; }
+
+        public DateTime ApprovedOn { get; set; }
+
+        public string ApprovedByUsername { get; set; }
 
         [Required]
         public string AddedByUserId { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Spotopedia.Data;
 
 namespace Spotopedia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211127162356_AddedApprovedOnAndApprovedByColumnsToSpotModel")]
+    partial class AddedApprovedOnAndApprovedByColumnsToSpotModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -767,55 +769,6 @@ namespace Spotopedia.Data.Migrations
                     b.ToTable("PostVotes");
                 });
 
-            modelBuilder.Entity("Spotopedia.Data.Models.Report", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ReportType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReportedByUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ReportedPostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReportedUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ReportedByUserId");
-
-                    b.HasIndex("ReportedPostId");
-
-                    b.HasIndex("ReportedUserId");
-
-                    b.ToTable("Reports");
-                });
-
             modelBuilder.Entity("Spotopedia.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -860,6 +813,7 @@ namespace Spotopedia.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ApprovedByUsername")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ApprovedOn")
@@ -1226,33 +1180,6 @@ namespace Spotopedia.Data.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("Spotopedia.Data.Models.Report", b =>
-                {
-                    b.HasOne("Spotopedia.Data.Models.ApplicationUser", "ReportedByUser")
-                        .WithMany()
-                        .HasForeignKey("ReportedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Spotopedia.Data.Models.Post", "ReportedPost")
-                        .WithMany("Reports")
-                        .HasForeignKey("ReportedPostId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Spotopedia.Data.Models.ApplicationUser", "ReportedUser")
-                        .WithMany()
-                        .HasForeignKey("ReportedUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ReportedByUser");
-
-                    b.Navigation("ReportedPost");
-
-                    b.Navigation("ReportedUser");
-                });
-
             modelBuilder.Entity("Spotopedia.Data.Models.Spot", b =>
                 {
                     b.HasOne("Spotopedia.Data.Models.ApplicationUser", "AddedByUser")
@@ -1346,8 +1273,6 @@ namespace Spotopedia.Data.Migrations
                     b.Navigation("PostImages");
 
                     b.Navigation("PostVotes");
-
-                    b.Navigation("Reports");
                 });
 
             modelBuilder.Entity("Spotopedia.Data.Models.PostComment", b =>

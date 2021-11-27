@@ -74,5 +74,10 @@ namespace Spotopedia.Services.Data
                 .To<T>()
                 .FirstOrDefault();
         }
+
+        public int GetUsersCount()
+        {
+            return this.usersRepository.AllAsNoTracking().Count();
+        }
     }
 }

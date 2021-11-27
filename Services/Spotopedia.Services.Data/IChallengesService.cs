@@ -17,5 +17,7 @@ namespace Spotopedia.Services.Data
         Task EditAsync(string id, EditChallengeInputModel input);
 
         Task DeleteAsync(string id);
+
+        int GetActiveChallengesCount();
     }
 }

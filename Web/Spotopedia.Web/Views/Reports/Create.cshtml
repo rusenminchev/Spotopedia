@@ -1,0 +1,61 @@
+﻿@model Spotopedia.Web.ViewModels.Reports.CreateReportInputModel
+@using Spotopedia.Data.Models.Enumerations
+
+@{
+    ViewData["Title"] = "Report";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr>
+<div class="col-md-8 offset-2">
+    <div>
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div>
+                <textarea asp-for="Description" class="form-control" placeholder="What is wrong with this post?"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <br>
+            <div>
+                <select asp-for="ReportType" class="form-control">
+                    <option selected disabled>Choose a report type.</option>
+                    @foreach (int reportType in Enum.GetValues(typeof(ReportType)))
+                    {
+                        <option value="@reportType">@Enum.GetName(typeof(ReportType), reportType)</option>
+                    }
+                </select>
+            </div>
+            <br>
+            <div class="float-right">
+                <input type="submit" class="btn btn-outline-primary" value="Send Report" />
+                <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <div class="media flex-wrap w-100 align-items-center">
+                <img src="@Model.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
+                <div class="media-body ml-3">
+                    <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.AddedByUserId" data-abc="true">@Model.AddedByUserFirstName @Model.AddedByUserLastName</a>
+                    <div class="text-muted small">@Model.PostCreatedOn</div>
+                </div>
+                <div class="text-muted small ml-3">
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @*<h5 class="card-title"><a asp-action="Details" asp-route-id="@Model.Id"></a></h5>*@
+            <p class="card-text">@Model.PostContent</p>
+        </div>
+        <div class="card-body">
+            @if (Model.PostImages.Count() > 0)
+            {
+                <img src="@Model.PostImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
+            }
+            <hr>
+        </div>
+    </div>
+</div>

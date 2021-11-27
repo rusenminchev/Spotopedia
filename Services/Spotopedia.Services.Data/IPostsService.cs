@@ -22,5 +22,7 @@ namespace Spotopedia.Services.Data
         Task DeleteAsync(int id);
 
         IEnumerable<PostImage> GetAllImagesByPostId(int postId);
+
+        int GetPostsCount();
     }
 }

@@ -13,6 +13,7 @@
             this.PostImages = new HashSet<PostImage>();
             this.PostComments = new HashSet<PostComment>();
             this.PostVotes = new HashSet<PostVote>();
+            this.Reports = new HashSet<Report>();
         }
 
         [Required]
@@ -39,5 +40,7 @@
         public virtual ICollection<PostVote> PostVotes { get; set; }
 
         public PostType Type { get; set; }
+
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

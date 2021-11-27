@@ -138,7 +138,7 @@
             {
                 ItemsPerPage = ItemsPerPage,
                 CurrentPageNumber = pageNumber,
-                SpotsCount = this.spotsService.GetCount(),
+                SpotsCount = this.spotsService.GetSpotsCount(),
                 Spots = this.spotsService.GetAllApproved<SpotInListViewModel>(),
             };
             return this.View(viewModel);

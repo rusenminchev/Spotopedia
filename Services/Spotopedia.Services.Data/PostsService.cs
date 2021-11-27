@@ -138,5 +138,10 @@ namespace Spotopedia.Services.Data
                 .Where(x => x.PostId == postId)
                 .ToList();
         }
+
+        public int GetPostsCount()
+        {
+            return this.postsRepository.AllAsNoTracking().Count();
+        }
     }
 }
