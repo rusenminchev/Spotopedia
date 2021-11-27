@@ -33,6 +33,9 @@
         public Address Address { get; set; }
 
         [Required]
+        public bool IsApproved { get; set; }
+
+        [Required]
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }

@@ -139,7 +139,7 @@
                 ItemsPerPage = ItemsPerPage,
                 CurrentPageNumber = pageNumber,
                 SpotsCount = this.spotsService.GetCount(),
-                Spots = this.spotsService.GetAll<SpotInListViewModel>(),
+                Spots = this.spotsService.GetAllApproved<SpotInListViewModel>(),
             };
             return this.View(viewModel);
         }
@@ -150,8 +150,17 @@
 
             var spotViewModel = this.spotsService.GetById<SingleSpotViewModel>(id);
             spotViewModel.SpotVote = this.spotVotesService.GetVoteByUser<SpotVoteViewModel>(id, user);
-
             spotViewModel.NearBySpots = this.spotsService.GetNearBySpots(spotViewModel);
+
+            if (spotViewModel.IsApproved == false)
+            {
+                if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    return this.View(spotViewModel);
+                }
+
+                return this.RedirectToAction("Index", "Home");
+            }
 
             return this.View(spotViewModel);
         }

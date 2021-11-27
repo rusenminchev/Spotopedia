@@ -1,7 +1,10 @@
-﻿namespace Spotopedia.Web.ViewModels.Administration.Dashboard
+﻿using Spotopedia.Web.ViewModels.Spots;
+using System.Collections.Generic;
+
+namespace Spotopedia.Web.ViewModels.Administration.Dashboard
 {
     public class IndexViewModel
     {
-        public int SettingsCount { get; set; }
+        public IEnumerable<SpotInListViewModel> Spots { get; set; }
     }
 }

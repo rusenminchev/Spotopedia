@@ -85,11 +85,30 @@ namespace Spotopedia.Services.Data
             return this.lastAddedSpotId;
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAllApproved<T>()
         {
             return this.spotsRepository.AllAsNoTracking()
+                .Where(x => x.IsApproved == true)
                 .To<T>()
                 .ToList();
+        }
+
+        public IEnumerable<T> GetAllNotApproved<T>()
+        {
+            return this.spotsRepository.AllAsNoTracking()
+                .Where(x => x.IsApproved == false)
+                .To<T>()
+                .ToList();
+        }
+
+        public async Task ApproveSpotAsync(int id)
+        {
+            var spot = this.spotsRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            spot.IsApproved = true;
+            this.spotsRepository.Update(spot);
+            await this.spotsRepository.SaveChangesAsync();
         }
 
         public int GetCount()
@@ -169,7 +188,7 @@ namespace Spotopedia.Services.Data
         public IEnumerable<T> AllSpotsByUser<T>(string userId)
         {
             var spots = this.spotsRepository.All()
-                .Where(x => x.AddedByUserId == userId)
+                .Where(x => x.AddedByUserId == userId && x.IsApproved == true)
                 .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToList();
@@ -180,7 +199,7 @@ namespace Spotopedia.Services.Data
         public IEnumerable<T> AllSpotsLikedByUser<T>(string id)
         {
             var spots = this.spotsRepository.All()
-                .Where(x => x.SpotVotes.Any(x => x.AddedByUserId == id && x.Value == VoteType.Like))
+                .Where(x => x.SpotVotes.Any(x => x.AddedByUserId == id && x.Value == VoteType.Like) && x.IsApproved == true)
                 .To<T>()
                 .ToList();
 
@@ -189,7 +208,7 @@ namespace Spotopedia.Services.Data
 
         public IEnumerable<SpotInListViewModel> GetNearBySpots(SingleSpotViewModel spotViewModel)
         {
-            var allSpots = this.GetAll<SpotInListViewModel>();
+            var allSpots = this.GetAllApproved<SpotInListViewModel>();
 
             var currentCoordinates = new Coordinate(
                 double.Parse(spotViewModel.Address.Longitude),
@@ -228,6 +247,15 @@ namespace Spotopedia.Services.Data
             }
 
             return nearBySpots;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var spot = this.spotsRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.spotsRepository.Delete(spot);
+            await this.spotsRepository.SaveChangesAsync();
         }
     }
 }

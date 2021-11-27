@@ -19,6 +19,7 @@
         public IEnumerable<T> GetAllAddresses<T>()
         {
             return this.addressesRepository.All()
+                 .Where(x => x.Spot.IsApproved == true)
                  .To<T>()
                  .ToList();
         }

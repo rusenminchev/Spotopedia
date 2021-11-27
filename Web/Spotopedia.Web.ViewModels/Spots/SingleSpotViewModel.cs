@@ -38,6 +38,8 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public bool IsApproved { get; set; }
+
         public virtual ICollection<SpotImage> SpotImages { get; set; }
 
         public SpotVoteViewModel SpotVote { get; set; }

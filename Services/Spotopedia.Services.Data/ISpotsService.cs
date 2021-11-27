@@ -11,7 +11,9 @@
 
         int GetCount();
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAllApproved<T>();
+
+        IEnumerable<T> GetAllNotApproved<T>();
 
         T GetById<T>(int id);
 
@@ -28,5 +30,9 @@
         IEnumerable<SpotInListViewModel> GetNearBySpots(SingleSpotViewModel spotViewModel);
 
         int GetLastAddedSpotId();
+
+        Task ApproveSpotAsync(int id);
+
+        Task DeleteAsync(int id);
     }
 }
