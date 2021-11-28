@@ -33,5 +33,6 @@ namespace Spotopedia.Web.ViewModels.Spots
 
         [Required(ErrorMessage = "Please upload photos of the spot.")]
         public IEnumerable<IFormFile> Images { get; set; }
+        = new HashSet<IFormFile>();
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Spotopedia.Data.Common.Repositories;
 using Spotopedia.Data.Models;
+using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Reports;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,6 +32,14 @@ namespace Spotopedia.Services.Data
 
             await this.reportsRepository.AddAsync(report);
             await this.reportsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAllActiveReports<T>()
+        {
+            return this.reportsRepository
+                .AllAsNoTracking()
+                .To<T>()
+                .ToList();
         }
     }
 }

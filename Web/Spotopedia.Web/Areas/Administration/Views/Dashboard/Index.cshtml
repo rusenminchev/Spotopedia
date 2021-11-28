@@ -140,13 +140,13 @@
                                 <div class="content">
                                     <table class="table is-fullwidth is-striped">
                                         <tbody>
-                                            @foreach (var spot in Model.Spots)
+                                            @foreach (var report in Model.Reports)
                                             {
                                                 <tr>
                                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                    <td><a asp-area="" asp-controller="Spots" asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></td>
-                                                    <td class="level-right"><a class="button is-small is-primary" asp-area="Administration" asp-controller="Spots" asp-action="ApproveSpot" asp-route-id="@spot.Id">Approve</a></td>
-                                                    <td class="level-right"><a class="button is-small is-danger" asp-area="Administration" asp-controller="Spots" asp-action="Delete" asp-route-id="@spot.Id">Delete</a></td>
+                                                    <td><a asp-area="" asp-controller="Posts" asp-action="All"> @report.ReportType.ToString()</a></td>
+                                                    <td class="level-right"><a class="button is-small is-primary" asp-area="Administration" asp-controller="Spots" asp-action="ApproveSpot">Approve</a></td>
+                                                    <td class="level-right"><a class="button is-small is-danger" asp-area="Administration" asp-controller="Spots" asp-action="Delete">Delete</a></td>
                                                 </tr>
                                             }
                                         </tbody>

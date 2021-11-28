@@ -9,5 +9,7 @@ namespace Spotopedia.Services.Data
     public interface IReportsService
     {
         Task CreateAsync(CreateReportInputModel input, int id, string reportedUserId, string reportedByUserId);
+
+        IEnumerable<T> GetAllActiveReports<T>();
     }
 }

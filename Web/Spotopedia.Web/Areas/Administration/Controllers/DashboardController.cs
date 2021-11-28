@@ -5,6 +5,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Spotopedia.Web.ViewModels.Spots;
+    using Spotopedia.Web.ViewModels.Reports;
 
     public class DashboardController : AdministrationController
     {
@@ -13,19 +14,22 @@
         private readonly IUsersService usersService;
         private readonly IPostsService postsService;
         private readonly IChallengesService challengesService;
+        private readonly IReportsService reportsService;
 
         public DashboardController(
             ISettingsService settingsService,
             ISpotsService spotsService,
             IUsersService usersService,
             IPostsService postsService,
-            IChallengesService challengesService)
+            IChallengesService challengesService,
+            IReportsService reportsService)
         {
             this.settingsService = settingsService;
             this.spotsService = spotsService;
             this.usersService = usersService;
             this.postsService = postsService;
             this.challengesService = challengesService;
+            this.reportsService = reportsService;
         }
 
         public IActionResult Index()
@@ -37,6 +41,7 @@
                 UsersCount = this.usersService.GetUsersCount(),
                 PostsCount = this.postsService.GetPostsCount(),
                 ActiveChallengesCount = this.challengesService.GetActiveChallengesCount(),
+                Reports = this.reportsService.GetAllActiveReports<ReportDetailsViewModel>(),
             };
             return this.View(viewModel);
         }
