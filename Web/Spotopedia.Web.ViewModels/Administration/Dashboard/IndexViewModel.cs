@@ -22,5 +22,8 @@ namespace Spotopedia.Web.ViewModels.Administration.Dashboard
 
         public IEnumerable<PostDetailsViewModel> ReportedPosts{ get; set; }
            = new HashSet<PostDetailsViewModel>();
+
+        public IEnumerable<SingleSpotViewModel> ReportedSpots { get; set; }
+        = new HashSet<SingleSpotViewModel>();
     }
 }

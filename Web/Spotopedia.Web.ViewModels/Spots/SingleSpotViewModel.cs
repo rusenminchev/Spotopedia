@@ -7,6 +7,7 @@
     using Spotopedia.Data.Models;
     using Spotopedia.Data.Models.Enumerations;
     using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.SpotReports;
     using Spotopedia.Web.ViewModels.SpotVotes;
     using Spotopedia.Web.ViewModels.Votes;
 
@@ -46,6 +47,9 @@
 
         public IEnumerable<SpotInListViewModel> NearBySpots { get; set; }
         = new HashSet<SpotInListViewModel>();
+
+        public ICollection<SpotReportDetailsViewModel> Reports { get; set; }
+        = new HashSet<SpotReportDetailsViewModel>();
 
         public void CreateMappings(IProfileExpression configuration)
         {

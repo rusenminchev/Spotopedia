@@ -4,7 +4,7 @@
 @if (this.TempData.ContainsKey("AddNewSpot"))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-         @this.TempData["AddNewSpot"]
+        @this.TempData["AddNewSpot"]
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -115,20 +115,20 @@
         }
 
     .product-links {
-    text-align: right;
-}
+        text-align: right;
+    }
 
-.product-links a {
-    display: inline-block;
-    margin-right: 10px;
-    color: #e1e1e1;
-    transition: 0.3s;
-    font-size: 17px;
-}
+        .product-links a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #e1e1e1;
+            transition: 0.3s;
+            font-size: 17px;
+        }
 
-.product-links a:hover {
-    color: #fbb72c;
-}
+            .product-links a:hover {
+                color: #fbb72c;
+            }
 
     .liked {
         color: #fb672c;
@@ -153,13 +153,12 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }
-
-    </style>
+</style>
 
 @if (this.TempData.ContainsKey("EditSpot"))
 {
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
-         @this.TempData["EditSpot"]
+        @this.TempData["EditSpot"]
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -169,7 +168,7 @@
 @if (this.TempData.ContainsKey("CannotEditSpot"))
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-         @this.TempData["CannotEditSpot"]
+        @this.TempData["CannotEditSpot"]
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -178,151 +177,157 @@
 
 
 <div class="container">
-  <div class="row">
-<div class="col-lg-8">
-			<div class="row">
-    <div class="col-12 col-sm-8 col-md-6 col-lg-12">
-	<div class="product-card">
-                @if (Model.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-12">
+                    <div class="product-card">
+                        @if (Model.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
                         {
-		                <div class="badge">New</div>
+                            <div class="badge">New</div>
                         }
-		<div class="product-tumb">
-			@*//carousel*@
-   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                              <div class="carousel-inner">
+                        <div class="product-tumb">
+                            @*//carousel*@
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
 
-                                @for (int i = 0; i < Model.SpotImages.Count; i++)
-                   {
-                       var imagesAsArray = Model.SpotImages.OrderBy(x=>x.CreatedOn).ToArray();
-                       var item = imagesAsArray[i];
-                       var itemClass = i == 0 ? "item active" : "item";
-             <div class="carousel-@itemClass">
-                <img class="d-block w-100" src="@item.ImageUrl" alt="Slide">               
-                </div>                                                  
-                   }
-                              </div>
-                              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                              </a>
-                              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                              </a>
-                            </div>
-		</div>
-                           
-		                        <div class="product-details">
-                        <div class="product-links float-right">
-                        <div class="row">
-                          @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
-                            {
-                             <span class="single-meta">
-                                <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-                            </span>
-                            }
-                         <form id="votesForm" method="post"></form>
-                            <div>
-                            @if(Model.SpotVote?.Value.ToString() == "Like")
-                            {
-                            <a href="#" onclick="sendVote(@Model.Id, false)">
-                                 <i class="fa fa-heart liked"></i>
+                                    @for (int i = 0; i < Model.SpotImages.Count; i++)
+                                    {
+                                        var imagesAsArray = Model.SpotImages.OrderBy(x => x.CreatedOn).ToArray();
+                                        var item = imagesAsArray[i];
+                                        var itemClass = i == 0 ? "item active" : "item";
+                                        <div class="carousel-@itemClass">
+                                            <img class="d-block w-100" src="@item.ImageUrl" alt="Slide">
+                                        </div>
+                                    }
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
                                 </a>
-                            }
-                            else
-                            {
-                            <a href="#" onclick="sendVote(@Model.Id, true)">
-                                  <i class="fa fa-heart notliked"></i>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
                                 </a>
-                            } 
                             </div>
-                            <div id="likesCount">@Model.LikesCount</div>
-				</div>
-</div>
-			<span class="product-catagory">@Model.Type</span>
-			<h4><a href="">@Model.Title</a></h4>
-            <p>Added by <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.AddedByUserId" data-abc="true">@Model.AddedByUserFirstName @Model.AddedByUserLastName</a></p>
-			<p>@Model.Description</p>
-			<div class="product-bottom-details">
-				<div class="product-price">Address: @Model.Address.AddressName</div>
-<a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
-				
-			</div>
-		</div>
-<div>
- <fieldset class="gllpLatlonPicker">
-	<div class="gllpMap">Google Maps</div>
-	<input type="hidden" class="gllpLatitude" value="@Model.Address.Latitude"/>
-	<input type="hidden" class="gllpLongitude" value="@Model.Address.Longitude"/>
-	<input type="hidden" class="gllpZoom" value="11"/>
-  </fieldset>
-</div>
-	</div>
-</div>
-</div>
-</div>
+                        </div>
+
+                        <div class="product-details">
+                            <div class="product-links float-right">
+                                <div class="row">
+                                    <form id="votesForm" method="post"></form>
+                                    <div>
+                                        @if (Model.SpotVote?.Value.ToString() == "Like")
+                                        {
+                                            <a href="#" onclick="sendVote(@Model.Id, false)">
+                                                <i class="fa fa-heart liked"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" onclick="sendVote(@Model.Id, true)">
+                                                <i class="fa fa-heart notliked"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                    <div id="likesCount">@Model.LikesCount</div>
+                                </div>
+                            </div>
+                            <span class="product-catagory">@Model.Type</span>
+                            <h4><a href="">@Model.Title</a></h4>
+                            <p>Added by <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.AddedByUserId" data-abc="true">@Model.AddedByUserFirstName @Model.AddedByUserLastName</a></p>
+                            <p>@Model.Description</p>
+                            <div class="product-bottom-details">
+                                <div class="product-price">Address: @Model.Address.AddressName</div>
+                                <a href="https://www.google.com/maps/search/?api=1&query=@Model.Address.Latitude,@Model.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
+
+                            </div>
+                        </div>
+                        <div>
+                            <fieldset class="gllpLatlonPicker">
+                                <div class="gllpMap">Google Maps</div>
+                                <input type="hidden" class="gllpLatitude" value="@Model.Address.Latitude" />
+                                <input type="hidden" class="gllpLongitude" value="@Model.Address.Longitude" />
+                                <input type="hidden" class="gllpZoom" value="11" />
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
+            {
+                <span class="single-meta">
+                    <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+                </span>
+            }
+
+            @if (User.Identity.IsAuthenticated && User.Identity.Name != Model.AddedByUserUsername)
+            {
+            <a asp-controller="SpotReports" asp-action="Create" asp-route-id="@Model.Id" asp-route-reportedUserId="@Model.AddedByUserId">Report</a>
+            }
+        </div>
 
 
 
 
-<div class="col-lg-4 sidebar">
-  <div class="row">
-<h4>Spots Around</h4>
-@foreach (var spot in Model.NearBySpots)
-{
+        <div class="col-lg-4 sidebar">
+            <div class="row">
+                <h4>Spots Around</h4>
+                @foreach (var spot in Model.NearBySpots)
+                {
 
-    <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="Card image cap">
-  <div class="card-body">
-        <h5 class="card-title"><a asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></h5>
-    @*<a href="#" class="btn btn-outline-primary float-right">Go to spot</a>*@
-  </div>
-</div>
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><a asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></h5>
+                            @*<a href="#" class="btn btn-outline-primary float-right">Go to spot</a>*@
+                        </div>
+                    </div>
 
-}
+                }
 
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 @*@if (this.TempData.ContainsKey("EditSpot"))
-{
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-         @this.TempData["EditSpot"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+             @this.TempData["EditSpot"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
 
-@if (this.TempData.ContainsKey("CannotEditSpot"))
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-         @this.TempData["CannotEditSpot"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
+    @if (this.TempData.ContainsKey("CannotEditSpot"))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+             @this.TempData["CannotEditSpot"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
 
-<div>
-    <img class="card-img" src="@Model.SpotImages.First().ImageUrl" alt="dog">
-    <span class="badge badge-success">@Model.Type</span>
+    <div>
+        <img class="card-img" src="@Model.SpotImages.First().ImageUrl" alt="dog">
+        <span class="badge badge-success">@Model.Type</span>
 
-    <h4 class="card-title mt-2">@Model.Title</h4>
-    <p class="card-text">@Model.Description</p>
- 
-<div class="text-muted small ml-3">*@
-          
+        <h4 class="card-title mt-2">@Model.Title</h4>
+        <p class="card-text">@Model.Description</p>
 
-                
+    <div class="text-muted small ml-3">*@
+
+
+
 
 
 @section Scripts {
-<script>
+    <script>
         function sendVote(spotId, isLiked) {
             var token = $("#votesForm input[name=__RequestVerificationToken]").val();
             var json = { spotId: spotId, isLiked: isLiked };
@@ -334,8 +339,8 @@
                 dataType: "json",
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (data) {
-                   $("#likesCount").html(data.likesCount);
-                   $("#dislikesCount").html(data.dislikesCount);
+                    $("#likesCount").html(data.likesCount);
+                    $("#dislikesCount").html(data.dislikesCount);
                 }
             });
         }

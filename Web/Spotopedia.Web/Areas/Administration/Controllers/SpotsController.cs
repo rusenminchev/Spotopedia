@@ -64,5 +64,11 @@ namespace Spotopedia.Web.Areas.Administration.Controllers
 
             return this.RedirectToAction("Index", "Dashboard");
         }
+
+        public IActionResult ReportedSpot(int id)
+        {
+            var postViewModel = this.spotsService.GetById<SingleSpotViewModel>(id);
+            return this.View(postViewModel);
+        }
     }
 }

@@ -44,6 +44,7 @@
                 ActiveChallengesCount = this.challengesService.GetActiveChallengesCount(),
                 Reports = this.reportsService.GetAllActiveReports<ReportDetailsViewModel>(),
                 ReportedPosts = this.postsService.GetAllReportedPosts<PostDetailsViewModel>(),
+                ReportedSpots = this.spotsService.GetAllReportedSpots<SingleSpotViewModel>(),
             };
             return this.View(viewModel);
         }

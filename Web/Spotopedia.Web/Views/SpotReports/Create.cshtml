@@ -1,0 +1,35 @@
+﻿@model Spotopedia.Web.ViewModels.SpotReports.CreateSpotReportInputModel
+@using Spotopedia.Data.Models.Enumerations
+
+@{
+    ViewData["Title"] = $"Report Spot: {Model.SpotTitle}";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr>
+<div class="col-md-8 offset-2">
+    <div>
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div>
+                <textarea asp-for="Description" class="form-control" placeholder="What is wrong with this post?"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <br>
+            <div>
+                <select asp-for="SpotReportType" class="form-control">
+                    <option selected disabled>Choose a report type.</option>
+                    @foreach (int spotReportType in Enum.GetValues(typeof(SpotReportType)))
+                    {
+                        <option value="@spotReportType">@Enum.GetName(typeof(SpotReportType), spotReportType)</option>
+                    }
+                </select>
+            </div>
+            <br>
+            <div class="float-right">
+                <input type="submit" class="btn btn-outline-primary" value="Send Report" />
+                <a asp-controller="Spots" asp-action="By" asp-route-id="@Model.ReportedSpotId" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>

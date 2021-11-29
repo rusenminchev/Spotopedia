@@ -279,5 +279,13 @@ namespace Spotopedia.Services.Data
             this.spotsRepository.Delete(spot);
             await this.spotsRepository.SaveChangesAsync();
         }
+
+        public IEnumerable<T> GetAllReportedSpots<T>()
+        {
+            return this.spotsRepository.AllAsNoTracking()
+                .Where(x => x.Reports.Any())
+                .To<T>()
+                .ToList();
+        }
     }
 }

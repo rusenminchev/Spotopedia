@@ -140,11 +140,11 @@
                                 <div class="content">
                                     <table class="table is-fullwidth is-striped">
                                         <tbody>
-                                            @foreach (var reportedPost in Model.ReportedPosts)
+                                            @foreach (var reportedSpot in Model.ReportedSpots)
                                             {
                                                 <tr>
                                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                    <td><a asp-area="Administration" asp-controller="Posts" asp-action="ReportedPost" asp-route-id="@reportedPost.Id" style="color: red"> @reportedPost.Content - @reportedPost.Reports.Count() Reports</a></td>
+                                                    <td><a asp-area="Administration" asp-controller="Spots" asp-action="ReportedSpot" asp-route-id="@reportedSpot.Id" style="color: red"> @reportedSpot.Title - @reportedSpot.Reports.Count() Reports</a></td>
                                                 </tr>
                                             }
                                         </tbody>

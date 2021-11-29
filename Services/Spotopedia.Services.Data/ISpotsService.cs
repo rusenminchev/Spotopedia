@@ -34,5 +34,7 @@
         Task ApproveSpotAsync(int id, string approvedByUsername);
 
         Task DeleteAsync(int id);
+
+        IEnumerable<T> GetAllReportedSpots<T>();
     }
 }
