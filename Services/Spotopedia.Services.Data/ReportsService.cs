@@ -41,5 +41,18 @@ namespace Spotopedia.Services.Data
                 .To<T>()
                 .ToList();
         }
+
+        public async Task DeleteAllByPostIdAsync(int postId)
+        {
+            var reports = this.reportsRepository.All()
+                .Where(x => x.ReportedPostId == postId)
+                .ToList();
+
+            foreach (var report in reports)
+            {
+                this.reportsRepository.Delete(report);
+                await this.reportsRepository.SaveChangesAsync();
+            }
+        }
     }
 }

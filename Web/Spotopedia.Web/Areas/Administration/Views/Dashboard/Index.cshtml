@@ -8,7 +8,7 @@
 <body class="myDIV">
     <div class="container">
         <div class="columns">
-            <div class="column is-3 ">
+            @*<div class="column is-3 ">
                 <aside class="menu is-hidden-mobile">
                     <p class="menu-label">
                         General
@@ -47,8 +47,8 @@
                         <li><a>Reports</a></li>
                     </ul>
                 </aside>
-            </div>
-            <div class="column is-9">
+            </div>*@
+            <div class="column is-12">
                 <section class="hero is-info welcome is-small">
                     <div class="hero-body">
                         <div class="container">
@@ -90,7 +90,7 @@
                     </div>
                 </section>
                 <div class="columns">
-                    <div class="column is-6">
+                    <div class="column is-4">
                         <div class="card events-card">
                             <header class="card-header">
                                 <p class="card-header-title">
@@ -124,11 +124,11 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="column is-6">
+                    <div class="column is-4">
                         <div class="card events-card">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    Reports
+                                    Spots Reports
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
@@ -140,13 +140,43 @@
                                 <div class="content">
                                     <table class="table is-fullwidth is-striped">
                                         <tbody>
-                                            @foreach (var report in Model.Reports)
+                                            @foreach (var reportedPost in Model.ReportedPosts)
                                             {
                                                 <tr>
                                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                    <td><a asp-area="" asp-controller="Posts" asp-action="All"> @report.ReportType.ToString()</a></td>
-                                                    <td class="level-right"><a class="button is-small is-primary" asp-area="Administration" asp-controller="Spots" asp-action="ApproveSpot">Approve</a></td>
-                                                    <td class="level-right"><a class="button is-small is-danger" asp-area="Administration" asp-controller="Spots" asp-action="Delete">Delete</a></td>
+                                                    <td><a asp-area="Administration" asp-controller="Posts" asp-action="ReportedPost" asp-route-id="@reportedPost.Id" style="color: red"> @reportedPost.Content - @reportedPost.Reports.Count() Reports</a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a href="#" class="card-footer-item">View All</a>
+                            </footer>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="card events-card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    Posts Reports
+                                </p>
+                                <a href="#" class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </a>
+                            </header>
+                            <div class="card-table">
+                                <div class="content">
+                                    <table class="table is-fullwidth is-striped">
+                                        <tbody>
+                                            @foreach (var reportedPost in Model.ReportedPosts)
+                                            {
+                                                <tr>
+                                                    <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                                    <td><a asp-area="Administration" asp-controller="Posts" asp-action="ReportedPost" asp-route-id="@reportedPost.Id" style="color: red"> @reportedPost.Content - @reportedPost.Reports.Count() Reports</a></td>                                                
                                                 </tr>
                                             }
                                         </tbody>

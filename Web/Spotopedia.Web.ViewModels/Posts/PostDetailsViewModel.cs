@@ -3,6 +3,7 @@ using Spotopedia.Data.Models;
 using Spotopedia.Data.Models.Enumerations;
 using Spotopedia.Services.Mapping;
 using Spotopedia.Web.ViewModels.Comments;
+using Spotopedia.Web.ViewModels.Reports;
 using Spotopedia.Web.ViewModels.Votes;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace Spotopedia.Web.ViewModels.Posts
         public DateTime CreatedOn { get; set; }
 
         public ICollection<PostCommentViewModel> PostComments { get; set; }
+        = new HashSet<PostCommentViewModel>();
 
         public ICollection<PostVote> PostVotes { get; set; }
 
@@ -49,6 +51,9 @@ namespace Spotopedia.Web.ViewModels.Posts
         public string ChallengeId { get; set; }
 
         public DateTime? ChallengeEndDate { get; set; }
+
+        public ICollection<ReportDetailsViewModel> Reports { get; set; }
+        = new HashSet<ReportDetailsViewModel>();
 
         public void CreateMappings(IProfileExpression configuration)
         {

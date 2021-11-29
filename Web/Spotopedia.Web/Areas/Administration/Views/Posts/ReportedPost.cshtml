@@ -1,0 +1,77 @@
+﻿@model Spotopedia.Web.ViewModels.Posts.PostDetailsViewModel
+@using Spotopedia.Data.Models.Enumerations
+
+@{
+    ViewData["Title"] = "Reported Post";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr>
+<div class="col-md-8 offset-2">
+    <div class="float-right">
+        <a asp-area="Administration" asp-controller="Reports" asp-action="Approve" asp-route-postId="@Model.Id" class="btn btn-outline-danger">Approve</a>
+        <a asp-area="Administration" asp-controller="Reports" asp-action="Reject" asp-route-postId="@Model.Id" class="btn btn-outline-primary">Reject</a>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <div class="media flex-wrap w-100 align-items-center">
+                <img src="@Model.AddedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
+                <div class="media-body ml-3">
+                    <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.AddedByUserId" data-abc="true">@Model.AddedByUserFirstName @Model.AddedByUserLastName</a>
+                    <div class="text-muted small">@Model.CreatedOn</div>
+                </div>
+                <div class="text-muted small ml-3">
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @*<h5 class="card-title"><a asp-action="Details" asp-route-id="@Model.Id"></a></h5>*@
+            <p class="card-text">@Model.Content</p>
+        </div>
+        <div class="card-body">
+            @if (Model.PostImages.Count() > 0)
+            {
+                <img src="@Model.PostImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
+            }
+            <hr>
+        </div>
+    </div>
+    <div>
+        <br>
+        <h4>Reports:</h4>
+        <hr>
+        @foreach (var report in Model.Reports)
+        {
+            <div class="container-fluid mt-100">
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center">
+                                    <img src="@report.ReportedByUserAvatarImageUrl" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <div class="media-body ml-3">
+                                        <a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@report.ReportedByUserId" data-abc="true">@report.ReportedByUserFirstName @report.ReportedByUserLastName</a>
+                                        <div class="text-muted small">Reported on: @report.CreatedOn</div>
+                                        <div class="text-muted small">
+                                        </div>
+                                    </div>
+                                    <div class="text-muted small ml-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h6><b>Report Type:</b></h6>
+                                <p class="card-text">@report.ReportType</p>
+                                <h6><b>Descrition:</b></h6>
+                                <p class="card-text">@report.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

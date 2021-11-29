@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Spotopedia.Web.ViewModels.Spots;
     using Spotopedia.Web.ViewModels.Reports;
+    using Spotopedia.Web.ViewModels.Posts;
 
     public class DashboardController : AdministrationController
     {
@@ -42,6 +43,7 @@
                 PostsCount = this.postsService.GetPostsCount(),
                 ActiveChallengesCount = this.challengesService.GetActiveChallengesCount(),
                 Reports = this.reportsService.GetAllActiveReports<ReportDetailsViewModel>(),
+                ReportedPosts = this.postsService.GetAllReportedPosts<PostDetailsViewModel>(),
             };
             return this.View(viewModel);
         }

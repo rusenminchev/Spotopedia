@@ -26,5 +26,7 @@ namespace Spotopedia.Services.Data
         IEnumerable<PostImage> GetAllImagesByPostId(int postId);
 
         int GetPostsCount();
+
+        IEnumerable<T> GetAllReportedPosts<T>();
     }
 }

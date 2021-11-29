@@ -171,5 +171,13 @@ namespace Spotopedia.Services.Data
         {
             return this.postsRepository.AllAsNoTracking().Count();
         }
+
+        public IEnumerable<T> GetAllReportedPosts<T>()
+        {
+            return this.postsRepository.AllAsNoTracking()
+                .Where(x => x.Reports.Any())
+                .To<T>()
+                .ToList();
+        }
     }
 }

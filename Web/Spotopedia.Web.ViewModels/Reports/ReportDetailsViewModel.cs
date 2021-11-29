@@ -12,29 +12,31 @@ namespace Spotopedia.Web.ViewModels.Reports
     {
         public string Description { get; set; }
 
-        [Required]
         public ReportType ReportType { get; set; }
 
-        [Required]
         public string ReportedByUserId { get; set; }
 
-        [Required]
+        public string ReportedByUserFirstName { get; set; }
+
+        public string ReportedByUserLastName { get; set; }
+
+        public string ReportedByUserAvatarImageUrl { get; set; }
+
         public string ReportedUserId { get; set; }
 
-        [Required]
+        public string ReportedUserFirstName { get; set; }
+
+        public string ReportedUserLastName { get; set; }
+
         public int ReportedPostId { get; set; }
-
-        public string AddedByUserId { get; set; }
-
-        public string AddedByUserFirstName { get; set; }
-
-        public string AddedByUserLastName { get; set; }
 
         public string AddedByUserAvatarImageUrl { get; set; }
 
         public string PostContent { get; set; }
 
         public DateTime PostCreatedOn { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public IEnumerable<PostImage> PostImages { get; set; }
         = new HashSet<PostImage>();

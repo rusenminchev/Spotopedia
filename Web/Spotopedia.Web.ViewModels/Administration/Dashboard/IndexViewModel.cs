@@ -1,4 +1,5 @@
-﻿using Spotopedia.Web.ViewModels.Reports;
+﻿using Spotopedia.Web.ViewModels.Posts;
+using Spotopedia.Web.ViewModels.Reports;
 using Spotopedia.Web.ViewModels.Spots;
 using System.Collections.Generic;
 
@@ -16,6 +17,10 @@ namespace Spotopedia.Web.ViewModels.Administration.Dashboard
 
         public int ActiveChallengesCount { get; set; }
 
-        public IEnumerable<ReportDetailsViewModel> Reports{ get; set; }
+        public IEnumerable<ReportDetailsViewModel> Reports { get; set; }
+        = new HashSet<ReportDetailsViewModel>();
+
+        public IEnumerable<PostDetailsViewModel> ReportedPosts{ get; set; }
+           = new HashSet<PostDetailsViewModel>();
     }
 }
