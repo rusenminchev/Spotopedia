@@ -267,7 +267,7 @@
                                         <div class="clearfix"></div>
                                     }
                                 }
-                                <div class="text-muted small">@post.CreatedOn</div>
+                                <div class="text-muted small">@post.CreatedOn.ToLocalTime()</div>
                             </div>
                             <div class="text-muted small ml-3">
                             </div>
@@ -428,7 +428,7 @@
 
                                                                 }
                                                                 <div class="text-muted small">
-                                                                    <div class="text-muted small">@comment.CreatedOn</div>
+                                                                    <div class="text-muted small">@comment.CreatedOn.ToLocalTime()</div>
                                                                 </div>
                                                             </div>
                                                             <div class="text-muted small ml-3">
