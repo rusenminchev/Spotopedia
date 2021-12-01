@@ -1,12 +1,12 @@
 ﻿@using Spotopedia.Web.ViewModels.Spots
 @model AllSpotsListViewModel
+
 @{
     this.ViewData["Title"] = "All Spots";
 }
 
-<h1>@this.ViewData["Title"]</h1>
-
-<hr />
+<h3>@this.ViewData["Title"]</h3>
+<hr>
 
 <div class="row">
     @foreach (var spot in Model.Spots)

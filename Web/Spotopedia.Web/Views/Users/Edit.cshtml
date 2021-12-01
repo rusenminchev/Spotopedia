@@ -1,6 +1,13 @@
 ﻿@model Spotopedia.Web.ViewModels.Users.EditUserProfileInputModel
 @using Spotopedia.Data.Models.Enumerations
 
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr>
+
 <style>
     @@charset "UTF-8";
 
@@ -86,7 +93,7 @@
     }
 </style>
 
-<form method="post" id="editForm" enctype="multipart/form-data">
+<form method="post" class="col-md-8 offset-md-2" id="editForm" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" class="form-control" placeholder="What is your firts name?"></input>
@@ -102,7 +109,7 @@
         <textarea asp-for="Bio" class="form-control"></textarea>
         <span asp-validation-for="Bio" class="text-danger"></span>
     </div>
- <div>   
+    <div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label asp-for="Gender" class="input-group-text">
@@ -124,7 +131,7 @@
         <input asp-for="City" class="form-control"></input>
         <span asp-validation-for="City" class="text-danger"></span>
     </div>
- <div>   
+    <div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label asp-for="SportType" class="input-group-text">
@@ -166,33 +173,34 @@
         <input asp-for="WebsiteUrl" class="form-control"></input>
         <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
     </div>
-<div>
-<label class="form__container" id="upload-container">Choose or Drag & Drop Photo
-    <input class="form__file" id="upload-files" type="file" asp-for="ProfileImage" accept="image/*"/>
-  </label>
-  <div class="form__files-container" id="files-list-container"></div>
-</div>
+    <div>
+        <label class="form__container" id="upload-container">
+            Choose or Drag & Drop Photo
+            <input class="form__file" id="upload-files" type="file" asp-for="ProfileImage" accept="image/*" />
+        </label>
+        <div class="form__files-container" id="files-list-container"></div>
+    </div>
     <p></p>
     <div>
-    <button type="submit" class="btn btn-outline-success" />Save Changes</button>
-    <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancel</a>
-</div>
+        <button type="submit" class="btn btn-outline-primary" />Save Changes</button>
+        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancel</a>
+    </div>
 </form>
 
 @section Scripts {
-   <script>
-  var subCategoryIndex = 1;
-    function AddSubCategory() {
-        $(".row").
-            append("<div class='image mb-2' id='preview-picture" + subCategoryIndex + "' >" +
-                "<label for='image" + subCategoryIndex + "' class='image-upload'></label>" +
-                "<input type='file' id='image" + subCategoryIndex + "' class='image-upload' name='Images'/>" +
-                "</div>");
-        subCategoryIndex++;
-    }
-</script>
+    <script>
+        var subCategoryIndex = 1;
+        function AddSubCategory() {
+            $(".row").
+                append("<div class='image mb-2' id='preview-picture" + subCategoryIndex + "' >" +
+                    "<label for='image" + subCategoryIndex + "' class='image-upload'></label>" +
+                    "<input type='file' id='image" + subCategoryIndex + "' class='image-upload' name='Images'/>" +
+                    "</div>");
+            subCategoryIndex++;
+        }
+    </script>
 
-   <script>
+    <script>
         const INPUT_FILE = document.querySelector('#upload-files');
         const INPUT_CONTAINER = document.querySelector('#upload-container');
         const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
@@ -212,10 +220,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-        <div class="form__image-container js-remove-image" data-index="${index}">
-          <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-        </div>
-      `;
+            <div class="form__image-container js-remove-image" data-index="${index}">
+              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+            </div>
+          `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });
@@ -282,5 +290,5 @@
 
         fileUpload();
         removeFile();
-</script>
+    </script>
 }

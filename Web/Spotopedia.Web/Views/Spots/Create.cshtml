@@ -1,6 +1,14 @@
 ﻿@using Spotopedia.Data.Models.Enumerations
 @model Spotopedia.Web.ViewModels.Spots.CreateSpotInputModel
 
+
+@{
+    ViewData["Title"] = "Add New Spot";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr>
+
 <style>
 
     @@charset "UTF-8";
@@ -85,10 +93,14 @@
         width: 100%;
         height: 100%;
     }
+
+    .form {
+        align-content: center
+    }
 </style>
 
 
-<form method="post" class="col-md-8 offset-2" enctype="multipart/form-data">
+<form method="post" class="col-md-8 offset-md-2" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label asp-for="Title"></label>
@@ -165,9 +177,9 @@
         <div class="form__files-container" id="files-list-container"></div>
     </div>
 
-        <p></p>
-        <input type="submit" class="btn btn-outline-primary" value="Submit" />
-        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    <p></p>
+    <input type="submit" class="btn btn-outline-primary" value="Submit" />
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
 </form>
 
 
@@ -193,10 +205,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-            <div class="form__image-container js-remove-image" data-index="${index}">
-              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-            </div>
-          `;
+                <div class="form__image-container js-remove-image" data-index="${index}">
+                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                </div>
+              `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });

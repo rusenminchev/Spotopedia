@@ -4,7 +4,8 @@
     ViewData["Title"] = "Edit post";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h3>@ViewData["Title"]</h3>
+<hr>
 
 <style>
     @@charset "UTF-8";
@@ -91,7 +92,7 @@
     }
 </style>
 
-<form method="post" id="editForm" enctype="multipart/form-data">
+<form method="post" class="col-md-8 offset-md-2" id="editForm" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Content"></label>
         <textarea asp-for="Content" class="form-control"></textarea>
@@ -159,10 +160,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-                <div class="form__image-container js-remove-image" data-index="${index}">
-                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-                </div>
-              `;
+                    <div class="form__image-container js-remove-image" data-index="${index}">
+                      <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                    </div>
+                  `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });

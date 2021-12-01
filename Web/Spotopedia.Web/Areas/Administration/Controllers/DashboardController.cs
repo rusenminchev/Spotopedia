@@ -37,7 +37,7 @@
         {
             var viewModel = new IndexViewModel
             {
-                Spots = this.spotsService.GetAllNotApproved<SpotInListViewModel>(),
+                Spots = this.spotsService.GetAllNotApproved<SingleSpotViewModel>(),
                 SpotsCount = this.spotsService.GetSpotsCount(),
                 UsersCount = this.usersService.GetUsersCount(),
                 PostsCount = this.postsService.GetPostsCount(),

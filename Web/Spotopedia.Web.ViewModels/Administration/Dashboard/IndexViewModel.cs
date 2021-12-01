@@ -7,7 +7,7 @@ namespace Spotopedia.Web.ViewModels.Administration.Dashboard
 {
     public class IndexViewModel
     {
-        public IEnumerable<SpotInListViewModel> Spots { get; set; }
+        public IEnumerable<SingleSpotViewModel> Spots { get; set; }
 
         public int SpotsCount { get; set; }
 

@@ -1,24 +1,24 @@
 ﻿<meta charset="utf-8" />
-  <title>Showing an ArcGIS basemap</title>
-  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>Showing an ArcGIS basemap</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
 <style>
-  #basemaps-wrapper {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 400;
-    background: white;
-    padding: 10px;
-  }
-  #basemaps {
-    margin-bottom: 5px;
-  }
+    #basemaps-wrapper {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 400;
+        background: white;
+        padding: 10px;
+    }
 
+    #basemaps {
+        margin-bottom: 5px;
+    }
 </style>
 
-<div  class="row justify-content-lg-center">
-<div id="map" style="width: 1260px; height: 720px;"></div>
+<div class="row justify-content-lg-center">
+    <div id="map" style="width: 1260px; height: 720px;"></div>
 </div>
 
 @section Scripts
@@ -31,34 +31,34 @@
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
 
- <!-- Load Esri Leaflet from CDN -->
-  <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
-  integrity="sha512-xY2smLIHKirD03vHKDJ2u4pqeHA7OQZZ27EjtqmuhDguxiUvdsOuXMwkg16PQrm9cgTmXtoxA6kwr8KBy3cdcw=="
-  crossorigin=""></script>
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
+            integrity="sha512-xY2smLIHKirD03vHKDJ2u4pqeHA7OQZZ27EjtqmuhDguxiUvdsOuXMwkg16PQrm9cgTmXtoxA6kwr8KBy3cdcw=="
+            crossorigin=""></script>
 
-  <!-- Load Esri Leaflet Geocoder from CDN -->
-  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
-    integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
-    crossorigin="">
+    <!-- Load Esri Leaflet Geocoder from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
+          integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+          crossorigin="">
 
-  <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
-    integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
-    crossorigin=""></script>
+    <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
+            integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
+            crossorigin=""></script>
 
-<!-- Load Esri Leaflet Vector from CDN -->
-  <script src="https://unpkg.com/esri-leaflet-vector@3.1.0/dist/esri-leaflet-vector.js"
-    integrity="sha512-AAcPGWoYOQ7VoaC13L/rv6GwvzEzyknHQlrtdJSGD6cSzuKXDYILZqUhugbJFZhM+bEXH2Ah7mA1OxPFElQmNQ=="
-    crossorigin=""></script>
+    <!-- Load Esri Leaflet Vector from CDN -->
+    <script src="https://unpkg.com/esri-leaflet-vector@3.1.0/dist/esri-leaflet-vector.js"
+            integrity="sha512-AAcPGWoYOQ7VoaC13L/rv6GwvzEzyknHQlrtdJSGD6cSzuKXDYILZqUhugbJFZhM+bEXH2Ah7mA1OxPFElQmNQ=="
+            crossorigin=""></script>
 
-<!-- Locate User -->
-<link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
-<script src="//unpkg.com/leaflet-gesture-handling"></script>
+    <!-- Locate User -->
+    <link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
+    <script src="//unpkg.com/leaflet-gesture-handling"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {           
+        $(document).ready(function () {
             const map = L.map('map', { gestureHandling: true }).setView([42.684653, 23.318529], 6);
             L.esri.Vector.vectorBasemapLayer("ArcGIS:Navigation", {
                 // provide either apikey or token
@@ -72,7 +72,7 @@
                 placeholder: 'Enter an address or place.',
                 useMapBounds: false,
                 providers: [L.esri.Geocoding.arcgisOnlineProvider({
-                    apikey: 'AAPKed4b089e720f45a28dd4f35741962688S93OetKvSnm5xSFVzKUtyFE94c_BialcVX3pNAaPDPbcsAtqiBUShv7wQuDWREo4', // replace with your api key 
+                    apikey: 'AAPKed4b089e720f45a28dd4f35741962688S93OetKvSnm5xSFVzKUtyFE94c_BialcVX3pNAaPDPbcsAtqiBUShv7wQuDWREo4', // replace with your api key
                     nearby: {
                         lat: -33.8688,
                         lng: 151.2093
@@ -83,7 +83,7 @@
             var results = L.layerGroup().addTo(map);
 
             //Locate User
-            
+
             function onLocationFound(e) {
                 var radius = e.accuracy / 2;
 
@@ -96,7 +96,7 @@
             function onLocationError(e) {
                 alert(e.message);
             }
-        
+
 
             map.on('locationfound', function (event) {
                 var radius = event.accuracy / 2;
@@ -104,31 +104,31 @@
                 var PopUp = L.popup().
                     setContent("You are here.").
                     setLatLng(event.latlng).addTo(map);
-                    L.circle(event.latlng, radius).addTo(map);
+                L.circle(event.latlng, radius).addTo(map);
             });
             map.on('locationerror', onLocationError);
 
             L.easyButton('<i class="fas fa-map-marker-alt"></i>', function (btn, map) {
                 map.locate({ setView: true, maxZoom: 16 });
-            }).addTo(map); 
+            }).addTo(map);
 
 
             $.ajax({
                 url: '/Spots/GetAddress',
                 success: function (data) {
-                        var result = JSON.stringify(data);
+                    var result = JSON.stringify(data);
 
-                        for (var i = 0; i < result.length; ++i) {
-                            var popup = '<br><b><img src="' + data[i].spotSpotImages[0].imageUrl + '" width="100%"><b></br>' +
-                                '<br><h5><a href="https://localhost:44319/Spots/ById/' + data[i].spotId + '"target="_blank">' + data[i].spotTitle + '</a></h5></br> ' + data[i].spotDescription;
-                                //'<br/><b>Latitude:</b> ' + data[i].latitude +
-                                //'<br/><b>Longitude:</b> ' + data[i].longitude;
+                    for (var i = 0; i < result.length; ++i) {
+                        var popup = '<br><b><img src="' + data[i].spotSpotImages[0].imageUrl + '" width="100%"><b></br>' +
+                            '<br><h5><a href="https://localhost:44319/Spots/ById/' + data[i].spotId + '"target="_blank">' + data[i].spotTitle + '</a></h5></br> ' + data[i].spotDescription;
+                        //'<br/><b>Latitude:</b> ' + data[i].latitude +
+                        //'<br/><b>Longitude:</b> ' + data[i].longitude;
 
-                            L.marker([data[i].latitude, data[i].longitude])
-                                .bindPopup(popup)
-                                .addTo(map);
-                        }
-                       },
+                        L.marker([data[i].latitude, data[i].longitude])
+                            .bindPopup(popup)
+                            .addTo(map);
+                    }
+                },
                 error: function (xhr) {
                     alert("Error has occurred..");
                 }

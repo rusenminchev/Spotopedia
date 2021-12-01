@@ -193,11 +193,11 @@
 </style>
 
 <div class="container-fluid mt-100">
-    <div>
-        <div class="text-muted small ml-3"> <button type="button" asp-controller="Posts" asp-action="Create" class="btn btn-outline-primary float-right" onclick="showAddPostForm()"><i class="fa fa-plus"></i>&nbsp; New Post</button> </div>
-
-        <div class="clearfix"></div>
-
+    <div class="col-md-10 offset-md-1">
+        <div class="float-right">
+            <button type="button" asp-controller="Posts" asp-action="Create" class="btn btn-outline-primary" onclick="showAddPostForm()"><i class="fa fa-plus"></i>&nbsp; New Post</button>
+        </div>
+            <div class="clearfix"></div>
         <div>
             <form asp-controller="Posts" asp-action="Create" method="post" id="AddPostForm" enctype="multipart/form-data" style="display: none">
                 <input type="hidden" name="PostId" value="PostId" />
@@ -230,7 +230,7 @@
     @foreach (var post in Model.Posts)
     {
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10 offset-md-1">
                 <div class="card mb-4">
                     <div class="card-header">
                         <div class="media flex-wrap w-100 align-items-center">
@@ -376,7 +376,7 @@
                                     <div class="container-fluid mt-100">
                                         <br>
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-10 offset-md-1">
                                                 <div class="card mb-4">
                                                     <div class="card-header">
                                                         <div class="media flex-wrap w-100 align-items-center">
@@ -451,7 +451,7 @@
                 </div>
             </div>
         </div>
-        <hr>
+        <hr class="col-md-10 offset-md-1">
         <br>
         @*</div>*@
 
