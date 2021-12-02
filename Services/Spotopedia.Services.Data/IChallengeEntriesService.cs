@@ -15,5 +15,7 @@
         T GetChallengeEntryDetails<T>(int id);
 
         int GetLastAddedChallengeEntryId();
+
+        bool IsThisEntryAddedByThisUser(int id, string userId);
     }
 }

@@ -13,5 +13,7 @@ namespace Spotopedia.Services.Data
         T GetUserDetails<T>(string id);
 
         int GetUsersCount();
+
+        bool IsThisUserOwnThisProfile(string currentUserId, string profileOwnerId);
     }
 }

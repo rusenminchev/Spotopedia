@@ -320,8 +320,14 @@
                                 </div>
                                 <div>
                                     <br>
-
-                                    <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
+                                    @if (this.User.Identity.IsAuthenticated)
+                                    {
+                                        <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" asp-area="Identity" asp-controller="Account" asp-action="Login" class="btn btn-outline-primary float-right" value="Add Comment" />
+                                    }
                                     <div class="clearfix"></div>
                                 </div>
                             </form>
@@ -376,7 +382,7 @@
                                     <div class="container-fluid mt-100">
                                         <br>
                                         <div class="row">
-                                            <div class="col-md-10 offset-md-1">
+                                            <div class="col-md-12">
                                                 <div class="card mb-4">
                                                     <div class="card-header">
                                                         <div class="media flex-wrap w-100 align-items-center">
@@ -451,7 +457,7 @@
                 </div>
             </div>
         </div>
-        <hr class="col-md-10 offset-md-1">
+        <hr class="col-md-10">
         <br>
         @*</div>*@
 

@@ -23,7 +23,7 @@ namespace Spotopedia.Web.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Create()
         {
             var input = new CreateChallengeInputModel();
@@ -31,7 +31,7 @@ namespace Spotopedia.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Create(CreateChallengeInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -40,7 +40,6 @@ namespace Spotopedia.Web.Controllers
 
             return this.RedirectToAction(nameof(this.All));
         }
-
 
         public IActionResult Details(string id)
         {

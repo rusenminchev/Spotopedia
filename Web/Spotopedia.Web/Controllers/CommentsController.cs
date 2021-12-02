@@ -40,8 +40,16 @@ namespace Spotopedia.Web.Controllers
             return this.RedirectToAction("All", "Posts");
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
+            var userId = this.userManager.GetUserId(this.User);
+
+            if (!this.commentsService.IsThisCommentAddedByThisUser(id, userId))
+            {
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
+            }
+
             await this.commentsService.DeleteAsync(id);
 
             this.TempData["DeleteComment"] = "Your comment was successfully deleted!";

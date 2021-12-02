@@ -90,5 +90,11 @@ namespace Spotopedia.Services.Data
         {
             return this.lastAddedChallengeEntryId;
         }
+
+        public bool IsThisEntryAddedByThisUser(int id, string userId)
+        {
+            return this.challengeEntriesRepository.All()
+                .Any(x => x.Id == id && x.AddedByUserId == userId);
+        }
     }
 }

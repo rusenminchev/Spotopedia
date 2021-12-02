@@ -26,8 +26,6 @@ namespace Spotopedia.Web.ViewModels.Posts
 
         public string ChallengeId { get; set; }
 
-        public virtual IEnumerable<KeyValuePair<string, string>> SpotItems { get; set; }
-
         public PostType Type { get; set; }
     }
 }

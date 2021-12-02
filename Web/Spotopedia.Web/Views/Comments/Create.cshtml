@@ -1,15 +1,22 @@
 ﻿@model Spotopedia.Web.ViewModels.Comments.CreatePostCommentInputModel
 
-<form method="post" class="col-md-8 offset-md-2" enctype="multipart/form-data"> 
+@{
+    ViewData["Title"] = "Add New Comment";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr>
+
+<form method="post" class="col-md-8 offset-md-2" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
-        <textarea asp-for="Content" class="form-control"  placeholder="Write a comment..." ></textarea>
+        <textarea asp-for="Content" class="form-control" placeholder="Write a comment..."></textarea>
     </div>
     <p></p>
-   <input type="hidden" asp-for="PostId" />
+    <input type="hidden" asp-for="PostId" />
     <div class="float-right">
-    <input type="submit" class="btn btn-outline-primary" value="Add Comment" />
-    <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+        <input type="submit" class="btn btn-outline-primary" value="Add Comment" />
+        <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
     </div>
-        <div class="clearfix"></div>
+    <div class="clearfix"></div>
 </form>

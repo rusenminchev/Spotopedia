@@ -79,5 +79,11 @@ namespace Spotopedia.Services.Data
         {
             return this.usersRepository.AllAsNoTracking().Count();
         }
+
+        public bool IsThisUserOwnThisProfile(string currentUserId, string profileOwnerId)
+        {
+            return this.usersRepository.All()
+                .Any(x => x.Id == currentUserId && x.Id == profileOwnerId);
+        }
     }
 }

@@ -80,7 +80,7 @@
 
             if (!this.spotsService.IsThisUserAddedThisSpot(userId, id))
             {
-                return this.RedirectToAction(nameof(this.ById), new { id });
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
 
             var inputModel = this.spotsService.GetById<EditSpotInputModel>(id);
@@ -103,8 +103,7 @@
 
             if (!this.spotsService.IsThisUserAddedThisSpot(userId, id))
             {
-                this.TempData["CannotEditSpot"] = $"Cannot edit this spot!";
-                return this.RedirectToAction(nameof(this.ById), new { id });
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
 
             this.TempData["EditSpot"] = $"The spot was successfully edited!";
@@ -118,6 +117,7 @@
             return this.View();
         }
 
+        [Authorize]
         public IActionResult All(int pageNumber = 1)
         {
             const int ItemsPerPage = 4;

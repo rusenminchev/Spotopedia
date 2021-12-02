@@ -39,5 +39,11 @@ namespace Spotopedia.Services.Data
             this.postCommentsRepository.Delete(comment);
             await this.postCommentsRepository.SaveChangesAsync();
         }
+
+        public bool IsThisCommentAddedByThisUser(int id, string userId)
+        {
+            return this.postCommentsRepository.All()
+                .Any(x => x.Id == id && x.AddedByUserId == userId);
+        }
     }
 }

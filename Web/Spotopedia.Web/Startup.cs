@@ -113,7 +113,8 @@
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/StatusCodeError");
+                app.UseStatusCodePagesWithReExecute("/Home/StatusCodeError", "errorCode={0}");
                 app.UseHsts();
             }
 

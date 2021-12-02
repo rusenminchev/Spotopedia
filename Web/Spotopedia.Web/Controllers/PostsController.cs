@@ -38,7 +38,6 @@ namespace Spotopedia.Web.Controllers
         public IActionResult Create()
         {
             var inputModel = new CreatePostInputModel();
-            inputModel.SpotItems = this.spotsService.GetAllSpotsAsKeyValuePairs();
             return this.View(inputModel);
         }
 
@@ -48,7 +47,6 @@ namespace Spotopedia.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                input.SpotItems = this.spotsService.GetAllSpotsAsKeyValuePairs();
                 return this.View(input);
             }
 
@@ -91,7 +89,7 @@ namespace Spotopedia.Web.Controllers
 
             if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
             {
-                return this.RedirectToAction(nameof(this.All));
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
 
             var inputModel = this.postsService.GetPostDetails<EditPostInputModel>(id);
@@ -112,7 +110,7 @@ namespace Spotopedia.Web.Controllers
 
             if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
             {
-                return this.RedirectToAction(nameof(this.All));
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
 
             await this.postsService.EditAsync(id, userId, input);
@@ -124,6 +122,13 @@ namespace Spotopedia.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
+            var userId = this.userManager.GetUserId(this.User);
+
+            if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
+            {
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
+            }
+
             await this.postsService.DeleteAsync(id);
 
             this.TempData["Delete"] = "Your post was successfully deleted!";

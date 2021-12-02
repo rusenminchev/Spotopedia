@@ -78,6 +78,13 @@ namespace Spotopedia.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
+            var userId = this.userManager.GetUserId(this.User);
+
+            if (!this.challengeEntriesService.IsThisChallengeEntryAddedByThisUser(id, userId))
+            {
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
+            }
+
             await this.challengeEntriesService.DeleteAsync(id);
 
             this.TempData["DeleteEntry"] = $"Your entry was successfully deleted!";

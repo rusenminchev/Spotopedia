@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Spotopedia.Data.Models;
 using Spotopedia.Services.Data;
 using Spotopedia.Web.ViewModels.Spots;
 using Spotopedia.Web.ViewModels.Users;
@@ -14,13 +16,19 @@ namespace Spotopedia.Web.Controllers
     {
         private readonly IUsersService usersService;
         private readonly ISpotsService spotsService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UsersController(IUsersService usersService, ISpotsService spotsService)
+        public UsersController(
+            IUsersService usersService,
+            ISpotsService spotsService,
+            UserManager<ApplicationUser> userManager)
         {
             this.usersService = usersService;
             this.spotsService = spotsService;
+            this.userManager = userManager;
         }
 
+        [Authorize]
         public IActionResult Details(string id)
         {
             var viewModel = this.usersService.GetUserDetails<UserProfileDetailsViewModel>(id);
@@ -33,6 +41,13 @@ namespace Spotopedia.Web.Controllers
         [Authorize]
         public IActionResult Edit(string id)
         {
+            var userId = this.userManager.GetUserId(this.User);
+
+            if (!this.usersService.IsThisUserOwnThisProfile(userId, id))
+            {
+                return this.RedirectToAction("StatusCodeForbidenError", "Home");
+            }
+
             var viewModel = this.usersService.GetUserDetails<EditUserProfileInputModel>(id);
             return this.View(viewModel);
         }
@@ -41,6 +56,13 @@ namespace Spotopedia.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(EditUserProfileInputModel inputModel)
         {
+            var userId = this.userManager.GetUserId(this.User);
+
+            if (!this.usersService.IsThisUserOwnThisProfile(userId, inputModel.Id))
+            {
+                return this.View("StatusCodeError");
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View();
