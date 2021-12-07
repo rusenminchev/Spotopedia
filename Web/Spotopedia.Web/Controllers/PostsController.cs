@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Mvc;
+using Spotopedia.Common;
 using Spotopedia.Data.Models;
 using Spotopedia.Data.Models.Enumerations;
 using Spotopedia.Services.Data;
@@ -87,7 +88,8 @@ namespace Spotopedia.Web.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
+            if (!this.postsService.IsThisPostAddedByThisUser(id, userId)
+                 && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
@@ -108,7 +110,8 @@ namespace Spotopedia.Web.Controllers
                 return this.View(input);
             }
 
-            if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
+            if (!this.postsService.IsThisPostAddedByThisUser(id, userId)
+                 && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
@@ -124,7 +127,8 @@ namespace Spotopedia.Web.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            if (!this.postsService.IsThisPostAddedByThisUser(id, userId))
+            if (!this.postsService.IsThisPostAddedByThisUser(id, userId)
+                  && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }

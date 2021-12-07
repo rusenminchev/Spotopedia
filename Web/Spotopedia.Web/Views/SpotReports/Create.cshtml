@@ -5,14 +5,25 @@
     ViewData["Title"] = $"Report Spot: {Model.SpotTitle}";
 }
 
-<h3>@ViewData["Title"]</h3>
-<hr>
-<div class="col-md-8 offset-2">
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Report Spot: @Model.SpotTitle</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<div class="col-md-4 offset-md-4">
     <div>
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div>
-                <textarea asp-for="Description" class="form-control" placeholder="What is wrong with this post?"></textarea>
+                <textarea asp-for="Description" class="form-control" placeholder="What is wrong with this post?" style="text-transform: none"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <br>
@@ -27,9 +38,10 @@
             </div>
             <br>
             <div class="float-right">
-                <input type="submit" class="btn btn-outline-primary" value="Send Report" />
+                <button type="submit" class="btn btn-outline-primary">Send Report</button>
                 <a asp-controller="Spots" asp-action="By" asp-route-id="@Model.ReportedSpotId" class="btn btn-outline-secondary">Cancel</a>
             </div>
             <div class="clearfix"></div>
         </form>
     </div>
+</div>

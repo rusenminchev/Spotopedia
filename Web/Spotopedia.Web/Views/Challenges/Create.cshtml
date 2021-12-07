@@ -1,10 +1,5 @@
 ﻿@model Spotopedia.Web.ViewModels.Challenges.CreateChallengeInputModel
 
-@{
-    ViewData["Title"] = "Create New Challenge";
-}
-
-<h1>@ViewData["Title"]</h1>
 <style>
     #btn-back-to-top {
         position: fixed;
@@ -107,7 +102,20 @@
     });
 </script>
 
-<form method="post" class="col-md-8 offset-2" enctype="multipart/form-data">
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Create New Challenge</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label asp-for="Name"></label>
@@ -132,8 +140,11 @@
         </label>
         <div class="form__files-container" id="files-list-container"></div>
     </div>
-    <input type="submit" class="btn btn-outline-primary" value="Submit" />
-    <a asp-controller="Challenges" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+    <div class="float-right">
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <a asp-controller="Challenges" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+    <div class="clearfix"></div>
 </form>
 
 @section Scripts{
@@ -167,10 +178,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-            <div class="form__image-container js-remove-image" data-index="${index}">
-              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-            </div>
-          `;
+                <div class="form__image-container js-remove-image" data-index="${index}">
+                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                </div>
+              `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });

@@ -2,58 +2,6 @@
 @using Spotopedia.Common
 @model Spotopedia.Web.ViewModels.Posts.AllPostsViewModel
 
-@if (this.TempData.ContainsKey("Add"))
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @this.TempData["Add"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
-@if (this.TempData.ContainsKey("Edit"))
-{
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        @this.TempData["Edit"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
-@if (this.TempData.ContainsKey("Delete"))
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @this.TempData["Delete"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
-@if (this.TempData.ContainsKey("AddComment"))
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @this.TempData["AddComment"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
-
-@if (this.TempData.ContainsKey("DeleteComment"))
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @this.TempData["DeleteComment"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
-
 <style>
     #btn-back-to-top {
         position: fixed;
@@ -173,37 +121,110 @@
         height: 100%;
     }
 
-    @*Delete Modal*@
+    #Content{  
+   text-transform: none;
+}
 
-    button.btn-primary {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        margin-top: -50px;
-        margin-left: -100px;
+    .card {
+        box-shadow: 0 2px 7px #dfdfdf;
+        border-radius: 7px;
     }
 
-    .hide {
-        display: none;
+    .card-img-top {
+        border-radius: 7px;
     }
 
-    .show {
-        display: block;
-    }
 </style>
 
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>News Feed</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<div class="col-md-6 offset-md-3">
+
+    @if (this.TempData.ContainsKey("Add"))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @this.TempData["Add"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (this.TempData.ContainsKey("Edit"))
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @this.TempData["Edit"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (this.TempData.ContainsKey("Delete"))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @this.TempData["Delete"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (this.TempData.ContainsKey("AddComment"))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @this.TempData["AddComment"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+
+    @if (this.TempData.ContainsKey("DeleteComment"))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @this.TempData["DeleteComment"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (this.TempData.ContainsKey("PostReport"))
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @this.TempData["PostReport"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+</div>
+
 <div class="container-fluid mt-100">
-    <div class="col-md-10 offset-md-1">
+    <div class="col-md-6 offset-md-3">
         <div class="float-right">
             <button type="button" asp-controller="Posts" asp-action="Create" class="btn btn-outline-primary" onclick="showAddPostForm()"><i class="fa fa-plus"></i>&nbsp; New Post</button>
         </div>
-            <div class="clearfix"></div>
+        <div class="clearfix"></div>
         <div>
             <form asp-controller="Posts" asp-action="Create" method="post" id="AddPostForm" enctype="multipart/form-data" style="display: none">
                 <input type="hidden" name="PostId" value="PostId" />
                 <div>
                     <label for="Content"></label>
-                    <textarea name="Content" id="Content" class="form-control" placeholder="Write a post..."></textarea>
+                    <textarea name="Content" id="Content" class="form-control" placeholder="What's on your mind?"></textarea>
                 </div>
                 <br>
                 <div>
@@ -215,7 +236,7 @@
                 </div>
 
                 <div class="float-right">
-                    <input type="submit" class="btn btn-outline-primary" value="Publish" />
+                    <button type="submit" class="btn btn-outline-primary">Publish</button>
                     <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
                 </div>
                 <div class="clearfix"></div>
@@ -230,7 +251,7 @@
     @foreach (var post in Model.Posts)
     {
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-6 offset-md-3">
                 <div class="card mb-4">
                     <div class="card-header">
                         <div class="media flex-wrap w-100 align-items-center">
@@ -239,8 +260,6 @@
                                 <a asp-controller="Users" asp-action="Details" asp-route-id="@post.AddedByUserId" data-abc="true">@post.AddedByUserFirstName @post.AddedByUserLastName</a>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    @if (post.Type != PostType.AutogeneratedSpotPost && post.Type != PostType.AutogeneratedChallengeEntryPost)
-                                    {
                                         <!-- Single button -->
                                         <div class="wrapper float-right">
                                             <div class="container">
@@ -250,10 +269,10 @@
                                                         <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu align-items-center" role="menu" aria-labelledby="menu1">
-                                                        @if (User.Identity.Name == post.AddedByUserUserName)
+                                                        @if (this.User.Identity.Name == post.AddedByUserUserName || this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                                                         {
                                                             <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">&nbsp;&nbsp; Edit</a></li>
-                                                            <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" data-toggle="modal" data-target="#myModal" onclick="openModal()">&nbsp;&nbsp; Delete</a></li>
+                                                            <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">&nbsp;&nbsp; Delete</a></li>
                                                         }
                                                         else
                                                         {
@@ -266,7 +285,6 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     }
-                                }
                                 <div class="text-muted small">@post.CreatedOn.ToLocalTime()</div>
                             </div>
                             <div class="text-muted small ml-3">
@@ -322,11 +340,11 @@
                                     <br>
                                     @if (this.User.Identity.IsAuthenticated)
                                     {
-                                        <input type="submit" class="btn btn-outline-primary float-right" value="Add Comment" />
+                                        <button type="submit" class="btn btn-outline-primary float-right">Add Comment</button>
                                     }
                                     else
                                     {
-                                        <input type="submit" asp-area="Identity" asp-controller="Account" asp-action="Login" class="btn btn-outline-primary float-right" value="Add Comment" />
+                                        <button type="submit" asp-area="Identity" asp-controller="Account" asp-action="Login" class="btn btn-outline-primary float-right">Add Comment</button>
                                     }
                                     <div class="clearfix"></div>
                                 </div>
@@ -400,38 +418,12 @@
                                                                                     <span class="caret"></span>
                                                                                 </button>
                                                                                 <ul class="dropdown-menu align-items-center" role="menu" aria-labelledby="menu1">
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id" data-toggle="modal" data-target="#commentModal" onclick="openCommentModal()">&nbsp;&nbsp; Delete</a></li>
+                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">&nbsp;&nbsp; Delete</a></li>
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="clearfix"></div>
-
-                                                                    <!-- The Modal -->
-                                                                    <div class="modal" id="commentModal">
-                                                                        <div class="modal-dialog">
-
-                                                                            <div class="modal-content">
-                                                                                <!-- Modal Header -->
-                                                                                <div class="modal-header">
-                                                                                    <h4 class="modal-title">Delete Comment Confirmation</h4>
-                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                </div>
-
-                                                                                <!-- Modal body -->
-                                                                                <div class="modal-body">
-                                                                                    Do you want to delete this comment?
-                                                                                </div>
-
-                                                                                <!-- Modal footer -->
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    <a asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id" class="btn btn-outline-danger float-right" onclick="confirmDelete()">Delete</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
                                                                 }
                                                                 <div class="text-muted small">
                                                                     <div class="text-muted small">@comment.CreatedOn.ToLocalTime()</div>
@@ -457,36 +449,9 @@
                 </div>
             </div>
         </div>
-        <hr class="col-md-10">
+        <hr class="col-md-6">
         <br>
         @*</div>*@
-
-        <!-- The Modal -->
-        <div class="container">
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Delete Post Confirmation</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            Do you want to delete this post?
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <a asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="btn btn-outline-danger float-right" onclick="confirmDelete()">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     }
 
     <!-- Back to top button -->
@@ -581,10 +546,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-                            <div class="form__image-container js-remove-image" data-index="${index}">
-                              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-                            </div>
-                          `;
+                                                                <div class="form__image-container js-remove-image" data-index="${index}">
+                                                                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                                                                </div>
+                                                              `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });
@@ -659,26 +624,5 @@
         }, function () {
             $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
         });
-    </script>
-
-    <script>
-        function confirmDelete() {
-            console.log("Deleting...");
-            $('.modal-header, .modal-footer, .modal-body').addClass('hide');
-            $('.confirm-delete').removeClass('hide');
-            //$('#myModal').modal('hide');
-        }
-
-        function openModal() {
-            $('.confirm-delete').addClass('hide');
-            $('#myModal .modal-header, .modal-footer, .modal-body').removeClass('hide');
-            $('#myModal').modal('show');
-        }
-
-        function openCommentModal() {
-            $('.confirm-delete').addClass('hide');
-            $('#commentModal .modal-header, .modal-footer, .modal-body').removeClass('hide');
-            $('#commentModal').modal('show');
-        }
     </script>
 }

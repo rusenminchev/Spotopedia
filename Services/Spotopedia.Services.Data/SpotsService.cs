@@ -108,9 +108,9 @@ namespace Spotopedia.Services.Data
 
         public async Task ApproveSpotAsync(int id, string approvedByUsername)
         {
-
             var spot = this.spotsRepository.All()
                 .Include(x => x.SpotImages)
+                .Include(x=>x.AddedByUser)
                 .FirstOrDefault(x => x.Id == id);
 
             spot.IsApproved = true;

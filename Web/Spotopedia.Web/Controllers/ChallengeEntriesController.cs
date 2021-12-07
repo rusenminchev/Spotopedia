@@ -80,7 +80,8 @@ namespace Spotopedia.Web.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            if (!this.challengeEntriesService.IsThisChallengeEntryAddedByThisUser(id, userId))
+            if (!this.challengeEntriesService.IsThisChallengeEntryAddedByThisUser(id, userId)
+               && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }

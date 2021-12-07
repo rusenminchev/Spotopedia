@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Spotopedia.Common;
 using Spotopedia.Data.Models;
 using Spotopedia.Services.Data;
 using Spotopedia.Web.ViewModels.Spots;
@@ -43,7 +44,8 @@ namespace Spotopedia.Web.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            if (!this.usersService.IsThisUserOwnThisProfile(userId, id))
+            if (!this.usersService.IsThisUserOwnThisProfile(userId, id)
+                 && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
@@ -58,7 +60,8 @@ namespace Spotopedia.Web.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            if (!this.usersService.IsThisUserOwnThisProfile(userId, inputModel.Id))
+            if (!this.usersService.IsThisUserOwnThisProfile(userId, inputModel.Id)
+                 && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.View("StatusCodeError");
             }
@@ -70,7 +73,7 @@ namespace Spotopedia.Web.Controllers
 
             await this.usersService.EditAsync(inputModel);
 
-            this.TempData["ChangeProfileDetails"] = $"Profile was successfully changed!";
+            this.TempData["ChangeProfileDetails"] = $"Profile information was successfully changed!";
 
             return this.RedirectToAction(nameof(this.Details), new { inputModel.Id });
         }

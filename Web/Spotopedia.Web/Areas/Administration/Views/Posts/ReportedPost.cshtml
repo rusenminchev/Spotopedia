@@ -1,13 +1,20 @@
 ﻿@model Spotopedia.Web.ViewModels.Posts.PostDetailsViewModel
 @using Spotopedia.Data.Models.Enumerations
 
-@{
-    ViewData["Title"] = "Reported Post";
-}
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Reported Post</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
 
-<h3>@ViewData["Title"]</h3>
-<hr>
-<div class="col-md-8 offset-2">
+<div class="col-md-6 offset-md-3">
     <div class="float-right">
         <a asp-area="Administration" asp-controller="Reports" asp-action="Approve" asp-route-postId="@Model.Id" class="btn btn-outline-danger">Approve</a>
         <a asp-area="Administration" asp-controller="Reports" asp-action="Reject" asp-route-postId="@Model.Id" class="btn btn-outline-primary">Reject</a>

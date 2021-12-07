@@ -1,46 +1,99 @@
 ﻿@page
 @model RegisterModel
+@using Spotopedia.Data.Models.Enumerations
 @{
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Register</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="col-md-4 offset-md-4">
+    <div class="col-md-12">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
+                <input asp-for="Input.Email" class="form-control" style="text-transform: none" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" />
+                <input asp-for="Input.FirstName" class="form-control" style="text-transform: none" />
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" />
+                <input asp-for="Input.LastName" class="form-control" style="text-transform: none" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label asp-for="Input.Gender" class="input-group-text">
+                            <i class="fas fa-chevron-down"></i>
+                        </label>
+                    </div>
+                    <select asp-for="Input.Gender" class="form-control">
+                        <option selected disabled>Whats is your gender?</option>
+                        @foreach (int gender in Enum.GetValues(typeof(Gender)))
+                        {
+                            <option value="@gender">@Enum.GetName(typeof(Gender), gender)</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="Input.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.City">City / Country</label>
+                <input asp-for="Input.City" class="form-control" style="text-transform: none" />
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+            <div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label asp-for="Input.SportType" class="input-group-text">
+                            <i class="fas fa-chevron-down"></i>
+                        </label>
+                    </div>
+                    <select asp-for="Input.SportType" class="form-control">
+                        <option selected disabled>What is your sport?</option>
+                        @foreach (int sportType in Enum.GetValues(typeof(SportType)))
+                        {
+                            <option value="@sportType">@Enum.GetName(typeof(SportType), sportType)</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="Input.SportType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+                <input asp-for="Input.Password" class="form-control" style="text-transform: none" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <input asp-for="Input.ConfirmPassword" class="form-control" style="text-transform: none" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+</div>
+    <br />
+    @*<div class="col-md-12">
         <section>
             <h4>Use another service to register.</h4>
             <hr />
@@ -70,7 +123,7 @@
             }
         </section>
     </div>
-</div>
+</div>*@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

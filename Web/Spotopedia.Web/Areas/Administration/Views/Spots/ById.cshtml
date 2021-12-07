@@ -1,13 +1,6 @@
 ﻿@using Spotopedia.Common
 @model Spotopedia.Web.ViewModels.Spots.SingleSpotViewModel
 
-@{
-    ViewData["Title"] = "Approve Spot";
-}
-
-<h3>@ViewData["Title"]</h3>
-<hr>
-
 <style>
 
     {
@@ -152,16 +145,31 @@
     }
 </style>
 
-<div class="float-right">
-    <a class="btn btn-outline-secondary" asp-area="" asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-    <a class="btn btn-outline-primary" asp-area="Administration" asp-controller="Spots" asp-action="ApproveSpot" asp-route-id="@Model.Id">Approve</a>
-    <a class="btn btn-outline-danger" asp-area="Administration" asp-controller="Spots" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Approve Spot</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<div class="col-lg-9">
+    <div class="float-right">
+        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-primary" asp-area="Administration" asp-controller="Spots" asp-action="ApproveSpot" asp-route-id="@Model.Id">Approve</a>
+        <a class="btn btn-outline-danger" asp-area="Administration" asp-controller="Spots" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    </div>
 </div>
 <div class="clearfix"></div>
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <div class="row">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-12">
                     <div class="product-card">
@@ -239,13 +247,13 @@
             </div>
             <br>
         </div>
-        <div class="col-lg-4 sidebar">
+        <div class="col-lg-3 sidebar">
             <div class="row">
                 <h4>Spots Around</h4>
                 @foreach (var spot in Model.NearBySpots)
                 {
 
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <img class="card-img-top" src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><a asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></h5>

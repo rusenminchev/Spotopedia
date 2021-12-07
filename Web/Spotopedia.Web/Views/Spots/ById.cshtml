@@ -1,33 +1,12 @@
 ﻿@using Spotopedia.Common
 @model Spotopedia.Web.ViewModels.Spots.SingleSpotViewModel
 
-@if (this.TempData.ContainsKey("AddNewSpot"))
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @this.TempData["AddNewSpot"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
 <style>
-
-    {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-
     .product-card {
         position: relative;
-        box-shadow: 0 2px 7px #dfdfdf;
+        box-shadow: 0 2px 10px #dfdfdf;
         background: #fafafa;
-        border-radius: 10px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        border-radius: 7px;
     }
 
     .badge {
@@ -53,6 +32,8 @@
         .product-tumb img {
             max-width: 100%;
             max-height: 100%;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
         }
 
     .product-details {
@@ -147,38 +128,74 @@
         }
 
     .card {
-        box-shadow: 0 2px 7px #dfdfdf;
+        box-shadow: 0 2px 5px #dfdfdf;
         margin-bottom: 13px;
-        border-radius: 10px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        border-radius: 7px;
+    }
+
+    .card-img-top {
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
     }
 </style>
 
-@if (this.TempData.ContainsKey("EditSpot"))
+<div class="col-md-8 offset-md-2">
+    @if (this.TempData.ContainsKey("AddNewSpot"))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @this.TempData["AddNewSpot"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (this.TempData.ContainsKey("EditSpot"))
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @this.TempData["EditSpot"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (this.TempData.ContainsKey("CannotEditSpot"))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @this.TempData["CannotEditSpot"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (this.TempData.ContainsKey("SpotReport"))
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @this.TempData["SpotReport"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+</div>
+
+@if (Model.IsApproved == false)
 {
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        @this.TempData["EditSpot"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="col-md-8 offset-md-2">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Thank you for your contribution! Your spot was successfully added! Upon the admin's approval, your spot will be visible on the map soon.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 }
-
-@if (this.TempData.ContainsKey("CannotEditSpot"))
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @this.TempData["CannotEditSpot"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <div class="row">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-12">
                     <div class="product-card">
@@ -255,29 +272,33 @@
                 </div>
             </div>
             <br>
-            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AddedByUserUsername)
-            {
-                <span class="single-meta">
-                    <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-                </span>
-            }
+            <div class="float-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.Identity.Name != Model.AddedByUserUsername || User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <a asp-controller="SpotReports" asp-action="Create" asp-route-id="@Model.Id" asp-route-reportedUserId="@Model.AddedByUserId">Report</a>
+                    }
 
-            @if (User.Identity.IsAuthenticated && User.Identity.Name != Model.AddedByUserUsername)
-            {
-            <a asp-controller="SpotReports" asp-action="Create" asp-route-id="@Model.Id" asp-route-reportedUserId="@Model.AddedByUserId">Report</a>
-            }
+                    @if (User.Identity.Name == Model.AddedByUserUsername || User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <a asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Edit</a>
+                    }
+                }
+            </div>
+            <div class="clearfix"></div>
         </div>
-
-
-
-
-        <div class="col-lg-4 sidebar">
+        <br>
+        <br>
+        <hr>
+        <hr>
+        <div class="col-lg-3 sidebar">
             <div class="row">
                 <h4>Spots Around</h4>
                 @foreach (var spot in Model.NearBySpots)
                 {
 
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <img class="card-img-top" src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><a asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></h5>
@@ -291,40 +312,6 @@
         </div>
     </div>
 </div>
-
-
-@*@if (this.TempData.ContainsKey("EditSpot"))
-    {
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-             @this.TempData["EditSpot"]
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    }
-
-    @if (this.TempData.ContainsKey("CannotEditSpot"))
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-             @this.TempData["CannotEditSpot"]
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    }
-
-    <div>
-        <img class="card-img" src="@Model.SpotImages.First().ImageUrl" alt="dog">
-        <span class="badge badge-success">@Model.Type</span>
-
-        <h4 class="card-title mt-2">@Model.Title</h4>
-        <p class="card-text">@Model.Description</p>
-
-    <div class="text-muted small ml-3">*@
-
-
-
-
 
 @section Scripts {
     <script>

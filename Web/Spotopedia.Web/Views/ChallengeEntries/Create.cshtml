@@ -1,12 +1,5 @@
 ﻿@model Spotopedia.Web.ViewModels.ChallengeEntries.CreateChallengeEntryInputModel
 
-@{
-    this.ViewData["Title"] = "Submit your entry for " + Model.ChallengeName;
-}
-
-<h3>@ViewData["Title"]</h3>
-<hr>
-
 <style>
     @@charset "UTF-8";
 
@@ -92,12 +85,24 @@
     }
 </style>
 
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Submit your entry for @Model.ChallengeName</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
 <div class="container-fluid mt-100">
-    <form method="post" class="col-md-8 offset-2" enctype="multipart/form-data">
+    <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div>
-            <textarea asp-for="@Model.Caption" class="form-control" placeholder="Write caption..."></textarea>
-            <span asp-validation-for="@Model.Caption" class="text-danger"></span>
+            <textarea asp-for="@Model.Caption" class="form-control" placeholder="Write caption..." style="text-transform: none"></textarea>
         </div>
         <p></p>
 
@@ -111,7 +116,7 @@
 
         <p></p>
         <div class="float-right">
-            <input type="submit" class="btn btn-outline-primary" value="Submit" />
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
             <a asp-controller="Challenges" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
         </div>
     </form>
@@ -139,10 +144,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-            <div class="form__image-container js-remove-image" data-index="${index}">
-              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-            </div>
-          `;
+                <div class="form__image-container js-remove-image" data-index="${index}">
+                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                </div>
+              `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });

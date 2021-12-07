@@ -2,12 +2,12 @@
 @model Spotopedia.Web.ViewModels.Spots.CreateSpotInputModel
 
 
-@{
+@*@{
     ViewData["Title"] = "Add New Spot";
 }
 
 <h3>@ViewData["Title"]</h3>
-<hr>
+<hr>*@
 
 <style>
 
@@ -97,19 +97,39 @@
     .form {
         align-content: center
     }
+
+      .container-body {
+        width: 100%;
+    }
+
+      .btn-outline-primary {
+          left:auto;
+      }
+
 </style>
 
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Add New Spot</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<form method="post" class="col-md-8 offset-md-2" enctype="multipart/form-data">
+<form method="post" class="col-md-4 offset-md-4" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label asp-for="Title"></label>
-        <input asp-for="Title" class="form-control" />
+        <input style="text-transform: none" asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <textarea asp-for="Description" class="form-control" rows="5" style="text-transform: none"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <p></p>
@@ -154,7 +174,7 @@
         <p></p>
         <fieldset class="gllpLatlonPicker">
             <label>Insert address or point it on the map</label>
-            <input type="text" class="form-control gllpSearchField">
+            <input type="text" class="gllpSearchField" style="text-transform: none">
             <br>
             <input type="button" class="btn btn-outline-primary gllpSearchButton" value="Search" />
             <br>
@@ -178,8 +198,11 @@
     </div>
 
     <p></p>
-    <input type="submit" class="btn btn-outline-primary" value="Submit" />
-    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    <div class=" float-right">
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <a id="cancelButton" asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+    <div class="clearfix"></div>
 </form>
 
 

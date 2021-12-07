@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Spotopedia.Common;
 using Spotopedia.Data.Models;
+using Spotopedia.Data.Models.Enumerations;
 
 namespace Spotopedia.Web.Areas.Identity.Pages.Account
 {
@@ -66,12 +67,25 @@ namespace Spotopedia.Web.Areas.Identity.Pages.Account
             [Required]
             [MinLength(2)]
             [MaxLength(30)]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Required]
             [MinLength(2)]
             [MaxLength(30)]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "City / Country")]
+            public string City { get; set; }
+
+            [Required]
+            [Display(Name = "Sport Type")]
+            public SportType SportType { get; set; }
+
+            [Required]
+            public Gender Gender { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -94,6 +108,9 @@ namespace Spotopedia.Web.Areas.Identity.Pages.Account
                     Email = this.Input.Email,
                     FirstName = this.Input.FirstName,
                     LastName = this.Input.LastName,
+                    City = this.Input.City,
+                    Gender = this.Input.Gender,
+                    SportType = this.Input.SportType,
                     ProfileImageUrl = GlobalConstants.UserDefaultProfileImageUrl,
                     AvatarImageUrl = GlobalConstants.UserDefaultAvatarImageUrl,
                 };

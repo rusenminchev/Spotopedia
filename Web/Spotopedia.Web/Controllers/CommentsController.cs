@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Spotopedia.Common;
 using Spotopedia.Data.Models;
 using Spotopedia.Services.Data;
 using Spotopedia.Web.ViewModels.Comments;
@@ -45,7 +46,8 @@ namespace Spotopedia.Web.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            if (!this.commentsService.IsThisCommentAddedByThisUser(id, userId))
+            if (!this.commentsService.IsThisCommentAddedByThisUser(id, userId)
+                && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }

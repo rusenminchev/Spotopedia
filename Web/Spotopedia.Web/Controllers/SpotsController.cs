@@ -68,7 +68,7 @@
 
             var currentSpotId = this.spotsService.GetLastAddedSpotId();
 
-            this.TempData["AddNewSpot"] = $"New spot was successfully added!";
+            this.TempData["AddNewSpot"] = $"Thank you for your contribution! Your spot was successfully added! Upon the admin's approval, your spot will be visible on the map soon.";
 
             return this.Redirect("https://localhost:44319/Spots/ById/" + currentSpotId);
         }
@@ -78,9 +78,10 @@
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (!this.spotsService.IsThisUserAddedThisSpot(userId, id))
+            if (!this.spotsService.IsThisUserAddedThisSpot(userId, id)
+                && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                return this.RedirectToAction("StatusCodeForbidenError", "Home");
+                    return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
 
             var inputModel = this.spotsService.GetById<EditSpotInputModel>(id);
@@ -101,7 +102,8 @@
                 return this.View(input);
             }
 
-            if (!this.spotsService.IsThisUserAddedThisSpot(userId, id))
+            if (!this.spotsService.IsThisUserAddedThisSpot(userId, id)
+                 && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.RedirectToAction("StatusCodeForbidenError", "Home");
             }
@@ -134,15 +136,15 @@
 
         public IActionResult ById(int id)
         {
-            var user = this.userManager.GetUserId(this.User);
+            var userId = this.userManager.GetUserId(this.User);
 
             var spotViewModel = this.spotsService.GetById<SingleSpotViewModel>(id);
-            spotViewModel.SpotVote = this.spotVotesService.GetVoteByUser<SpotVoteViewModel>(id, user);
+            spotViewModel.SpotVote = this.spotVotesService.GetVoteByUser<SpotVoteViewModel>(id, userId);
             spotViewModel.NearBySpots = this.spotsService.GetNearBySpots(spotViewModel);
 
             if (spotViewModel.IsApproved == false)
             {
-                if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.spotsService.IsThisUserAddedThisSpot(userId, id))
                 {
                     return this.View(spotViewModel);
                 }

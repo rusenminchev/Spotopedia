@@ -1,22 +1,35 @@
 ﻿@model Spotopedia.Web.ViewModels.Comments.CreatePostCommentInputModel
 
-@{
-    ViewData["Title"] = "Add New Comment";
-}
+    <style>
 
-<h3>@ViewData["Title"]</h3>
-<hr>
+        #Content {
+            text-transform: none;
+        }
+    </style>
 
-<form method="post" class="col-md-8 offset-md-2" enctype="multipart/form-data">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div>
-        <textarea asp-for="Content" class="form-control" placeholder="Write a comment..."></textarea>
-    </div>
-    <p></p>
-    <input type="hidden" asp-for="PostId" />
-    <div class="float-right">
-        <input type="submit" class="btn btn-outline-primary" value="Add Comment" />
-        <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
-    </div>
-    <div class="clearfix"></div>
-</form>
+    <section class="inner_page_head">
+        <div class="container_fuild">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <h3>Add New Comment</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+
+    <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div>
+            <textarea asp-for="Content" class="form-control" placeholder="Write a comment..."></textarea>
+        </div>
+        <p></p>
+        <input type="hidden" asp-for="PostId" />
+        <div class="float-right">
+            <button type="submit" class="btn btn-outline-primary">Add Comment</button>
+            <a asp-controller="Posts" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+        <div class="clearfix"></div>
+    </form>

@@ -5,47 +5,31 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (this.TempData.ContainsKey("ChangeProfileDetails"))
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-         @this.TempData["ChangeProfileDetails"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
 <style>
 
-         .profile-head {
-             transform: translateY(5rem)
-         }
-
-                 .cover {
-                     background-color: #cfcfcf;
-                     background-size: cover;
-                     background-repeat: no-repeat
-                 }
-
- /*        body {
-             background: #654ea3;
-             background: linear-gradient(to right, #e96443, #904e95);
-             min-height: 100vh;
-             overflow-x: hidden
-         }*/
-
-    {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+    .profile-head {
+        transform: translateY(5rem)
     }
 
+    .cover {
+        background-color: #cfcfcf;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+
+    .card {
+        border-radius: 7px;
+    }
 
     .product-card {
         position: relative;
         box-shadow: 0 2px 7px #dfdfdf;
         background: #fafafa;
+        border-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
     }
 
     .badge {
@@ -71,6 +55,8 @@
         .product-tumb img {
             max-width: 100%;
             max-height: 100%;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
         }
 
     .product-details {
@@ -163,195 +149,235 @@
         .notliked:hover {
             color: #fb672c;
         }
-
 </style>
 
-<div class="row py-5 px-4">
-    <div class="col-md-10 offset-md-1">
-        <!-- Profile widget -->
-        <div class="bg-white shadow rounded overflow-hidden">
-            <div class="px-4 pt-0 pb-4 cover">
-                <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><img src="@Model.ProfileImageUrl" alt="..." width="130" class="rounded mb-2 img-thumbnail">
-              @if (this.UserManager.GetUserId(this.User) == Model.Id)
-              {
-                <a asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
-              }
-                    </div>
-                    <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0">@Model.FirstName @Model.LastName</h4>
-                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>@Model.City</p>
-                    </div>
-                        <div class="float-right">
-                        <br>
-                         <partial name="_SocialMediaIconsPartial">
-                        <br>
-                        <br>
-                        <br>
-                        </div>
-                        <div class="clearfix"></div>
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>User Profile</h3>
                 </div>
             </div>
-            <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">@Model.SpotsAddedByUser.Count()</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Spots</small>
-                    </li>
-                    @*<li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Posts</small>
-                    </li>*@
-                </ul>
-            </div>
-            <div class="px-4 py-3">
-                <h5 class="mb-0">Bio</h5>
-                     <div class="p-4 rounded shadow-sm bg-light">
-                     <p>@Model.Bio</p>
-                     <hr>
-                    @if (Model.SportType > 0)
-                    {
-                        <p class="font-italic mb-0">Sport: @Model.SportType</p>
-                    }
-                  
-                
-                     @if (Model.SportType > 0)
-                    {
-                        <p class="font-italic mb-0">Gender: @Model.Gender</p>
-                    }
-                    @*<p class="font-italic mb-0">Photographer</p>*@
-                      </div>
-          
-            <div class="py-4 px-4">
-                <div class="align-items-center justify-content-between mb-3">
-                    @if (Model.SpotsAddedByUser.Count() > 0)
-                    {
-                    <hr>
-                <div>
-                 @*Navigation card*@
-                <div class="container">
-  <h1 class="text-center"></h1>
-  <div class="row">
-    <div class="col-sm-12">
-     <div class="card text-center my-4">
-       <!-- navigation in .card-header -->
-       <div class="card-header">
-         <ul class="nav nav-tabs card-header-tabs">
-           <li class="nav-item">
-             <a class="nav-link active" data-toggle="tab" href="#tab1">Submitted Spots</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" data-toggle="tab" href="#tab2">Liked Spots</a>
-           </li>
-         </ul>
-       </div>
-       <!-- .card-body.tab-content  -->
-       <div class="card-body tab-content">
-         <div class="tab-pane fade show active" id="tab1">
-           <h4 class="card-title">Submitted Spots</h4>
-           <p class="card-text">
-
-            @foreach (var spot in Model.SpotsAddedByUser)
-                                {
-                                <div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-8 col-md-6 col-lg-12">
-	<div class="product-card">
-                @if (spot.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
-                        {
-		                <div class="badge">New</div>
-                        }
-		<div class="product-tumb">
-			<img src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="">
-		</div>
-                           
-		                        <div class="product-details">
-                        <div class="product-links">
-                        <div class="row">
-				</div>
-</div>
-			<span class="product-catagory">@spot.Type</span>
-			<h4><a asp-controller="Spots" asp-action="ById" asp-route-id="@spot.Id">@spot.Title</a></h4>
-			<p>@spot.Description</p>
-			<div class="product-bottom-details">
-				<div class="product-price">Address: @spot.Address.AddressName</div>
-<a href="https://www.google.com/maps/search/?api=1&query=@spot.Address.Latitude,@spot.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
-				
-			</div>
-		</div>
-<div>
- <fieldset class="gllpLatlonPicker">
-	<div class="gllpMap">Google Maps</div>
-	<input type="hidden" class="gllpLatitude" value="@spot.Address.Latitude"/>
-	<input type="hidden" class="gllpLongitude" value="@spot.Address.Longitude"/>
-	<input type="hidden" class="gllpZoom" value="11"/>
-  </fieldset>
-<hr>
-</div>
-	</div>
-	</div>
-	</div>
-	</div>
-                                }
-           </p>
-         </div>
-         <div class="tab-pane fade" id="tab2">
-           <h4 class="card-title">Liked Spots</h4>
-           <p class="card-text">
-            @foreach (var spot in Model.SpotsLikedByUser)
-                                {
-                                 
-                                 <div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-8 col-md-6 col-lg-12">
-	<div class="product-card">
-                @if (spot.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
-                        {
-		                <div class="badge">New</div>
-                        }
-		<div class="product-tumb">
-			<img src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="">
-		</div>
-                           
-		                        <div class="product-details">
-                        <div class="product-links">
-                        <div class="row">
-				</div>
-</div>
-			<span class="product-catagory">@spot.Type</span>
-			<h4><a asp-controller="Spots" asp-action="ById" asp-route-id="@spot.Id">@spot.Title</a></h4>
-			<p>@spot.Description</p>
-			<div class="product-bottom-details">
-				<div class="product-price">Address: @spot.Address.AddressName</div>
-<a href="https://www.google.com/maps/search/?api=1&query=@spot.Address.Latitude,@spot.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
-				
-			</div>
-		</div>
-<div>
- <fieldset class="gllpLatlonPicker">
-	<div class="gllpMap">Google Maps</div>
-	<input type="hidden" class="gllpLatitude" value="@spot.Address.Latitude"/>
-	<input type="hidden" class="gllpLongitude" value="@spot.Address.Longitude"/>
-	<input type="hidden" class="gllpZoom" value="11"/>
-  </fieldset>
-<hr>
-</div>
-	</div>
-	</div>
-	</div>
-	</div>
-                                }
-           </p>
-         </div>
-          </div><!--/.card-body -->
-      </div><!--/.card-->
-    </div><!--/.col-sm-6 -->
-  </div>
-</div><!--/.container -->
-                  @*Navigation card*@
-            </div>
-                    }
         </div>
     </div>
+</section>
+<br>
+
+<div class="col-md-6 offset-md-3">
+    @if (this.TempData.ContainsKey("ChangeProfileDetails"))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @this.TempData["ChangeProfileDetails"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
 </div>
-</div>
-</div>
+
+<div class="col-md-6 offset-md-3">
+    <!-- Profile widget -->
+    <div class="bg-white shadow rounded overflow-hidden">
+        <div class="px-4 pt-0 pb-4 cover">
+            <div class="media align-items-end profile-head">
+                <div class="profile mr-3">
+                    <img src="@Model.ProfileImageUrl" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                    @if (this.UserManager.GetUserId(this.User) == Model.Id)
+                    {
+                        <a asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+                    }
+                    else
+                    { 
+                    <br>
+                    <br>
+                    }
+                </div>
+                <div class="media-body mb-5 text-white">
+                    <div class="float-left">
+                        <div class="footer_social">
+                            <a href="@Model.FacebookUrl">
+                                <i class="fa fa-facebook" target="_blank"></i>
+                            </a>
+                            <a href="@Model.InstagramUrl">
+                                <i class="fa fa-instagram" target="_blank" aria-hidden="true"></i>
+                            </a>
+                            <a href="@Model.TwitterUrl">
+                                <i class="fa fa-twitter" target="_blank" aria-hidden="true"></i>
+                            </a>
+                            <a href="@Model.TikTokUrl">
+                                <i class="fab fa-tiktok" target="_blank" aria-hidden="true"></i>
+                            </a>
+                            <a href="@Model.WebsiteUrl">
+                                <i class="fa fa-home" target="_blank" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <h4 class="mt-0 mb-0">@Model.FirstName @Model.LastName</h4>
+                    <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>@Model.City</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-light p-4 d-flex justify-content-end text-center">
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                    <h5 class="font-weight-bold mb-0 d-block">@Model.SpotsAddedByUser.Count()</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Spots</small>
+                </li>
+                @*<li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Posts</small>
+                    </li>*@
+            </ul>
+        </div>
+        <div class="px-4 py-3">
+            <h5 class="mb-0">Bio</h5>
+            <div class="p-4 rounded shadow-sm bg-light">
+                <p>@Model.Bio</p>
+                <hr>
+                @if (Model.SportType > 0)
+                {
+                    <p class="font-italic mb-0">Sport: @Model.SportType</p>
+                }
+
+
+                @if (Model.SportType > 0)
+                {
+                    <p class="font-italic mb-0">Gender: @Model.Gender</p>
+                }
+                @*<p class="font-italic mb-0">Photographer</p>*@
+            </div>
+
+            <div class="py-4 px-4">
+                <div class="align-items-center justify-content-between mb-3">
+                    @if (Model.SpotsAddedByUser.Count() > 0 || Model.SpotsLikedByUser.Count() > 0)
+                    {
+                        <hr>
+                        <div>
+                            @*Navigation card*@
+                            <div class="container">
+                                <h1 class="text-center"></h1>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="card text-center my-4">
+                                            <!-- navigation in .card-header -->
+                                            <div class="card-header">
+                                                <ul class="nav nav-tabs card-header-tabs">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-toggle="tab" href="#tab1">Submitted Spots</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#tab2">Liked Spots</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- .card-body.tab-content  -->
+                                            <div class="card-body tab-content">
+                                                <div class="tab-pane fade show active" id="tab1">
+                                                    <h4 class="card-title">Added Spots</h4>
+                                                    <p class="card-text">
+
+                                                        @foreach (var spot in Model.SpotsAddedByUser)
+                                                        {
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-sm-8 col-md-6 col-lg-12">
+                                                                        <div class="product-card">
+                                                                            @if (spot.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
+                                                                            {
+                                                                                <div class="badge">New</div>
+                                                                            }
+                                                                            <div class="product-tumb">
+                                                                                <img src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="">
+                                                                            </div>
+
+                                                                            <div class="product-details">
+                                                                                <div class="product-links">
+                                                                                    <div class="row">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <span class="product-catagory">@spot.Type</span>
+                                                                                <h4><a asp-controller="Spots" asp-action="ById" asp-route-id="@spot.Id">@spot.Title</a></h4>
+                                                                                <p>@spot.Description</p>
+                                                                                <div class="product-bottom-details">
+                                                                                    <div class="product-price">Address: @spot.Address.AddressName</div>
+                                                                                    <a href="https://www.google.com/maps/search/?api=1&query=@spot.Address.Latitude,@spot.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div>
+                                                                                <fieldset class="gllpLatlonPicker">
+                                                                                    <div class="gllpMap">Google Maps</div>
+                                                                                    <input type="hidden" class="gllpLatitude" value="@spot.Address.Latitude" />
+                                                                                    <input type="hidden" class="gllpLongitude" value="@spot.Address.Longitude" />
+                                                                                    <input type="hidden" class="gllpZoom" value="11" />
+                                                                                </fieldset>
+                                                                                <hr>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </p>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab2">
+                                                    <h4 class="card-title">Liked Spots</h4>
+                                                    <p class="card-text">
+                                                        @foreach (var spot in Model.SpotsLikedByUser)
+                                                        {
+
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-sm-8 col-md-6 col-lg-12">
+                                                                        <div class="product-card">
+                                                                            @if (spot.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
+                                                                            {
+                                                                                <div class="badge">New</div>
+                                                                            }
+                                                                            <div class="product-tumb">
+                                                                                <img src="@spot.SpotImages.FirstOrDefault().ImageUrl" alt="">
+                                                                            </div>
+
+                                                                            <div class="product-details">
+                                                                                <div class="product-links">
+                                                                                    <div class="row">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <span class="product-catagory">@spot.Type</span>
+                                                                                <h4><a asp-controller="Spots" asp-action="ById" asp-route-id="@spot.Id">@spot.Title</a></h4>
+                                                                                <p>@spot.Description</p>
+                                                                                <div class="product-bottom-details">
+                                                                                    <div class="product-price">Address: @spot.Address.AddressName</div>
+                                                                                    <a href="https://www.google.com/maps/search/?api=1&query=@spot.Address.Latitude,@spot.Address.Longitude" target="_blank" class="btn btn-outline-primary float-right">Directions</a>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div>
+                                                                                <fieldset class="gllpLatlonPicker">
+                                                                                    <div class="gllpMap">Google Maps</div>
+                                                                                    <input type="hidden" class="gllpLatitude" value="@spot.Address.Latitude" />
+                                                                                    <input type="hidden" class="gllpLongitude" value="@spot.Address.Longitude" />
+                                                                                    <input type="hidden" class="gllpZoom" value="11" />
+                                                                                </fieldset>
+                                                                                <hr>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </div><!--/.card-body -->
+                                        </div><!--/.card-->
+                                    </div><!--/.col-sm-6 -->
+                                </div>
+                            </div><!--/.container -->
+                            @*Navigation card*@
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

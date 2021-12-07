@@ -1,17 +1,16 @@
 ﻿@using Spotopedia.Common
 @model Spotopedia.Web.ViewModels.Challenges.ChallengeDetailsViewModel
 
-@if (this.TempData.ContainsKey("AddNewEntry"))
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @this.TempData["AddNewEntry"]
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
 <style>
+    .card {
+        box-shadow: 0 2px 7px #dfdfdf;
+        border-radius: 7px;
+    }
+
+    .card-img-top {
+        border-radius: 7px;
+    }
+
     button.btn-primary {
         position: fixed;
         top: 50%;
@@ -27,7 +26,32 @@
     .show {
         display: block;
     }
-    </style>
+</style>
+
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Challenges</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="col-md-6 offset-md-3">
+    @if (this.TempData.ContainsKey("AddNewEntry"))
+    {
+        <br>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @this.TempData["AddNewEntry"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+</div>
 
 <div class="container">
     <div class="row">
@@ -51,6 +75,7 @@
                         @if (Model.IsItActive)
                         {
                             <h4 class="card-title">@Model.Name <span class="badge badge-pill badge-success float-right">Active</span></h4>
+                            <p class="card-text">Challenge ends: @Model.EndDate</p>
                             <a asp-controller="ChallengeEntries" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-warning float-right">Join the challenge</a>
                             <div class="clearfix"></div>
                         }
@@ -63,6 +88,7 @@
                         <br>
 
                         <img src="@Model.Image.ImageUrl" class="card-img-top" alt="...">
+                        <hr>
                         <p class="card-text">@Html.Raw(Model.SanitizedDescription)</p>
                     </div>
                     <div class="tab-pane fade" id="tab2">
@@ -90,37 +116,9 @@
                                                     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.Identity.Name == challengeEntry.AddedByUserUserName)
                                                     {
                                                         <hr>
-                                                        <div class="container">
-                                                            <!-- Button to Open the Modal -->
-                                                            <button type="button" asp-controller="ChallengeEntries" asp-action="Delete" asp-route-id="@challengeEntry.Id" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#myModal" onclick="openModal()">
-                                                                Delete
-                                                            </button>
-
-                                                            <!-- The Modal -->
-                                                            <div class="modal" id="myModal">
-                                                                <div class="modal-dialog">
-
-                                                                    <div class="modal-content">
-                                                                        <!-- Modal Header -->
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title">Delete Entry Confirmation</h4>
-                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                        </div>
-
-                                                                        <!-- Modal body -->
-                                                                        <div class="modal-body">
-                                                                            Do you want to delete this entry?
-                                                                        </div>
-                                     
-                                                                        <!-- Modal footer -->
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                            <a asp-controller="ChallengeEntries" asp-action="Delete" asp-route-id="@challengeEntry.Id" class="btn btn-outline-danger float-right" onclick="confirmDelete()">Delete</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> 
+                                                        <a type="button" asp-controller="ChallengeEntries" asp-action="Delete" asp-route-id="@challengeEntry.Id" class="btn btn-outline-danger float-right">
+                                                            Delete
+                                                        </a>
                                                     }
 
                                                 </div>
@@ -140,8 +138,43 @@
         </div>
     </div>
 </div>
+<div class="col-md-6 offset-md-3">
+    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+    {
+        <div class="float-right">
+            <a asp-controller="Challenges" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Edit</a>
+            <a asp-controller="Challenges" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal" onclick="openModal()">Delete</a>
+        </div>
+        <div class="clearfix"></div>
+    }
+</div>
 
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
 
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Challenge Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Do you want to delete this challenge?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a asp-controller="Challenges" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger float-right" onclick="confirmDelete()">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
 
@@ -158,6 +191,6 @@
             $('#myModal .modal-header, .modal-footer, .modal-body').removeClass('hide');
             $('#myModal').modal('show');
         }
-        </script>
+    </script>
 
- }
+}

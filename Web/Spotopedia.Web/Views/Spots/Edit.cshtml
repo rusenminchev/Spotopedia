@@ -1,13 +1,6 @@
 ﻿@using Spotopedia.Data.Models.Enumerations
 @model Spotopedia.Web.ViewModels.Spots.EditSpotInputModel
 
-@{
-    ViewData["Title"] = "Edit spot";
-}
-
-<h3>@ViewData["Title"]</h3>
-<hr>
-
 <style>
 
     @* Upload new image *@
@@ -97,13 +90,10 @@
 
 
     @* Delete existing image *@
-    body {
-        padding: 20px;
-    }
 
     .image-area {
         position: relative;
-        width: 20%;
+        width: 30%;
         padding: 20px;
     }
 
@@ -142,20 +132,36 @@
             top: -10px;
             right: -11px;
         }
+        .container-body{
+            max-width:100%;
+        }
 </style>
 
-<form class="col-md-8 offset-md-2" method="post" id="editForm" enctype="multipart/form-data">
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Edit Spot</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<form class="col-md-4 offset-md-4" method="post" id="editForm" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Title"></label>
-        <input asp-for="Title" class="form-control" />
+        <input asp-for="Title" class="form-control" style="text-transform: none" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <textarea asp-for="Description" class="form-control" style="text-transform: none"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-   <div>   
+    <div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label asp-for="Type" class="input-group-text">
@@ -172,7 +178,7 @@
         </div>
         <span asp-validation-for="Type" class="text-danger"></span>
     </div>
-   <div>   
+    <div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label asp-for="KickOutLevel" class="input-group-text">
@@ -190,50 +196,53 @@
         <span asp-validation-for="KickOutLevel" class="text-danger"></span>
     </div>
     <p></p>
-    <div>    
- <fieldset class="gllpLatlonPicker">
-     <label>Location</label>
-    <input type="text" class="gllpSearchField" >
-    <input type="button" class="gllpSearchButton" value="search">
-	<div class="gllpMap">Google Maps</div>
-    <input asp-for="Address.AddressName" type="hidden" class="gllpLocationName" value="@Model.Address.AddressName"/>
-	<input asp-for="Address.Latitude"   type="hidden" class="gllpLatitude" value="@Model.Address.Latitude"/>
-	<input asp-for="Address.Longitude"  type="hidden" class="gllpLongitude" value="@Model.Address.Longitude"/>
-	<input type="hidden" class="gllpZoom" value="15"/>
-  </fieldset>
-</div>
-
-<br>
-<div>
-<label class="form__container" id="upload-container">Choose or Drag & Drop Photo
-    <input class="form__file" id="upload-files" type="file" asp-for="Images" accept="image/*" multiple="multiple"/>
-  </label>
-  <div class="form__files-container" id="files-list-container"></div>
-</div>
+    <div>
+        <fieldset class="gllpLatlonPicker">
+            <label>Change Location</label>
+            <input type="text" class="gllpSearchField" style="text-transform: none">
+            <input type="button" class="gllpSearchButton" value="search">
+            <div class="gllpMap">Google Maps</div>
+            <input asp-for="Address.AddressName" type="hidden" class="gllpLocationName" value="@Model.Address.AddressName" />
+            <input asp-for="Address.Latitude" type="hidden" class="gllpLatitude" value="@Model.Address.Latitude" />
+            <input asp-for="Address.Longitude" type="hidden" class="gllpLongitude" value="@Model.Address.Longitude" />
+            <input type="hidden" class="gllpZoom" value="15" />
+        </fieldset>
+    </div>
+    <br>
+    <div>
+        <label class="form__container" id="upload-container">
+            Add More Photos
+            <input class="form__file" id="upload-files" type="file" asp-for="Images" accept="image/*" multiple="multiple" />
+        </label>
+        <div class="form__files-container" id="files-list-container"></div>
+    </div>
 
     <hr />
     <input type="hidden" asp-for="Id" />
-<div class="row">
-@foreach (var img in Model.ExistingSpotImages)
-{
-<div class="image-area">
-  <img src="@img.ImageUrl"  alt="Preview">
-@if (Model.ExistingSpotImages.Count() > 1)
+    <div class="row">
+        @foreach (var img in Model.ExistingSpotImages)
         {
-          <a class="remove-image" asp-controller="SpotImages" asp-action="Delete" asp-route-id="@img.Id" asp-route-id="@Model.Id" style="display: table-row;">&#215;</a>
+            <div class="image-area">
+                <img src="@img.ImageUrl" alt="Preview">
+                @if (Model.ExistingSpotImages.Count() > 1)
+                {
+                    <a class="remove-image" asp-controller="SpotImages" asp-action="Delete" asp-route-id="@img.Id" style="display: table-row;">&#215;</a>
+                }
+            </div>
         }
-</div>
-}
-</div>
+    </div>
 </form>
 
 
-<div class="col-md-8 offset-md-2">
-<button type="submit" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalEdit">Save changes</button>
-<a asp-controller="Spots" asp-action="ById" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancel</a>
-<br>
-<br>
-<br>
+<div class="col-md-4 offset-md-4">
+    <div class=" float-right">
+        <button type="submit" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+        <a asp-controller="Spots" asp-action="ById" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancel</a>
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="clearfix"></div>
 </div>
 
 
@@ -262,19 +271,19 @@
 
 @section Scripts {
 
-<script>
-    var subCategoryIndex = 1;
-    function AddSubCategory() {
-        $(".row").
-            append("<div class='image mb-2' id='preview-picture" + subCategoryIndex + "' >" +
-                "<label for='image" + subCategoryIndex + "' class='image-upload'></label>" +
-                "<input type='file' id='image" + subCategoryIndex + "' class='image-upload' name='Images'/>" +
-                "</div>");
-        subCategoryIndex++;
-    }
-</script>
+    <script>
+        var subCategoryIndex = 1;
+        function AddSubCategory() {
+            $(".row").
+                append("<div class='image mb-2' id='preview-picture" + subCategoryIndex + "' >" +
+                    "<label for='image" + subCategoryIndex + "' class='image-upload'></label>" +
+                    "<input type='file' id='image" + subCategoryIndex + "' class='image-upload' name='Images'/>" +
+                    "</div>");
+            subCategoryIndex++;
+        }
+    </script>
 
-   <script>
+    <script>
         const INPUT_FILE = document.querySelector('#upload-files');
         const INPUT_CONTAINER = document.querySelector('#upload-container');
         const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
@@ -294,10 +303,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-        <div class="form__image-container js-remove-image" data-index="${index}">
-          <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-        </div>
-      `;
+                                    <div class="form__image-container js-remove-image" data-index="${index}">
+                                      <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                                    </div>
+                                  `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });
@@ -364,5 +373,5 @@
 
         fileUpload();
         removeFile();
-</script>
+    </script>
 }

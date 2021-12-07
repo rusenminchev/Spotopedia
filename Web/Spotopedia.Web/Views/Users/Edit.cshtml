@@ -1,13 +1,6 @@
 ﻿@model Spotopedia.Web.ViewModels.Users.EditUserProfileInputModel
 @using Spotopedia.Data.Models.Enumerations
 
-@{
-    ViewData["Title"] = "Edit Profile";
-}
-
-<h3>@ViewData["Title"]</h3>
-<hr>
-
 <style>
     @@charset "UTF-8";
 
@@ -52,8 +45,8 @@
 
     .form__image-container {
         display: inline-block;
-        width: 20%;
-        height: 200px;
+        width: 100%;
+        height: 300px;
         margin-bottom: 10px;
         position: relative;
         align-content: center
@@ -93,20 +86,33 @@
     }
 </style>
 
-<form method="post" class="col-md-8 offset-md-2" id="editForm" enctype="multipart/form-data">
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Edit Profile</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<form method="post" class="col-md-4 offset-md-4" id="editForm" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" class="form-control" placeholder="What is your firts name?"></input>
+        <input asp-for="FirstName" class="form-control" placeholder="What is your firts name?"  style="text-transform: none"/>
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="LastName"></label>
-        <input asp-for="LastName" class="form-control" placeholder="What is your last name?"></input>
+        <input asp-for="LastName" class="form-control" placeholder="What is your last name?"  style="text-transform: none"/>
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Bio"></label>
-        <textarea asp-for="Bio" class="form-control"></textarea>
+        <textarea asp-for="Bio" class="form-control" style="text-transform: none"></textarea>
         <span asp-validation-for="Bio" class="text-danger"></span>
     </div>
     <div>
@@ -124,12 +130,10 @@
                 }
             </select>
         </div>
-        <span asp-validation-for="Gender" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="City"></label>
-        <input asp-for="City" class="form-control"></input>
-        <span asp-validation-for="City" class="text-danger"></span>
+        <input asp-for="City" class="form-control"  style="text-transform: none"/>
     </div>
     <div>
         <div class="input-group mb-3">
@@ -146,43 +150,42 @@
                 }
             </select>
         </div>
-        <span asp-validation-for="SportType" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="FacebookUrl"></label>
-        <input asp-for="FacebookUrl" class="form-control"></input>
+        <input asp-for="FacebookUrl" class="form-control" style="text-transform: none"/>
         <span asp-validation-for="FacebookUrl" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="InstagramUrl"></label>
-        <input asp-for="InstagramUrl" class="form-control"></input>
+        <input asp-for="InstagramUrl" class="form-control"  style="text-transform: none"/>
         <span asp-validation-for="InstagramUrl" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="TikTokUrl"></label>
-        <input asp-for="TikTokUrl" class="form-control"></input>
+        <input asp-for="TikTokUrl" class="form-control" style="text-transform: none"/>
         <span asp-validation-for="TikTokUrl" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="TwitterUrl"></label>
-        <input asp-for="TwitterUrl" class="form-control"></input>
+        <input asp-for="TwitterUrl" class="form-control" style="text-transform: none"/>
         <span asp-validation-for="TwitterUrl" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="WebsiteUrl"></label>
-        <input asp-for="WebsiteUrl" class="form-control"></input>
+        <input asp-for="WebsiteUrl" class="form-control" style="text-transform: none"/>
         <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
     </div>
     <div>
         <label class="form__container" id="upload-container">
-            Choose or Drag & Drop Photo
+            Change Profile Photo
             <input class="form__file" id="upload-files" type="file" asp-for="ProfileImage" accept="image/*" />
         </label>
         <div class="form__files-container" id="files-list-container"></div>
     </div>
     <p></p>
     <div>
-        <button type="submit" class="btn btn-outline-primary" />Save Changes</button>
+        <button type="submit" class="btn btn-outline-primary">Save Changes</button>
         <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancel</a>
     </div>
 </form>
@@ -220,10 +223,10 @@
             if (FILE_LIST.length > 0) {
                 FILE_LIST.forEach((addedFile, index) => {
                     const content = `
-            <div class="form__image-container js-remove-image" data-index="${index}">
-              <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
-            </div>
-          `;
+                <div class="form__image-container js-remove-image" data-index="${index}">
+                  <img class="form__image" src="${addedFile.url}" alt="${addedFile.name}">
+                </div>
+              `;
 
                     FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
                 });

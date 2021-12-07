@@ -8,8 +8,8 @@ namespace Spotopedia.Web.ViewModels.ChallengeEntries
 {
     public class CreateChallengeEntryInputModel
     {
-        [Required]
         [MaxLength(100)]
+        [Required(ErrorMessage = "Caption field is required.")]
         public string Caption { get; set; }
 
         [Required]
@@ -26,7 +26,7 @@ namespace Spotopedia.Web.ViewModels.ChallengeEntries
         [Required]
         public int ChallengeId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Image field is required.")]
         public IFormFile ChallengeEntryImage { get; set; }
     }
 }

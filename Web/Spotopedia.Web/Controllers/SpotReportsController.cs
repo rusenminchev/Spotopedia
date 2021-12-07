@@ -48,6 +48,8 @@ namespace Spotopedia.Web.Controllers
 
             await this.spotReportsService.CreateAsync(input, id, reportedUserId, reportedByUserId);
 
+            this.TempData["SpotReport"] = $"Thank you for your contribution! Your report is received and will be processed by our team as soon as possible.";
+
             return this.RedirectToAction("ById", "Spots", new { id });
         }
     }
