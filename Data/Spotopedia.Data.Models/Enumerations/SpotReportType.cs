@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Data.Models.Enumerations
+﻿namespace Spotopedia.Data.Models.Enumerations
 {
     public enum SpotReportType
     {

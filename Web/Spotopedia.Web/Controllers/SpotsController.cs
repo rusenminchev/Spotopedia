@@ -70,7 +70,7 @@
 
             this.TempData["AddNewSpot"] = $"Thank you for your contribution! Your spot was successfully added! Upon the admin's approval, your spot will be visible on the map soon.";
 
-            return this.Redirect("https://localhost:44319/Spots/ById/" + currentSpotId);
+            return this.Redirect("https://spotopedia.azurewebsites.net/Spots/ById/" + currentSpotId);
         }
 
         [Authorize]
@@ -119,17 +119,16 @@
             return this.View();
         }
 
-        [Authorize]
-        public IActionResult All(int pageNumber = 1)
+        public IActionResult All(int id = 1)
         {
-            const int ItemsPerPage = 4;
+            const int itemsPerPage = 12;
 
             var viewModel = new AllSpotsListViewModel
             {
-                ItemsPerPage = ItemsPerPage,
-                CurrentPageNumber = pageNumber,
+                ItemsPerPage = itemsPerPage,
+                CurrentPageNumber = id,
                 SpotsCount = this.spotsService.GetSpotsCount(),
-                Spots = this.spotsService.GetAllApproved<SpotInListViewModel>(),
+                Spots = this.spotsService.GetAllApproved<SpotInListViewModel>(id, itemsPerPage),
             };
             return this.View(viewModel);
         }

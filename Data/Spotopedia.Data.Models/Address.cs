@@ -1,11 +1,9 @@
-﻿using Spotopedia.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Spotopedia.Data.Models
+﻿namespace Spotopedia.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Spotopedia.Data.Common.Models;
+
     public class Address : BaseDeletableModel<int>
     {
         [Required]

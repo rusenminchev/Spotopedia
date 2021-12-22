@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Spotopedia.Data.Migrations
+﻿namespace Spotopedia.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ChangesOnSpotsModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

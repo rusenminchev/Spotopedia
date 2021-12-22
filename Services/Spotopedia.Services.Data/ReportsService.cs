@@ -1,15 +1,14 @@
-﻿using Spotopedia.Data.Common.Repositories;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using Spotopedia.Web.ViewModels.Reports;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Data.Common.Repositories;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.Reports;
+
     public class ReportsService : IReportsService
     {
         private readonly IDeletableEntityRepository<Report> reportsRepository;

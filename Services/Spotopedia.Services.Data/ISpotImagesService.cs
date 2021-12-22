@@ -1,11 +1,10 @@
-﻿using Spotopedia.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Data.Models;
+
     public interface ISpotImagesService
     {
         IEnumerable<SpotImage> GetAllImagesBySpotId(int spotId);

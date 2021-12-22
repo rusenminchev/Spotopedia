@@ -1,15 +1,15 @@
-﻿using Ganss.XSS;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using Spotopedia.Web.ViewModels.ChallengeEntries;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace Spotopedia.Web.ViewModels.Challenges
+﻿namespace Spotopedia.Web.ViewModels.Challenges
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Text.RegularExpressions;
+
+    using Ganss.XSS;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.ChallengeEntries;
+
     public class ChallengeDetailsViewModel : IMapFrom<Challenge>
     {
         public string Id { get; set; }

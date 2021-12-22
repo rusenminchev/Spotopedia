@@ -1,6 +1,5 @@
 ﻿namespace Spotopedia.Services.Data
 {
-    using Spotopedia.Data.Models;
     using System.Threading.Tasks;
 
     public interface ISpotVotesService

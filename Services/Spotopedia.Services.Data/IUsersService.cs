@@ -1,11 +1,9 @@
-﻿using Spotopedia.Web.ViewModels.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Threading.Tasks;
+
+    using Spotopedia.Web.ViewModels.Users;
+
     public interface IUsersService
     {
         Task EditAsync(EditUserProfileInputModel input);

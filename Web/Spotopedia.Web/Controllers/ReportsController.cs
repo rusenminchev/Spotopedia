@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Data;
-using Spotopedia.Web.ViewModels.Posts;
-using Spotopedia.Web.ViewModels.Reports;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Web.Controllers
+﻿namespace Spotopedia.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Data;
+    using Spotopedia.Web.ViewModels.Posts;
+    using Spotopedia.Web.ViewModels.Reports;
+
     public class ReportsController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;

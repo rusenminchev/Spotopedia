@@ -1,11 +1,10 @@
-﻿using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.Spots
+﻿namespace Spotopedia.Web.ViewModels.Spots
 {
+    using System.Collections.Generic;
+
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+
     public class GetAddressesViewModel : IMapFrom<Address>
     {
         public string AddressName { get; set; }

@@ -1,21 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NetTopologySuite.Geometries;
-using Spotopedia.Data.Common.Repositories;
-using Spotopedia.Data.Models;
-using Spotopedia.Data.Models.Enumerations;
-using Spotopedia.Services.Mapping;
-using Spotopedia.Web.ViewModels.Posts;
-using Spotopedia.Web.ViewModels.Spots;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using NetTopologySuite.Geometries;
+    using Spotopedia.Data.Common.Repositories;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Data.Models.Enumerations;
+    using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.Posts;
+    using Spotopedia.Web.ViewModels.Spots;
+
     public class SpotsService : ISpotsService
     {
         private readonly IDeletableEntityRepository<Spot> spotsRepository;
@@ -24,7 +24,8 @@ namespace Spotopedia.Services.Data
         private readonly IPostsService postsService;
         private int lastAddedSpotId;
 
-        public SpotsService(IDeletableEntityRepository<Spot> spotsRepository,
+        public SpotsService(
+            IDeletableEntityRepository<Spot> spotsRepository,
             IDeletableEntityRepository<Address> addressRepository,
             ICloudinaryService cloudinaryService,
             IRepository<SpotVote> spotVoteRepository,
@@ -90,10 +91,22 @@ namespace Spotopedia.Services.Data
             return this.lastAddedSpotId;
         }
 
+        public IEnumerable<T> GetAllApproved<T>(int id, int itemsPerPage = 12)
+        {
+            return this.spotsRepository.AllAsNoTracking()
+                .Where(x => x.IsApproved == true)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip((id - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToList();
+        }
+
         public IEnumerable<T> GetAllApproved<T>()
         {
             return this.spotsRepository.AllAsNoTracking()
                 .Where(x => x.IsApproved == true)
+                .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToList();
         }
@@ -110,7 +123,7 @@ namespace Spotopedia.Services.Data
         {
             var spot = this.spotsRepository.All()
                 .Include(x => x.SpotImages)
-                .Include(x=>x.AddedByUser)
+                .Include(x => x.AddedByUser)
                 .FirstOrDefault(x => x.Id == id);
 
             spot.IsApproved = true;
@@ -204,7 +217,6 @@ namespace Spotopedia.Services.Data
                 x.Title,
             }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Title));
         }
-
 
         public IEnumerable<T> AllSpotsByUser<T>(string userId)
         {

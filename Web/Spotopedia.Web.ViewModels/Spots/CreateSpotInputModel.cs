@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Spotopedia.Data.Models;
-using Spotopedia.Data.Models.Enumerations;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.Spots
+﻿namespace Spotopedia.Web.ViewModels.Spots
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+    using Spotopedia.Data.Models.Enumerations;
+
     public class CreateSpotInputModel
     {
         [MinLength(5)]

@@ -1,10 +1,7 @@
-﻿using Spotopedia.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.Spots
+﻿namespace Spotopedia.Web.ViewModels.Spots
 {
+    using System.Collections.Generic;
+
     public class ListOfAddressesViewModel
     {
         public IEnumerable<GetAddressesViewModel> Addresses { get; set; }

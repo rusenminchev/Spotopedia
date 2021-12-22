@@ -1,12 +1,11 @@
-﻿using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.Challenges
+﻿namespace Spotopedia.Web.ViewModels.Challenges
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+
     public class EditChallengeInputModel : IMapFrom<Challenge>
     {
         public string Id { get; set; }

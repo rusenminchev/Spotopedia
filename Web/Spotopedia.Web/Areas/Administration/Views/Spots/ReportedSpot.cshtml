@@ -1,22 +1,7 @@
 ﻿@model Spotopedia.Web.ViewModels.Spots.SingleSpotViewModel
 @using Spotopedia.Data.Models.Enumerations
 
-@{
-    ViewData["Title"] = "Reported Spot";
-}
-
-<h3>@ViewData["Title"]</h3>
-<hr>
-
 <style>
-
-    {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
 
     .product-card {
         position: relative;
@@ -168,8 +153,8 @@
 <div class="col-md-6 offset-3">
     <div class="float-right">
         <a class="btn btn-outline-secondary" asp-area="" asp-controller="Spots" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        <a asp-area="Administration" asp-controller="Reports" asp-action="ApproveSpotReport" asp-route-spotId="@Model.Id" class="btn btn-outline-danger">Approve(Delete Spot)</a>
-        <a asp-area="Administration" asp-controller="Reports" asp-action="RejectSpotReport" asp-route-spotId="@Model.Id" class="btn btn-outline-primary">Reject(Delete Report)</a>
+        <a asp-area="Administration" asp-controller="Reports" asp-action="ApproveSpotReport" asp-route-spotId="@Model.Id" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal" onclick="openModal()">Approve (Delete Spot)</a>
+        <a asp-area="Administration" asp-controller="Reports" asp-action="RejectSpotReport" asp-route-spotId="@Model.Id" class="btn btn-outline-primary">Reject (Delete Report)</a>
     </div>
     <div class="clearfix"></div>
     <br>
@@ -287,4 +272,50 @@
         </div>
     }
 </div>
+
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Spot Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Do you want to delete this spot?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a asp-area="Administration" asp-controller="Reports" asp-action="ApproveSpotReport" asp-route-spotId="@Model.Id" class="btn btn-outline-danger float-right" onclick="confirmDelete()">Delete</a>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        function confirmDelete() {
+            console.log("Deleting...");
+            $('.modal-header, .modal-footer, .modal-body').addClass('hide');
+            $('.confirm-delete').removeClass('hide');
+            //$('#myModal').modal('hide');
+        }
+
+        function openModal() {
+            $('.confirm-delete').addClass('hide');
+            $('#myModal .modal-header, .modal-footer, .modal-body').removeClass('hide');
+            $('#myModal').modal('show');
+        }
+    </script>
+
+}
+

@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.ChallengeEntries
+﻿namespace Spotopedia.Web.ViewModels.ChallengeEntries
 {
+    using System;
+
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+
     public class ChallengeEntryViewDetailsModel : IMapFrom<ChallengeEntry>
     {
         public int Id { get; set; }

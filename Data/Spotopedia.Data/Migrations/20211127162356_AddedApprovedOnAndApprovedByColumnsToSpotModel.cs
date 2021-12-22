@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Spotopedia.Data.Migrations
+﻿namespace Spotopedia.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddedApprovedOnAndApprovedByColumnsToSpotModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

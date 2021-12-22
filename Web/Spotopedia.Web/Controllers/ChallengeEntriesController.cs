@@ -1,21 +1,18 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Spotopedia.Common;
-using Spotopedia.Data.Models;
-using Spotopedia.Data.Models.Enumerations;
-using Spotopedia.Services.Data;
-using Spotopedia.Web.ViewModels.ChallengeEntries;
-using Spotopedia.Web.ViewModels.Challenges;
-using Spotopedia.Web.ViewModels.Posts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Web.Controllers
+﻿namespace Spotopedia.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Common;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Data.Models.Enumerations;
+    using Spotopedia.Services.Data;
+    using Spotopedia.Web.ViewModels.ChallengeEntries;
+    using Spotopedia.Web.ViewModels.Challenges;
+    using Spotopedia.Web.ViewModels.Posts;
+
     public class ChallengeEntriesController : BaseController
     {
         private readonly IChallengeEntriesService challengeEntriesService;

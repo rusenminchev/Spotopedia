@@ -1,7 +1,7 @@
 ﻿namespace Spotopedia.Services.Data
 {
     using System.Threading.Tasks;
-    using Spotopedia.Data.Models;
+
     using Spotopedia.Web.ViewModels.ChallengeEntries;
 
     public interface IChallengeEntriesService

@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Spotopedia.Services.Data;
-using Spotopedia.Web.ViewModels.Reports;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Web.Areas.Administration.Controllers
+﻿namespace Spotopedia.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Services.Data;
+    using Spotopedia.Web.ViewModels.Reports;
+
     public class ReportsController : AdministrationController
     {
         private readonly IReportsService reportsService;

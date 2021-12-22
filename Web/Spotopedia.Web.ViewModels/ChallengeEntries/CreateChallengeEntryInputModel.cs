@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.ChallengeEntries
+﻿namespace Spotopedia.Web.ViewModels.ChallengeEntries
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+
     public class CreateChallengeEntryInputModel
     {
         [MaxLength(100)]

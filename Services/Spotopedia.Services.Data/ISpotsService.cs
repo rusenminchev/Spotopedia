@@ -11,6 +11,8 @@
 
         int GetSpotsCount();
 
+        IEnumerable<T> GetAllApproved<T>(int id, int itemsPerPage = 12);
+
         IEnumerable<T> GetAllApproved<T>();
 
         IEnumerable<T> GetAllNotApproved<T>();

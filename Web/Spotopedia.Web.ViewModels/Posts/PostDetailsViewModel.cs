@@ -1,18 +1,16 @@
-﻿using AutoMapper;
-using Spotopedia.Data.Models;
-using Spotopedia.Data.Models.Enumerations;
-using Spotopedia.Services.Mapping;
-using Spotopedia.Web.ViewModels.Comments;
-using Spotopedia.Web.ViewModels.Reports;
-using Spotopedia.Web.ViewModels.Votes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.Posts
+﻿namespace Spotopedia.Web.ViewModels.Posts
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using AutoMapper;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Data.Models.Enumerations;
+    using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.Reports;
+    using Spotopedia.Web.ViewModels.Votes;
+
     public class PostDetailsViewModel : IMapFrom<Post>, IHaveCustomMappings
     {
         public int Id { get; set; }

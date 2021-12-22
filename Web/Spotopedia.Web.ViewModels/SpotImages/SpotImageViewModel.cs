@@ -1,11 +1,8 @@
-﻿using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.SpotImages
+﻿namespace Spotopedia.Web.ViewModels.SpotImages
 {
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+
     public class SpotImageViewModel : IMapFrom<SpotImage>
     {
         public string Id { get; set; }

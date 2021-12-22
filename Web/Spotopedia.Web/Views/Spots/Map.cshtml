@@ -1,6 +1,9 @@
-﻿<meta charset="utf-8" />
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<meta charset="utf-8" />
 <title>Showing an ArcGIS basemap</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <style>
     #basemaps-wrapper {
@@ -8,7 +11,6 @@
         top: 10px;
         z-index: 400;
         background: white;
-
     }
 
     #basemaps {
@@ -76,20 +78,22 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            const map = L.map('map', { gestureHandling: true }).setView([42.684653, 23.318529], 6);
+            const map = L.map('map', {
+                minZoom: 3,
+                zoomDelta: 0.25,
+                zoomSnap: 0
+            }).fitWorld().setView([42.684653, 23.318529], 6);
             L.esri.Vector.vectorBasemapLayer("ArcGIS:Navigation", {
                 // provide either apikey or token
-                apikey: "AAPKed4b089e720f45a28dd4f35741962688S93OetKvSnm5xSFVzKUtyFE94c_BialcVX3pNAaPDPbcsAtqiBUShv7wQuDWREo4"
+                apikey: "@Configuration["ArcGISApi:ApiKey"]"
             }).addTo(map);
-
-            /*L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);*/
 
             var searchControl = L.esri.Geocoding.geosearch({
                 position: 'topleft',
                 placeholder: 'Enter an address or place.',
                 useMapBounds: false,
                 providers: [L.esri.Geocoding.arcgisOnlineProvider({
-                    apikey: 'AAPKed4b089e720f45a28dd4f35741962688S93OetKvSnm5xSFVzKUtyFE94c_BialcVX3pNAaPDPbcsAtqiBUShv7wQuDWREo4', // replace with your api key
+                    apikey: '@Configuration["ArcGISApi:ApiKey"]', // replace with your api key
                     nearby: {
                         lat: -33.8688,
                         lng: 151.2093
@@ -137,9 +141,7 @@
 
                     for (var i = 0; i < result.length; ++i) {
                         var popup = '<br><b><img src="' + data[i].spotSpotImages[0].imageUrl + '" width="100%"><b></br>' +
-                            '<br><h5><a href="https://localhost:44319/Spots/ById/' + data[i].spotId + '"target="_blank">' + data[i].spotTitle + '</a></h5></br> ' + data[i].spotDescription;
-                        //'<br/><b>Latitude:</b> ' + data[i].latitude +
-                        //'<br/><b>Longitude:</b> ' + data[i].longitude;
+                            '<br><h5><a href="https://spotopedia.azurewebsites.net/Spots/ById/' + data[i].spotId + '"target="_blank">' + data[i].spotTitle + '</a></h5></br> ' + data[i].spotDescription;
 
                         L.marker([data[i].latitude, data[i].longitude])
                             .bindPopup(popup)

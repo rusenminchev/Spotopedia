@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using Spotopedia.Data.Common.Repositories;
     using Spotopedia.Data.Models;
     using Spotopedia.Services.Data;
     using Spotopedia.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

@@ -1,9 +1,8 @@
 ﻿namespace Spotopedia.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using Spotopedia.Data.Models;
     using Spotopedia.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

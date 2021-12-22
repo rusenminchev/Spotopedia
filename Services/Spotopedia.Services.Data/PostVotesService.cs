@@ -1,14 +1,12 @@
-﻿using Spotopedia.Data.Common.Repositories;
-using Spotopedia.Data.Models;
-using Spotopedia.Data.Models.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Data.Common.Repositories;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Data.Models.Enumerations;
+
     public class PostVotesService : IPostVotesService
     {
         private readonly IRepository<PostVote> postVotesRepository;
@@ -54,6 +52,6 @@ namespace Spotopedia.Services.Data
             }
 
             await this.postVotesRepository.SaveChangesAsync();
-        }  
+        }
     }
 }

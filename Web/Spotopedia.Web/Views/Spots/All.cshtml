@@ -1,54 +1,105 @@
 ﻿@using Spotopedia.Web.ViewModels.Spots
 @model AllSpotsListViewModel
 
-    <style>
-        .card {
-            align-content: center;
-            box-shadow: 0 2px 10px #dfdfdf;
-            border-radius: 7px;
-            margin: .5rem;
-        
-        }
+<style>
+    .card {
+        align-content: center;
+        box-shadow: 0 2px 10px #dfdfdf;
+        border-radius: 7px;
+        margin: .5rem;
+    }
 
-        .card-img-top {
-            border-radius: 5px;
-        }
+    .card-img-top {
+        border-radius: 5px;
+    }
 
-        .master {
-            margin:0 auto;
-            float: none; /* Added */
-            margin-bottom: 10px; /* Added */
-        }
+    .master {
+        margin: 0 auto;
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+    }
 
-    </style>
+    .badge {
+        position: absolute;
+        left: 20px;
+        top: 30px;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 700;
+        background: #00BFFF;
+        color: #b5ffa0;
+        padding: 3px 10px;
+    }
+</style>
 
-    <section class="inner_page_head">
-        <div class="container_fuild">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="full">
-                        <h3>All Spots</h3>
-                    </div>
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>All Spots</h3>
                 </div>
             </div>
         </div>
-    </section>
-    <br>
-
-    <div class="master col-md-10">
-        <div class="row justify-content-center">
-            @foreach (var spot in Model.Spots)
-            {
-                <div class="card col-md-3">
-                    <br>
-                    <img src="@spot.SpotImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><a asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></h5>
-                        <p class="card-text">@spot.Description</p>
-                    </div>
-                </div>
-            }
-            <br>
-            <br>
-        </div>
     </div>
+</section>
+<br>
+
+<div class="master col-md-10">
+    <div class="row justify-content-center">
+        @foreach (var spot in Model.Spots)
+        {
+            <div class="card col-md-3">
+                <br>
+                <img src="@spot.SpotImages.FirstOrDefault().ImageUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                    @if (spot.CreatedOn.Date.AddDays(10) >= DateTime.UtcNow)
+                    {
+                        <div class="badge">New</div>
+                    }
+                    <h5 class="card-title"><a asp-action="ById" asp-route-id="@spot.Id"> @spot.Title</a></h5>
+                    <p class="card-text">@spot.Description</p>
+                </div>
+            </div>
+        }
+        <br>
+        <br>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item  @if (!Model.HasPreviousPage)
+{<text>disabled</text>}">
+            <a class="page-link" asp-action="All" asp-route-id="@Model.PreviousPageNumber">Previous</a>
+        </li>
+        @for (int i = Model.CurrentPageNumber - 2; i < Model.CurrentPageNumber; i++)
+        {
+            if (i > 0)
+            {
+                <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i">@i</a></li>
+            }
+
+        }
+
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                @Model.CurrentPageNumber
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+        @for (int i = Model.CurrentPageNumber + 1; i <= Model.CurrentPageNumber + 2; i++)
+        {
+            if (i <= Model.PagesCount)
+            {
+                <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i">@i</a></li>
+            }
+        }
+        <li class="page-item @if (!Model.HasNextPage)
+        {<text>disabled</text>}">
+            <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Next</a>
+        </li>
+    </ul>
+</nav>
+</div>

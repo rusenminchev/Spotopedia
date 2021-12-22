@@ -1,12 +1,11 @@
-﻿using Spotopedia.Data.Models;
-using Spotopedia.Data.Models.Enumerations;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.SpotReports
+﻿namespace Spotopedia.Web.ViewModels.SpotReports
 {
+    using System;
+
+    using Spotopedia.Data.Models;
+    using Spotopedia.Data.Models.Enumerations;
+    using Spotopedia.Services.Mapping;
+
     public class SpotReportDetailsViewModel : IMapFrom<SpotReport>
     {
         public string Description { get; set; }

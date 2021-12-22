@@ -1,11 +1,10 @@
-﻿using Spotopedia.Web.ViewModels.Reports;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Web.ViewModels.Reports;
+
     public interface IReportsService
     {
         Task CreateAsync(CreateReportInputModel input, int id, string reportedUserId, string reportedByUserId);

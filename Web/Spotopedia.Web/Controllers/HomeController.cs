@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using Spotopedia.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Web.ViewModels;
 
     public class HomeController : BaseController
     {
@@ -35,7 +34,7 @@
             return this.View();
         }
 
-        public IActionResult Contact()
+        public IActionResult About()
         {
             return this.View();
         }

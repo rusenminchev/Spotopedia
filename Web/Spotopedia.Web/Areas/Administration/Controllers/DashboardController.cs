@@ -1,12 +1,11 @@
 ﻿namespace Spotopedia.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using Spotopedia.Services.Data;
     using Spotopedia.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
-    using Spotopedia.Web.ViewModels.Spots;
-    using Spotopedia.Web.ViewModels.Reports;
     using Spotopedia.Web.ViewModels.Posts;
+    using Spotopedia.Web.ViewModels.Reports;
+    using Spotopedia.Web.ViewModels.Spots;
 
     public class DashboardController : AdministrationController
     {

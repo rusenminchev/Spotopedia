@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using AutoMapper;
     using Spotopedia.Data.Models;
     using Spotopedia.Data.Models.Enumerations;
     using Spotopedia.Services.Mapping;
     using Spotopedia.Web.ViewModels.SpotReports;
-    using Spotopedia.Web.ViewModels.SpotVotes;
     using Spotopedia.Web.ViewModels.Votes;
 
     public class SingleSpotViewModel : IMapFrom<Spot>, IHaveCustomMappings

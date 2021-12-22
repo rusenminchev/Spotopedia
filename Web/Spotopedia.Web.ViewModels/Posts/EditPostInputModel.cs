@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Spotopedia.Web.ViewModels.Posts
+﻿namespace Spotopedia.Web.ViewModels.Posts
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+
     public class EditPostInputModel : IMapFrom<Post>
     {
         public int Id { get; set; }

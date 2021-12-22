@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.ChallengeEntries
+﻿namespace Spotopedia.Web.ViewModels.ChallengeEntries
 {
+    using System.Collections.Generic;
+
     public class AllChallengeEntriesViewModel
     {
         public IEnumerable<ChallengeEntryViewDetailsModel> ChallengeEntries { get; set; }

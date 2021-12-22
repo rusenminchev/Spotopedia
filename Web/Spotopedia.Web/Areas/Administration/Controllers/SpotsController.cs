@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Data;
-using Spotopedia.Web.ViewModels.Spots;
-using Spotopedia.Web.ViewModels.Votes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Web.Areas.Administration.Controllers
+﻿namespace Spotopedia.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Data;
+    using Spotopedia.Web.ViewModels.Spots;
+    using Spotopedia.Web.ViewModels.Votes;
+
     public class SpotsController : AdministrationController
     {
         private readonly ISpotsService spotsService;

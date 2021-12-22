@@ -1,16 +1,15 @@
-﻿using Spotopedia.Data.Common.Repositories;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using Spotopedia.Web.ViewModels.Challenges;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Data.Common.Repositories;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.Challenges;
+
     public class ChallengesService : IChallengesService
     {
         private readonly IDeletableEntityRepository<Challenge> challengesRepository;
@@ -24,7 +23,6 @@ namespace Spotopedia.Services.Data
 
         public async Task CreateAsync(CreateChallengeInputModel input, string userId)
         {
-
             await using var memoryStream = new MemoryStream();
             await input.ChallengeImage.CopyToAsync(memoryStream);
             var destinationData = memoryStream.ToArray();

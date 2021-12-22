@@ -1,17 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Spotopedia.Data.Common.Repositories;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using Spotopedia.Web.ViewModels.Posts;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Spotopedia.Data.Common.Repositories;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.Posts;
+
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
@@ -130,7 +129,6 @@ namespace Spotopedia.Services.Data
                 .FirstOrDefault(x => x.Id == id);
 
             // TODO: Change the logic to use the entrie collection of images and display it with a carousel in the view.
-
             if (input.Images.Count() > 0)
             {
                 var postImage = input.Images.FirstOrDefault();

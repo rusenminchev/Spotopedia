@@ -1,11 +1,7 @@
-﻿using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Spotopedia.Web.ViewModels.Challenges
+﻿namespace Spotopedia.Web.ViewModels.Challenges
 {
+    using System.Collections.Generic;
+
     public class AllChallengesViewModel
     {
         public IEnumerable<ChallengeDetailsViewModel> Challenges { get; set; }

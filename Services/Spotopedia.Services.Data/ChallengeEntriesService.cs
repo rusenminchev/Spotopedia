@@ -1,16 +1,14 @@
-﻿using Spotopedia.Data.Common.Repositories;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Mapping;
-using Spotopedia.Web.ViewModels.ChallengeEntries;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Data.Common.Repositories;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Mapping;
+    using Spotopedia.Web.ViewModels.ChallengeEntries;
+
     public class ChallengeEntriesService : IChallengeEntriesService
     {
         private readonly IDeletableEntityRepository<ChallengeEntry> challengeEntriesRepository;
@@ -18,7 +16,10 @@ namespace Spotopedia.Services.Data
         private readonly IDeletableEntityRepository<Challenge> challengesRepository;
         private int lastAddedChallengeEntryId;
 
-        public ChallengeEntriesService(IDeletableEntityRepository<ChallengeEntry> challengeEntriesRepository, ICloudinaryService cloudinaryService, IDeletableEntityRepository<Challenge> challengesRepository)
+        public ChallengeEntriesService(
+            IDeletableEntityRepository<ChallengeEntry> challengeEntriesRepository,
+            ICloudinaryService cloudinaryService,
+            IDeletableEntityRepository<Challenge> challengesRepository)
         {
             this.challengeEntriesRepository = challengeEntriesRepository;
             this.cloudinaryService = cloudinaryService;
@@ -27,7 +28,6 @@ namespace Spotopedia.Services.Data
 
         public async Task CreateAsync(CreateChallengeEntryInputModel input, string challengeId, string userId)
         {
-
             await using var memoryStream = new MemoryStream();
             await input.ChallengeEntryImage.CopyToAsync(memoryStream);
             var destinationData = memoryStream.ToArray();

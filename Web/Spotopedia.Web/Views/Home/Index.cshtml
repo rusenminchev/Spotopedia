@@ -18,13 +18,21 @@
     .body-container {
         max-width: 100%;
     }
+
+    i {
+        color: black;
+    }
+
+        i:hover {
+            color: #f7444e;
+        }
 </style>
 
 <div class="hero_area">
     <!-- slider section -->
     <section class="slider_section ">
         <div class="slider_bg_box">
-            <img src="https://res.cloudinary.com/defgu4hed/image/upload/v1638546897/darker_ggmuez.jpg" alt="">
+            <img src="~/Images/Spotopedia BG - Collage.jpg" alt="" />
         </div>
         <div id="customCarousel1" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -51,11 +59,95 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <br>
-        <br>
     </section>
     <!-- end slider section -->
 </div>
+
+<!-- footer start -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="full">
+                    <div class="logo_footer">
+                        <a href="#">
+                            <img width="210" src="~/Images/Spotopedia - Logo - PNG 250px.png" alt="#" />
+                        </a>
+                    </div>
+                    <div class="information_f">
+                        <p><strong>EMAIL:<br></strong> thespotopedia@gmail.com</p>
+                        <div class="footer_social">
+                            <a href="https://www.facebook.com/rusen.minchev" target=”_blank”>
+                                <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.instagram.com/rusenminchev" target=”_blank”>
+                                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.twitter.com/rusenminchev" target=”_blank”>
+                                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/goldgrippin" target=”_blank”>
+                                <i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.goldgrippin.com" target=”_blank”>
+                                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="widget_menu">
+                                    <h3>Menu</h3>
+                                    <ul>
+                                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li><a asp-controller="Spots" asp-action="Create">Add Spot</a></li>
+                                        <li><a asp-controller="Posts" asp-action="All">News Feed</a></li>
+                                        <li><a asp-controller="Challenges" asp-action="All">Challenges</a></li>
+                                        <li><a asp-controller="Home" asp-action="About">About</a></li>
+                                        <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Contact Us Form*@
+            @*<div class="col-md-6">
+                <div class="container">
+                    <div class="widget_menu">
+                        <h3>Contact Us</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="full">
+                                    <form action="index.html">
+                                        <fieldset>
+                                            <input type="text" placeholder="Enter your full name" name="name" required />
+                                            <input type="email" placeholder="Enter your email address" name="email" required />
+                                            <input type="text" placeholder="Enter subject" name="subject" required />
+                                            <textarea placeholder="Enter your message" required></textarea>
+                                            <input class="float-right" type="submit" value="Submit" />
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>*@
+        </div>
+    </div>
+</footer>
+<div class="cpy_">
+    <p class="mx-auto">
+        Copyright © 2021 <a asp-area="" asp-controller="Home" asp-action="Index">Spotopedia</a> / <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a><br>
+    </p>
+</div>
+<!-- footer end -->

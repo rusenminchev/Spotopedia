@@ -2,6 +2,15 @@
 {
     using System.Reflection;
 
+    using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Spotopedia.Data;
     using Spotopedia.Data.Common;
     using Spotopedia.Data.Common.Repositories;
@@ -12,16 +21,6 @@
     using Spotopedia.Services.Mapping;
     using Spotopedia.Services.Messaging;
     using Spotopedia.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using CloudinaryDotNet;
 
     public class Startup
     {

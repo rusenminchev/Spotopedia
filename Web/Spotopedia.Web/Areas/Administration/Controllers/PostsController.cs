@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Spotopedia.Services.Data;
-using Spotopedia.Web.ViewModels.Posts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Web.Areas.Administration.Controllers
+﻿namespace Spotopedia.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Services.Data;
+    using Spotopedia.Web.ViewModels.Posts;
+
     public class PostsController : AdministrationController
     {
         private readonly IPostsService postsService;

@@ -1,11 +1,10 @@
-﻿using Spotopedia.Web.ViewModels.Challenges;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Web.ViewModels.Challenges;
+
     public interface IChallengesService
     {
         Task CreateAsync(CreateChallengeInputModel input, string userId);

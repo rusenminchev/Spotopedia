@@ -1,17 +1,15 @@
 ﻿namespace Spotopedia.Web.ViewModels.Spots
 {
-    using AutoMapper;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     using Microsoft.AspNetCore.Http;
     using Spotopedia.Data.Models;
     using Spotopedia.Data.Models.Enumerations;
     using Spotopedia.Services.Mapping;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
 
     public class EditSpotInputModel : IMapFrom<Spot>
     {
-
         public int Id { get; set; }
 
         [MinLength(5)]

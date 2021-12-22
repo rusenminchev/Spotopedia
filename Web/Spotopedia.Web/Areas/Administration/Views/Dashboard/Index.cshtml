@@ -8,59 +8,20 @@
 <body class="myDIV">
     <div class="container">
         <div class="columns">
-            @*<div class="column is-3 ">
-                <aside class="menu is-hidden-mobile">
-                    <p class="menu-label">
-                        General
-                    </p>
-                    <ul class="menu-list">
-                        <li><a class="is-active">Dashboard</a></li>
-                        <li><a>Customers</a></li>
-                        <li><a>Other</a></li>
-                    </ul>
-                    <p class="menu-label">
-                        Administration
-                    </p>
-                    <ul class="menu-list">
-                        <li><a>Team Settings</a></li>
-                        <li>
-                            <a>Manage Your Team</a>
-                            <ul>
-                                <li><a>Members</a></li>
-                                <li><a>Plugins</a></li>
-                                <li><a>Add a member</a></li>
-                                <li><a>Remove a member</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Invitations</a></li>
-                        <li><a>Cloud Storage Environment Settings</a></li>
-                        <li><a>Authentication</a></li>
-                        <li><a>Payments</a></li>
-                    </ul>
-                    <p class="menu-label">
-                        Transactions
-                    </p>
-                    <ul class="menu-list">
-                        <li><a>Payments</a></li>
-                        <li><a>Transfers</a></li>
-                        <li><a>Balance</a></li>
-                        <li><a>Reports</a></li>
-                    </ul>
-                </aside>
-            </div>*@
             <div class="column is-12">
-                <section class="hero is-info welcome is-small">
-                    <div class="hero-body">
-                        <div class="container">
-                            <h1 class="title">
-                                Hello, @User.Identity.Name.
-                            </h1>
-                            <h2 class="subtitle">
-                                I hope you are having a great day!
-                            </h2>
+                <section class="inner_page_head">
+                    <div class="container_fuild">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="full">
+                                    <h3>Admin Dashboard</h3>
+                                    <h4>Hello, @User.Identity.Name</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
+                <br>
                 <section class="info-tiles">
                     <div class="tile is-ancestor has-text-centered">
                         <div class="tile is-parent">
@@ -118,8 +79,8 @@
                                 </div>
                             </div>
                             @*<footer class="card-footer">
-                                <a href="#" class="card-footer-item">View All</a>
-                            </footer>*@
+                                    <a href="#" class="card-footer-item">View All</a>
+                                </footer>*@
                         </div>
                     </div>
                     <div class="column is-4">
@@ -150,8 +111,8 @@
                                 </div>
                             </div>
                             @*<footer class="card-footer">
-                                <a href="#" class="card-footer-item">View All</a>
-                            </footer>*@
+                                    <a href="#" class="card-footer-item">View All</a>
+                                </footer>*@
                         </div>
                     </div>
                     <div class="column is-4">
@@ -174,7 +135,7 @@
                                             {
                                                 <tr>
                                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                    <td><a asp-area="Administration" asp-controller="Posts" asp-action="ReportedPost" asp-route-id="@reportedPost.Id" style="color: red"> @reportedPost.Content - @reportedPost.Reports.Count() Reports</a></td>                                                
+                                                    <td><a asp-area="Administration" asp-controller="Posts" asp-action="ReportedPost" asp-route-id="@reportedPost.Id" style="color: red"> @reportedPost.Content - @reportedPost.Reports.Count() Reports</a></td>
                                                 </tr>
                                             }
                                         </tbody>
@@ -182,8 +143,8 @@
                                 </div>
                             </div>
                             @*<footer class="card-footer">
-                                <a href="#" class="card-footer-item">View All</a>
-                            </footer>*@
+                                    <a href="#" class="card-footer-item">View All</a>
+                                </footer>*@
                         </div>
                     </div>
                 </div>
@@ -192,16 +153,16 @@
     </div>
     <script async type="text/javascript" src="../js/bulma.js"></script>
     <script>
-    function myFunction() {
-      let root = document.documentElement;
-      let x = document.getElementById("img");
-      // let videoVal = document.video;
-      // let h1Val = document.h1;
-      root.classList.toggle("dark-mode");
-      x.classList.toggle("inverted");
-      // pictureVal.classList.toggle("inverted");
-      // videoVal.classList.toggle("inverted");
-      // h1Val.classList.toggle("inverted");
-    }
+        function myFunction() {
+            let root = document.documentElement;
+            let x = document.getElementById("img");
+            // let videoVal = document.video;
+            // let h1Val = document.h1;
+            root.classList.toggle("dark-mode");
+            x.classList.toggle("inverted");
+            // pictureVal.classList.toggle("inverted");
+            // videoVal.classList.toggle("inverted");
+            // h1Val.classList.toggle("inverted");
+        }
     </script>
 </body>

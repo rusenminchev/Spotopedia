@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Spotopedia.Data.Models;
-using Spotopedia.Data.Models.Enumerations;
-using Spotopedia.Services.Mapping;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Spotopedia.Web.ViewModels.Posts
+﻿namespace Spotopedia.Web.ViewModels.Posts
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Data.Models.Enumerations;
+    using Spotopedia.Services.Mapping;
+
     public class CreatePostInputModel : IMapFrom<Post>
     {
         [MaxLength(500)]

@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Spotopedia.Data.Models;
-using Spotopedia.Services.Data;
-using Spotopedia.Web.ViewModels.SpotImages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Web.Controllers
+﻿namespace Spotopedia.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Spotopedia.Data.Models;
+    using Spotopedia.Services.Data;
+    using Spotopedia.Web.ViewModels.SpotImages;
+
     public class SpotImagesController : Controller
     {
         private readonly ISpotImagesService spotImagesService;
@@ -55,8 +54,8 @@ namespace Spotopedia.Web.Controllers
 
             await this.spotImagesService.DeleteAsync(id);
 
-            //TODO: Change to code to avoid hard coded url address
-            return this.Redirect("https://localhost:44319/Spots/Edit/" + spotId);
+            // TODO: Change to code to avoid hard coded url address
+            return this.Redirect("https://spotopedia.azurewebsites.net/Spots/Edit/" + spotId);
         }
     }
 }

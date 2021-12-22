@@ -1,12 +1,11 @@
-﻿using Spotopedia.Data.Models;
-using Spotopedia.Web.ViewModels.Posts;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spotopedia.Services.Data
+﻿namespace Spotopedia.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Spotopedia.Data.Models;
+    using Spotopedia.Web.ViewModels.Posts;
+
     public interface IPostsService
     {
         Task CreateAsync(CreatePostInputModel input, string userId);
@@ -19,7 +18,7 @@ namespace Spotopedia.Services.Data
 
         public bool IsThisPostAddedByThisUser(int postId, string userId);
 
-        Task EditAsync(int id,string userId, EditPostInputModel input);
+        Task EditAsync(int id, string userId, EditPostInputModel input);
 
         Task DeleteAsync(int id);
 
