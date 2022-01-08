@@ -1,5 +1,6 @@
 <h1>Spotopedia - Find skate spots and have fun!</h1> 
 <br>
+<img src=https://res.cloudinary.com/defgu4hed/image/upload/v1641549196/Spotopedia_-_Home_Page_jb7zrs.jpg>
 <h3>ASP.NET Core Web Application</h3>
 <h4>Spotopedia is available here:</h4> 
 <h4>https://spotopedia.azurewebsites.net</h4> 
