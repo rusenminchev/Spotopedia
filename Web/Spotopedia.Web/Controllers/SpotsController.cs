@@ -158,11 +158,5 @@
         {
             return this.View();
         }
-
-        public JsonResult GetAddress()
-        {
-            var allAdresses = this.addressesService.GetAllAddresses<GetAddressesViewModel>().ToList();
-            return this.Json(allAdresses);
-        }
     }
 }

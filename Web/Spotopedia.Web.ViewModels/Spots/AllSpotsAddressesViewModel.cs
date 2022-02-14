@@ -5,7 +5,7 @@
     using Spotopedia.Data.Models;
     using Spotopedia.Services.Mapping;
 
-    public class GetAddressesViewModel : IMapFrom<Address>
+    public class AllSpotsAddressesViewModel : IMapFrom<Address>
     {
         public string AddressName { get; set; }
 

@@ -9,6 +9,13 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\theme\**" />
+    <Content Remove="wwwroot\css\theme\**" />
+    <EmbeddedResource Remove="wwwroot\css\theme\**" />
+    <None Remove="wwwroot\css\theme\**" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -47,9 +54,5 @@
     <ProjectReference Include="..\..\Services\Spotopedia.Services\Spotopedia.Services.csproj" />
     <ProjectReference Include="..\Spotopedia.Web.Infrastructure\Spotopedia.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Spotopedia.Web.ViewModels\Spotopedia.Web.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\theme\" />
   </ItemGroup>
 </Project>
